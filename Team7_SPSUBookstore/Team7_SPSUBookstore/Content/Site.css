@@ -1,23 +1,23 @@
-﻿body {
+﻿/*body {
     padding-top: 50px;
     padding-bottom: 20px;
-}
+}*/
 
 /* Set padding to keep content from hitting the edges */
-.body-content {
+/*.body-content {
     padding-left: 15px;
     padding-right: 15px;
-}
+}*/
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
-}
+}*/
 
 /* styles for validation helpers */
-.field-validation-error {
+/*.field-validation-error {
     color: #b94a48;
 }
 
@@ -39,4 +39,8 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}*/
+.home_search {
+padding-top:200px;
+padding-bottom:200px;
 }
