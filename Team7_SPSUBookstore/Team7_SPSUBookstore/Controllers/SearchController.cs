@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Team7_SPSUBookstore.Controllers
 {
-    public class SearchController : Controller
+    public class SearchController : BaseController
     {
         //
         // GET: /Search/

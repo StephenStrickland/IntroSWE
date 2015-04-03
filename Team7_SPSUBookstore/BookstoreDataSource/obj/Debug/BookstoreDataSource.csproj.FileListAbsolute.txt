@@ -1,0 +1,8 @@
+Y:\Code\IntroSWE\Team7_SPSUBookstore\BookstoreDataSource\obj\Debug\BookstoreDataSource.csprojResolveAssemblyReference.cache
+Y:\Code\IntroSWE\Team7_SPSUBookstore\BookstoreDataSource\bin\Debug\BookstoreDataSource.dll
+Y:\Code\IntroSWE\Team7_SPSUBookstore\BookstoreDataSource\bin\Debug\BookstoreDataSource.pdb
+Y:\Code\IntroSWE\Team7_SPSUBookstore\BookstoreDataSource\bin\Debug\Entities.dll
+Y:\Code\IntroSWE\Team7_SPSUBookstore\BookstoreDataSource\bin\Debug\Entities.pdb
+Y:\Code\IntroSWE\Team7_SPSUBookstore\BookstoreDataSource\obj\Debug\BookstoreDataSource.dll
+Y:\Code\IntroSWE\Team7_SPSUBookstore\BookstoreDataSource\obj\Debug\BookstoreDataSource.pdb
+Y:\Code\IntroSWE\Team7_SPSUBookstore\BookstoreDataSource\bin\Debug\users.txt

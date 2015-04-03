@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookstoreDataSource;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,13 +7,16 @@ using System.Web.Mvc;
 
 namespace Team7_SPSUBookstore.Controllers
 {
-    public class UserSessionController : BaseController
+    public class BaseController : Controller
     {
         //
-        // GET: /UserSession/
+        // GET: /Base/
         public ActionResult Index()
         {
             return View();
         }
+
+
+        DbManager DbManager = new DbManager("Resources/users.txt", "Resources/books.txt");
 	}
 }

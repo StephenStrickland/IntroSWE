@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    class User
+    public class User
     {
         public virtual string Email { get; set; }
         public virtual string Password { get; set; }

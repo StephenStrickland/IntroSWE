@@ -10,5 +10,6 @@ namespace Entities
     {
 
         //add attributes here
+        public virtual string ISBN { get; set; }
     }
 }

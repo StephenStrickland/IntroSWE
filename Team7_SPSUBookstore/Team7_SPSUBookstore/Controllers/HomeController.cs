@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Team7_SPSUBookstore.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {

@@ -108,3 +108,9 @@ Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\Microsoft.Owin.Secu
 Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\obj\Debug\Team7_SPSUBookstore.csprojResolveAssemblyReference.cache
 Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\obj\Debug\Team7_SPSUBookstore.dll
 Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\obj\Debug\Team7_SPSUBookstore.pdb
+Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\BookstoreDataSource.dll
+Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\Entities.dll
+Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\BookstoreDataSource.pdb
+Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\Entities.pdb
+Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\users.txt
+Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\Resources\users.txt

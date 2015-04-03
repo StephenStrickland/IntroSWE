@@ -1,0 +1,5 @@
+Y:\Code\IntroSWE\Team7_SPSUBookstore\Entities\bin\Debug\Entities.dll
+Y:\Code\IntroSWE\Team7_SPSUBookstore\Entities\bin\Debug\Entities.pdb
+Y:\Code\IntroSWE\Team7_SPSUBookstore\Entities\obj\Debug\Entities.csprojResolveAssemblyReference.cache
+Y:\Code\IntroSWE\Team7_SPSUBookstore\Entities\obj\Debug\Entities.dll
+Y:\Code\IntroSWE\Team7_SPSUBookstore\Entities\obj\Debug\Entities.pdb

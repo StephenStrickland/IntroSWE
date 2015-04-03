@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Team7_SPSUBookstore.Controllers
 {
-    public class BookController : Controller
+    public class BookController : BaseController
     {
         //
         // GET: /Book/
