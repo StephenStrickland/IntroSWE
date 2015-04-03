@@ -11,10 +11,6 @@ namespace Team7_SPSUBookstore.Controllers
     {
         //
         // GET: /Base/
-        public ActionResult Index()
-        {
-            return View();
-        }
 
 
         DbManager DbManager = new DbManager("Resources/users.txt", "Resources/books.txt");

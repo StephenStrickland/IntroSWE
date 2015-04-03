@@ -17,8 +17,8 @@ namespace BookstoreDataSource
             Books = new List<Book>();
             ReadFiles(userUrl, bookUrl);
         }
-        private IList<User> Users { get; set; }
-        private IList<Book> Books {get; set;}
+        public IList<User> Users { get; set; }
+        public IList<Book> Books {get; set;}
 
         public void ReadFiles(string userUrl, string bookUrl)
         {
