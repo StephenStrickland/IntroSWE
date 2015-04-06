@@ -246,6 +246,8 @@
     <Content Include="Views\Search\AdvancedSearch.cshtml" />
     <Content Include="Views\ShoppingCart\PreCart.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\Order\Receipt.cshtml" />
+    <Content Include="Views\Order\Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
