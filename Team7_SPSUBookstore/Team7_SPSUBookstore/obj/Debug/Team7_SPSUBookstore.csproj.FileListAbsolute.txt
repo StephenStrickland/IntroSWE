@@ -53,7 +53,6 @@
 \\psf\Home\Documents\Visual Studio 2013\Projects\Team7_SPSUBookstore\Team7_SPSUBookstore\obj\Debug\Team7_SPSUBookstore.csprojResolveAssemblyReference.cache
 \\psf\Home\Documents\Visual Studio 2013\Projects\Team7_SPSUBookstore\Team7_SPSUBookstore\obj\Debug\Team7_SPSUBookstore.dll
 \\psf\Home\Documents\Visual Studio 2013\Projects\Team7_SPSUBookstore\Team7_SPSUBookstore\obj\Debug\Team7_SPSUBookstore.pdb
-Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\obj\Debug\Team7_SPSUBookstore.csprojResolveAssemblyReference.cache
 Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\Resources\users.txt
 Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\Team7_SPSUBookstore.dll.config
 Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\Team7_SPSUBookstore.dll
@@ -111,5 +110,6 @@ Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\Microsoft.Owin.Secu
 Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\Microsoft.Owin.Security.Google.xml
 Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\Microsoft.Owin.Security.Twitter.xml
 Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\obj\Debug\Team7_SPSUBookstore.csprojResolveAssemblyReference.cache
 Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\obj\Debug\Team7_SPSUBookstore.dll
 Y:\Code\IntroSWE\Team7_SPSUBookstore\Team7_SPSUBookstore\obj\Debug\Team7_SPSUBookstore.pdb

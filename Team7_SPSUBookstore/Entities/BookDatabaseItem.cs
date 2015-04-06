@@ -48,12 +48,10 @@ namespace Entities
 
     public class BookStock
     {
-        enum StockType { Rental, New, Used, E_Book}
-
         public StockType Type { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
     }
 
-    enum StockType { Rental, New, Used, E_Book }
+    public enum StockType { Rental, New, Used, E_Book }
 }

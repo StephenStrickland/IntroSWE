@@ -45,7 +45,7 @@ namespace BookstoreDataSource
                     {
                         string[] input = line.Split(new char[] { ',' }, 2);
                         //copy assign attribute values and 
-                        Book newBook = new Book()
+                        BookDatabaseItem newBook = new BookDatabaseItem()
                             {
                                 ISBN = input[0]
                             };
