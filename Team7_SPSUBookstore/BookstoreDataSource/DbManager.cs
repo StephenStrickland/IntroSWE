@@ -14,11 +14,11 @@ namespace BookstoreDataSource
         public DbManager(string userUrl, string bookUrl)
         {
             Users = new List<User>();
-            Books = new List<Book>();
+            Books = new List<BookDatabaseItem>();
             ReadFiles(userUrl, bookUrl);
         }
         public IList<User> Users { get; set; }
-        public IList<Book> Books {get; set;}
+        public IList<BookDatabaseItem> Books {get; set;}
 
         public void ReadFiles(string userUrl, string bookUrl)
         {
