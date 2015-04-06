@@ -162,6 +162,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserSessionController.cs" />
     <Compile Include="Global.asax.cs">
@@ -244,6 +245,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Book\" />
+    <Folder Include="Views\Order\" />
     <Folder Include="Views\UserSession\" />
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,7 @@ namespace Team7_SPSUBookstore.Controllers
     {
         public ActionResult Index()
         {
-            IList<Book> books = DbManager.Books.AsQueryable().Where(x => x.ISBN == "Something").ToList();
+            IList<BookDatabaseItem> books = DbManager.Books.AsQueryable().Where(x => x.ISBN == "Something").ToList();
             Session["isLoggedIn"] = false;
             ViewBag.Title = "something";
             ViewBag.hey = ";aoisnfoasnflksnlksnlsknf";
