@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,10 @@ namespace Team7_SPSUBookstore.Controllers
     {
         public ActionResult Index()
         {
+            IList<Book> books = DbManager.Books.AsQueryable().Where(x => x.ISBN == "Something").ToList();
+            Session["isLoggedIn"] = false;
+            ViewBag.Title = "something";
+            ViewBag.hey = ";aoisnfoasnflksnlksnlsknf";
             return View();
         }
 

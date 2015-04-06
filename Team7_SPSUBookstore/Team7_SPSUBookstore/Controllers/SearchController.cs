@@ -10,8 +10,17 @@ namespace Team7_SPSUBookstore.Controllers
     {
         //
         // GET: /Search/
+        [HttpPost]
+        public ActionResult Index(string criteria)
+        {
+            ViewBag.Title = criteria;
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.Title = "nothing here, try searching for something!!!";
             return View();
         }
 

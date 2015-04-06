@@ -48,8 +48,10 @@ namespace Team7_SPSUBookstore.Controllers
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
+                    Session["isUserValid"] = true;
                     await SignInAsync(user, model.RememberMe);
                     return RedirectToLocal(returnUrl);
+
                 }
                 else
                 {
