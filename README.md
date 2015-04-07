@@ -3,6 +3,11 @@ This is the repository for group 7 in Intro to Software Engineering @ SPSU taugh
 
 
 # Todo list
+## Design adjustments
+- [ ] Revised homepage
+- [ ] Revised search diagram (sorting and code)
+- [ ] Reciept page; model after print recipt from amazon
+
 ## Views
 - [ ] Book
 - [ ] Search
