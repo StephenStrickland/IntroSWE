@@ -13,6 +13,6 @@ namespace Team7_SPSUBookstore.Controllers
         // GET: /Base/
 
 
-        public DbManager DbManager = new DbManager("Resources/users.txt", "Resources/books.txt");
+        public DbManager DbManager = new DbManager("Resources/users.txt", "Resources/books.xlsx");
 	}
 }
