@@ -47,13 +47,30 @@ namespace BookstoreDataSource
                 excelReader.IsFirstRowAsColumnNames = true;
                 
                 result = excelReader.AsDataSet();
+              //Books = result.Tables[0].AsEnumerable().Select(x =>
+              //      new BookDatabaseItem()
+              //      {
+              //          ISBN = x.Field<string>("ISBN"),
+              //          Title = x.Field<string>("title"),
+              //          Author = x.Field<string>("CRN"),
+              //          Semester = x.Field<string>("semester"),
+              //          Course = x.Field<string>("course"),
+              //          Section = x.Field<int>("section"),
+              //          Professor = x.Field<string>("professor"),
+              //          CRN = x.Field<string>("ISBN"),
+              //          isRequired = (x.Field<string>("use") == "Required"),
+              //          Stock = ConvertToStock(x.Field<int>("quantityNew"), x.Field<int>("quantityUsed"), 
+              //              x.Field<int>("quantityRental"), x.Field<int>("quantityEBook"), x.Field<decimal>("priceNew"),
+              //              x.Field<decimal>("priceUsed"), x.Field<decimal>("priceRental"), x.Field<decimal>("priceEBook")),
+
+              //          Description = x.Field<string>("description")}).ToList();
                 
 
                 //5. Data Reader methods
-                while (excelReader.Read())
-                {
-                    //excelReader.GetInt32(0);
-                }
+                //while (excelReader.Read())
+                //{
+                //    //excelReader.GetInt32(0);
+                //}
 
                 //6. Free resources (IExcelDataReader is IDisposable)
                 excelReader.Close();
@@ -76,6 +93,16 @@ namespace BookstoreDataSource
                 //    // @"Y:\Code\IntroSWE\Team7_SPSUBookstore\users.txt"
                 //}
             }
+
+        }
+        public List<BookStock> ConvertToStock(int qtyNew, int qtyUsed, int qtyRental, int qtyEBook, decimal pNew, decimal pUsed, decimal pRental, decimal pEbook)
+        {
+            List<BookStock> stock = new List<BookStock>();
+            stock.Add(new BookStock() { Price = pNew, Quantity = qtyNew, Type = StockType.New});
+            stock.Add(new BookStock() { Price = pUsed, Quantity = qtyUsed, Type = StockType.Used });
+            stock.Add(new BookStock() { Price = pRental, Quantity = qtyRental, Type = StockType.Rental });
+            stock.Add(new BookStock() { Price = pEbook, Quantity = qtyEBook, Type = StockType.E_Book });
+            return stock;
         }
     }
 }

@@ -21,6 +21,7 @@ namespace Entities
         public string CRN { get; set; }
         public bool isRequired { get; set; }
         public IList<BookStock> Stock { get; set; }
+        public string Description { get; set; }
 
         //        title : String
         //-author : String
