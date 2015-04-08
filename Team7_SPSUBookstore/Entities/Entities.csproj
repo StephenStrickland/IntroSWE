@@ -43,6 +43,7 @@
     <Compile Include="Order.cs" />
     <Compile Include="PaymentInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchCriteria.cs" />
     <Compile Include="ShipingInfo.cs" />
     <Compile Include="ShoppingCartBook.cs" />
     <Compile Include="User.cs" />
