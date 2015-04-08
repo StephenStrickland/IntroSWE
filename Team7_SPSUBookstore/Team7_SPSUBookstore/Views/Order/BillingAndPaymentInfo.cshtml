@@ -32,17 +32,18 @@
 
 
 }
+<div>
+    <form method="post">
 
-<form method="post">
-    @Html.TextBoxFor(model => model.ShippingInfo.FirstName, new { @placeholder = "First Name" }) @Html.TextBoxFor(model => model.ShippingInfo.LastName, new { @placeholder = "Last Name" })<br /><br />
-    @Html.TextBoxFor(model => model.ShippingInfo.StreetAddr, new { @placeholder = "Street Address" })<br /><br />
-    @Html.TextBoxFor(model => model.ShippingInfo.ZipCode, new { @placeholder = "Zip Code" })<br /><br />
-    @Html.TextBoxFor(model => model.ShippingInfo.City, new { @placeholder = "City" })<br /><br />
-    @Html.TextBoxFor(model => model.ShippingInfo.State, new { @placeholder = "State" })<br /><br />
-    <p>Is your Shipping Information the Same as Billing Information? @Html.CheckBox("isInfoSame", "yes") </p>
-    <input type="submit" />
-</form>
-
+        @Html.TextBoxFor(model => model.ShippingInfo.FirstName, new { @placeholder = "First Name" }) @Html.TextBoxFor(model => model.ShippingInfo.LastName, new { @placeholder = "Last Name" })<br /><br />
+        @Html.TextBoxFor(model => model.ShippingInfo.StreetAddr, new { @placeholder = "Street Address"})<br /><br />
+        @Html.TextBoxFor(model => model.ShippingInfo.ZipCode, new { @placeholder = "Zip Code" })<br /><br />
+        @Html.TextBoxFor(model => model.ShippingInfo.City, new { @placeholder = "City" })<br /><br />
+        @Html.TextBoxFor(model => model.ShippingInfo.State, new { @placeholder = "State" })<br /><br />
+        <p>Is your Shipping Information the Same as Billing Information? @Html.CheckBox("isInfoSame", "yes") </p>
+        <input type="submit" />
+    </form>
+</div>
 <p> checkBoxValue = @Request["isInfoSame"]</p>
 
 
