@@ -50,7 +50,7 @@ namespace BookstoreDataSource
                 result = excelReader.AsDataSet();
 
                 result.AcceptChanges();
-               // var t = result.Tables[0].Rows[43];
+               
                 Books = result.Tables[0].AsEnumerable().Select(x =>
                       new BookDatabaseItem()
                       {
@@ -70,7 +70,6 @@ namespace BookstoreDataSource
                           Description = x.Field<string>("description")
                       }).ToList();
                 
-
                 excelReader.Close();
             }
 
