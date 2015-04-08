@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    class PaymentInfo
+    public class PaymentInfo : ShipingInfo
     {
 
         //        - ccNumber: String - expDateMonth: int - expDateYear: int

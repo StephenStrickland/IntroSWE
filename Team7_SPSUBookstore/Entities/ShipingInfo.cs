@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    class ShipingInfo
+    public class ShipingInfo
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

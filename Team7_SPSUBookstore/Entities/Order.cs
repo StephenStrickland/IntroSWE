@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    class Order
+    public class Order
     {
         public Order(List<ShoppingCartBook> books)
         {
