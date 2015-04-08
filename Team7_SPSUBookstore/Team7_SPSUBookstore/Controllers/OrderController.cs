@@ -16,6 +16,11 @@ namespace Team7_SPSUBookstore.Controllers
             return View();
         }
 
+        public ActionResult BillingAndPaymentInfo()
+        {
+            return View();
+        }
+
         //
         // GET: /Order/Details/5
         public ActionResult Details(int id)

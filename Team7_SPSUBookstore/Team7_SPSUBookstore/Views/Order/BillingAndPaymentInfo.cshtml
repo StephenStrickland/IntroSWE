@@ -34,11 +34,11 @@
 }
 
 <form method="post">
-    @Html.TextBox("sFirstName", "First Name")  @Html.TextBox("sLastName", "Last Name")<br /><br />
-    @Html.TextBox("sStreetAddress", "Street Address")<br /><br />
-    @Html.TextBox("sZip", "Zip Code")<br /><br />
-    @Html.TextBox("sCity", "City")<br /><br />
-    @Html.TextBox("sState", "State")<br /><br />
+    @Html.TextBoxFor(model => model.ShippingInfo.FirstName, new { @placeholder = "First Name" }) @Html.TextBoxFor(model => model.ShippingInfo.LastName, new { @placeholder = "Last Name" })<br /><br />
+    @Html.TextBoxFor(model => model.ShippingInfo.StreetAddr, new { @placeholder = "Street Address" })<br /><br />
+    @Html.TextBoxFor(model => model.ShippingInfo.ZipCode, new { @placeholder = "Zip Code" })<br /><br />
+    @Html.TextBoxFor(model => model.ShippingInfo.City, new { @placeholder = "City" })<br /><br />
+    @Html.TextBoxFor(model => model.ShippingInfo.State, new { @placeholder = "State" })<br /><br />
     <p>Is your Shipping Information the Same as Billing Information? @Html.CheckBox("isInfoSame", "yes") </p>
     <input type="submit" />
 </form>
@@ -49,14 +49,13 @@
 <br />
 <h2>Billing Information</h2>
 
-@Html.TextBox("bFirstName", "First Name")  @Html.TextBox("bLastName", "Last Name")<br /><br />
-@Html.TextBox("bStreetAddress", "Street Address")<br /><br />
-@Html.TextBox("bZip", "Zip Code")<br /><br />
-@Html.TextBox("bCity", "City")<br /><br />
-@Html.TextBox("bState", "State")<br /><br />
+@Html.TextBoxFor(model => model.PaymentInfo.FirstName, new { @placeholder = "First Name" }) @Html.TextBoxFor(model => model.PaymentInfo.LastName, new { @placeholder = "Last Name" })<br /><br />
+@Html.TextBoxFor(model => model.PaymentInfo.StreetAddr, new { @placeholder = "Street Address" })<br /><br />
+@Html.TextBoxFor(model => model.PaymentInfo.ZipCode, new { @placeholder = "Zip Code" })<br /><br />
+@Html.TextBoxFor(model => model.PaymentInfo.City, new { @placeholder = "City" })<br /><br />
+@Html.TextBoxFor(model => model.PaymentInfo.State, new { @placeholder = "State" })<br /><br />
 
-@Html.TextBox("ccNumber", "CC#")<br /><br />
+@Html.TextBoxFor(model => model.PaymentInfo.CcNumber, new { @placeholder = "Credit Card Number" })<br /><br />
 <h3>Expiration Date</h3>
-@Html.TextBox("expMonth", "MM")/@Html.TextBox("expYear", "YY")<br /><br />
-@Html.TextBox("email", "Email")
-
+@Html.TextBoxFor(model => model.PaymentInfo.ExpDateMonth, new { @placeholder = "MM" })/@Html.TextBoxFor(model => model.PaymentInfo.ExpDateYear, new { @placeholder = "YY" })<br /><br />
+<!--//Html.TextBoxFor(model => model) HOW IS THE EMAIL ADDRESS GOING TO BE DONE!-->
