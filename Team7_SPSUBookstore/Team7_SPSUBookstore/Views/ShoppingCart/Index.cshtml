@@ -1,87 +1,61 @@
-﻿@model IEnumerable<Entities.BookDatabaseItem>
+﻿@model IEnumerable<Entities.ShoppingCartBook>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+
+<h2>Shopping Cart</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "PreCart")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ISBN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Edition)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Course)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Section)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Semester)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Professor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CRN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isRequired)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ISBN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Edition)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Course)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Section)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Semester)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Professor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CRN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isRequired)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+
+
+@if (Model != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantityInCart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+        </tr>
+
+    </table>
+
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN) + " by " + @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeInCart)
+            </td>
+            <td>
+                @Html.ActionLink("Remove from cart", "Remove from cart", new { /* id=item.PrimaryKey */ }) |
+            </td>
+        </tr>
+    }
+}
+else
+{
+    <h4>
+        Your cart is empty!
+    </h4>
 }
 
-</table>
+
+
