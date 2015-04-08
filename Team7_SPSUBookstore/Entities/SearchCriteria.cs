@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    class SearchCriteria
+    public class SearchCriteria
     {
         public string BasicSearch { get; set; }
         public int CRN { get; set; }
