@@ -4,34 +4,7 @@
 }
 <div class="container">
     <h2>Shipping Information</h2>
-    @{
 
-        //Shipping Info
-        string sFirstName = (string)Session["sFirstName"];
-        string sLastName = (string)Session["sLastName"];
-        string sStreetAddress = (string)Session["sStreetAddress"];
-        string sZip = (string)Session["sZip"];
-        string sCity = (string)Session["sCity"];
-        string sState = (string)Session["sState"];
-
-        //Billing Info
-        string bFirstName = (string)Session["bFirstName"];
-        string bLastName = (string)Session["bLastName"];
-        string bStreetAddress = (string)Session["bStreetAddress"];
-        string bZip = (string)Session["bZip"];
-        string bCity = (string)Session["bCity"];
-        string bState = (string)Session["bState"];
-
-
-        //Credit Card Info
-        string ccNumber = (string)Session["ccNumber"];
-        string expDateMonth = (string)Session["expDateMonth"];
-        string expDateYear = (string)Session["expDateYear"];
-        string email = (string)Session["email"];
-    //bool isInfoSame = (bool)Session["isInfoSame"];
-
-
-    }
     <div>
         <form method="post">
             <div class="row">
@@ -41,28 +14,77 @@
                 <div class="col-md-3 col-lg-3">
 
                     @Html.TextBoxFor(model => model.ShippingInfo.LastName, new { @placeholder = "Last Name", @class = "form-control" })
-                </div><br /><br />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    @Html.TextBoxFor(model => model.ShippingInfo.StreetAddr, new { @placeholder = "Street Address", @class = "form-control" })<br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.ShippingInfo.City, new { @placeholder = "City", @class = "form-control" })
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.ShippingInfo.State, new { @placeholder = "State", @class = "form-control" })
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.ShippingInfo.ZipCode, new { @placeholder = "Zip Code", @class = "form-control" })
+                </div>
+            </div>
 
+            <p>Is your Shipping Information the Same as Billing Information? @Html.CheckBox("isInfoSame", "yes") </p>
+            <input type="submit" />
+        </form>
     </div>
-    @Html.TextBoxFor(model => model.ShippingInfo.StreetAddr, new { @placeholder = "Street Address", @class = "form-control" })<br /><br />
-    @Html.TextBoxFor(model => model.ShippingInfo.ZipCode, new { @placeholder = "Zip Code", @class = "form-control" })<br /><br />
-    @Html.TextBoxFor(model => model.ShippingInfo.City, new { @placeholder = "City", @class = "form-control" })<br /><br />
-    @Html.TextBoxFor(model => model.ShippingInfo.State, new { @placeholder = "State", @class = "form-control" })<br /><br />
-    <p>Is your Shipping Information the Same as Billing Information? @Html.CheckBox("isInfoSame", "yes") </p>
-    <input type="submit" />
-    </form>
-</div>
     <p> checkBoxValue = @Request["isInfoSame"]</p>
 
     <br />
     <h2>Billing Information</h2>
-    @Html.TextBoxFor(model => model.PaymentInfo.FirstName, new { @placeholder = "First Name" }) @Html.TextBoxFor(model => model.PaymentInfo.LastName, new { @placeholder = "Last Name" })<br /><br />
-    @Html.TextBoxFor(model => model.PaymentInfo.StreetAddr, new { @placeholder = "Street Address" })<br /><br />
-    @Html.TextBoxFor(model => model.PaymentInfo.ZipCode, new { @placeholder = "Zip Code" })<br /><br />
-    @Html.TextBoxFor(model => model.PaymentInfo.City, new { @placeholder = "City" })<br /><br />
-    @Html.TextBoxFor(model => model.PaymentInfo.State, new { @placeholder = "State" })<br /><br />
-    @Html.TextBoxFor(model => model.PaymentInfo.CcNumber, new { @placeholder = "Credit Card Number" })<br /><br />
+    <div class="row">
+        <div class="col-md-3 col-lg-3">
+            @Html.TextBoxFor(model => model.PaymentInfo.FirstName, new { @placeholder = "First Name", @class = "form-control" })
+        </div>
+        <div class="col-md-3 col-lg-3">
+            @Html.TextBoxFor(model => model.PaymentInfo.LastName, new { @placeholder = "Last Name", @class = "form-control" })<br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-6">
+            @Html.TextBoxFor(model => model.PaymentInfo.StreetAddr, new { @placeholder = "Street Address", @class = "form-control" })<br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-lg-2">
+            @Html.TextBoxFor(model => model.PaymentInfo.City, new { @placeholder = "City", @class = "form-control" })
+        </div>
+        <div class="col-md-2 col-lg-2">
+            @Html.TextBoxFor(model => model.PaymentInfo.State, new { @placeholder = "State", @class = "form-control" })
+        </div>
+        <div class="col-md-2 col-lg-2">
+            @Html.TextBoxFor(model => model.PaymentInfo.ZipCode, new { @placeholder = "Zip Code", @class = "form-control" })
+        </div>
+    </div>
+
+
+
+
     <h3>Expiration Date</h3>
-    @Html.TextBoxFor(model => model.PaymentInfo.ExpDateMonth, new { @placeholder = "MM" })/@Html.TextBoxFor(model => model.PaymentInfo.ExpDateYear, new { @placeholder = "YY" })<br /><br />
+    <div class="row">
+        <div class="col-md-6 col-lg-6">
+            @Html.TextBoxFor(model => model.PaymentInfo.CcNumber, new { @placeholder = "Credit Card Number", @class = "form-control" })<br />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 col-lg-3">
+            @Html.TextBoxFor(model => model.PaymentInfo.ExpDateMonth, new { @placeholder = "MM", @class = "form-control" })
+        </div>
+        <div class="col-md-3 col-lg-3">
+            @Html.TextBoxFor(model => model.PaymentInfo.ExpDateYear, new { @placeholder = "YY", @class = "form-control" })
+        </div>
+    </div>
+    
 </div>
 <!--//Html.TextBoxFor(model => model) HOW IS THE EMAIL ADDRESS GOING TO BE DONE!-->
