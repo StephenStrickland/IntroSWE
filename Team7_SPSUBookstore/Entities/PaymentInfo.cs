@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class PaymentInfo : ShipingInfo
+    public class PaymentInfo : ShippingInfo
     {
 
         //        - ccNumber: String - expDateMonth: int - expDateYear: int
@@ -14,9 +16,24 @@ namespace Entities
         //+ validateCCNumber(): bool + validateExpDate(): bool
         //+ validateCCV(): bool
 
+        [Required(ErrorMessage = "Credit Card Number is required")]
+        [MinLength(16,ErrorMessage = "Credit Card Number must be 16 digits long")]
+        [MaxLength(16, ErrorMessage = "Credit Card Number must be 16 digits long")]
         public string CcNumber { get; set; }
+
+        [Required(ErrorMessage = "Month expiration date is required")]
+        [MinLength(2, ErrorMessage = "Month expiration date must be 2 digits long")]
+        [MaxLength(2, ErrorMessage = "Month expiration date must be 2 digits long")]
         public int ExpDateMonth { get; set; }
+
+        [Required(ErrorMessage = "Year expiration date is required")]
+        [MinLength(2, ErrorMessage = "Year expiration date must be 2 digits long")]
+        [MaxLength(2, ErrorMessage = "Year expiration date must be 2 digits long")]
         public int ExpDateYear { get; set; }
+        [Required(ErrorMessage = "Security Code is required")]
+        [MinLength(2, ErrorMessage = "Year expiration date must be 3 digits long")]
+        [MaxLength(2, ErrorMessage = "Year expiration date must be 3 digits long")]
+
         public int CCV { get; set; }
 
         public bool ValidateCcNUmber()

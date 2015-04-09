@@ -13,7 +13,7 @@ namespace Entities
             BooksInCart = books;
         }
 
-        public Order(List<ShoppingCartBook> books, ShipingInfo shipping, PaymentInfo payment)
+        public Order(List<ShoppingCartBook> books, ShippingInfo shipping, PaymentInfo payment)
         {
             BooksInCart = books;
             ShippingInfo = shipping;
@@ -21,7 +21,7 @@ namespace Entities
         }
 
         public IList<ShoppingCartBook> BooksInCart { get; set; }
-        public ShipingInfo ShippingInfo { get; set; }
+        public ShippingInfo ShippingInfo { get; set; }
         public PaymentInfo PaymentInfo { get; set; }
         public decimal SubTotalCost { get { return BooksInCart.Select(x => x.QuantityInCart * x.Price).Sum(); } }
         public decimal Tax { get { return (SubTotalCost * (decimal)(.07)); } }//7%
