@@ -4,9 +4,9 @@ This is the repository for group 7 in Intro to Software Engineering @ SPSU taugh
 
 # Todo list
 ## Design adjustments
-- [ ] Revised homepage
+- [x] Revised intro page layout diagram
 - [ ] Revised search diagram (sorting and code)
-- [ ] Reciept page; model after print recipt from amazon
+- [ ] Reciept page; (model after print recipt from amazon?)
 
 ## Views
 - [ ] Book
@@ -17,7 +17,7 @@ This is the repository for group 7 in Intro to Software Engineering @ SPSU taugh
 
 ## Data models
 - [x] Implement models for BookDatabaseItem, Order, PaymentInfo, ShippingInfo, ShoppingCartBook, User
-- [ ] Check data model styles with customer
+- [x] Check data model styles with customer
 
 ## Controllers
 - [x] Home
@@ -33,6 +33,6 @@ This is the repository for group 7 in Intro to Software Engineering @ SPSU taugh
 - [ ] Sort results
 
 ## Resources
-- [ ] Implement books.csv (pending file)
+- [x] Implement books.csv (pending file)
 - [x] Implement userpass file
 
