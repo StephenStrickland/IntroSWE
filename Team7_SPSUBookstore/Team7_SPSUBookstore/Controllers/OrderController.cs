@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,11 @@ namespace Team7_SPSUBookstore.Controllers
         //
         // GET: /Order/
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult BillingAndPaymentInfo()
         {
             return View();
         }

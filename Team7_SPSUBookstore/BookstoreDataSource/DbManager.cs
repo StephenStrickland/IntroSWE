@@ -36,6 +36,7 @@ namespace BookstoreDataSource
                     string[] input = line.Split(new char[] { ' ' }, 2);
                     Users.Add(new User() { Email = input[0], Password = input[1]});
                 }
+                sr.Close();
                 // @"Y:\Code\IntroSWE\Team7_SPSUBookstore\users.txt"
             }
             //generate the Book list
@@ -47,51 +48,29 @@ namespace BookstoreDataSource
                 excelReader.IsFirstRowAsColumnNames = true;
                 
                 result = excelReader.AsDataSet();
-              //Books = result.Tables[0].AsEnumerable().Select(x =>
-              //      new BookDatabaseItem()
-              //      {
-              //          ISBN = x.Field<string>("ISBN"),
-              //          Title = x.Field<string>("title"),
-              //          Author = x.Field<string>("CRN"),
-              //          Semester = x.Field<string>("semester"),
-              //          Course = x.Field<string>("course"),
-              //          Section = x.Field<int>("section"),
-              //          Professor = x.Field<string>("professor"),
-              //          CRN = x.Field<string>("ISBN"),
-              //          isRequired = (x.Field<string>("use") == "Required"),
-              //          Stock = ConvertToStock(x.Field<int>("quantityNew"), x.Field<int>("quantityUsed"), 
-              //              x.Field<int>("quantityRental"), x.Field<int>("quantityEBook"), x.Field<decimal>("priceNew"),
-              //              x.Field<decimal>("priceUsed"), x.Field<decimal>("priceRental"), x.Field<decimal>("priceEBook")),
 
-              //          Description = x.Field<string>("description")}).ToList();
+                result.AcceptChanges();
+               
+                Books = result.Tables[0].AsEnumerable().Select(x =>
+                      new BookDatabaseItem()
+                      {
+                          ISBN = x.Field<string>("ISBN"),
+                          Title = x.Field<string>("title"),
+                          Author = x.Field<string>("author"),
+                          Semester = x.Field<string>("semester"),
+                          Course = x.Field<string>("course"),
+                          Section = Convert.ToInt32( x.Field<double>("section")),
+                          Professor = x.Field<string>("professor"),
+                          CRN = x.Field<double>("CRN").ToString(),
+                          isRequired = (x.Field<string>("use") == "Required"),
+                          Stock = ConvertToStock(Convert.ToInt32(x.Field<object>("quantityNew")), Convert.ToInt32(x.Field<object>("quantityUsed")),
+                              Convert.ToInt32(x.Field<double>("quantityRental")), Convert.ToInt32(x.Field<double>("quantityEBook")), Convert.ToDecimal(x.Field<double>("priceNew")),
+                              Convert.ToDecimal(x.Field<double>("priceUsed")), Convert.ToDecimal(x.Field<double>("priceRental")), Convert.ToDecimal(x.Field<double>("priceEBook"))),
+
+                          Description = x.Field<string>("description")
+                      }).ToList();
                 
-
-                //5. Data Reader methods
-                //while (excelReader.Read())
-                //{
-                //    //excelReader.GetInt32(0);
-                //}
-
-                //6. Free resources (IExcelDataReader is IDisposable)
                 excelReader.Close();
-
-
-                //using (StreamReader sr = File.OpenText(root + userUrl))
-                //{
-                //    string line = String.Empty;
-                //    while ((line = sr.ReadLine()) != null)
-                //    {
-                //        string[] input = line.Split(new char[] { ',' }, 2);
-                //        //copy assign attribute values and 
-                //        BookDatabaseItem newBook = new BookDatabaseItem()
-                //            {
-                //                ISBN = input[0]
-                //            };
-
-                //        Books.Add(newBook);
-                //    }
-                //    // @"Y:\Code\IntroSWE\Team7_SPSUBookstore\users.txt"
-                //}
             }
 
         }

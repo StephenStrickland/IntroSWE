@@ -14,5 +14,30 @@ namespace Team7_SPSUBookstore.Controllers
 
 
         public DbManager DbManager = new DbManager("Resources/users.txt", "Resources/books.xlsx");
+
+
+        public List<SelectListItem> GetProfessorsForDropDown()
+        {
+
+            return DbManager.Books.Select(x => x.Professor).Distinct().Select(x => new SelectListItem() { Text = x.ToString(), Value = x.ToString() }).OrderBy(x => x.Text).ToList();
+
+        }
+        public List<SelectListItem> GetSectionsForDropDown()
+        {
+
+            return DbManager.Books.Select(x => x.Section).Distinct().Select(x => new SelectListItem() { Text = x.ToString(), Value = x.ToString() }).ToList();
+
+        }
+        public List<SelectListItem> GetCoursesForDropDown()
+        {
+
+            return DbManager.Books.Select(x => new SelectListItem() { Text = x.Course, Value = x.Course }).OrderBy(x => x.Text).ToList();
+
+        }
+
+
+
+
+
 	}
 }

@@ -11,10 +11,41 @@ namespace Team7_SPSUBookstore.Controllers
         //
         // GET: /Search/
         [HttpPost]
-        public ActionResult Index(string criteria)
+        //public ActionResult Index(string criteria)
+       // {
+           // ViewBag.Title = criteria;
+           // return View();
+        //}
+        public ActionResult Index(string query, int sortOrder)
         {
-            ViewBag.Title = criteria;
-            return View();
+            var bookList = from b in DbManager.Books
+                           select b;
+            if (!String.IsNullOrEmpty(query))
+            {
+                bookList = bookList.Where(b => b.Title.Contains(query));
+            }
+            switch (sortOrder)
+            {
+                case 1:
+                    bookList = bookList.OrderByDescending(b => b.Author);
+                    break;
+                case 2:
+                    bookList = bookList.OrderBy(b => b.Author);
+                    break;
+                //case 3:
+                //    bookList = bookList.OrderByDescending(b => b.Price);
+                //    break;
+                //case 4:
+                //    bookList = bookList.OrderBy(b => b.Price);
+                //    break;
+                case 5:
+                    bookList = bookList.OrderByDescending(b => b.Title);
+                    break;
+                default:
+                    bookList = bookList.OrderBy(b => b.Title);
+                    break;
+            }
+            return View(bookList.ToList());
         }
 
         [HttpGet]

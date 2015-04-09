@@ -2,61 +2,89 @@
 @{
     ViewBag.Title = "View";
 }
+<div class="container">
+    <h2>Shipping Information</h2>
 
-<h2>Shipping Information</h2>
-@{
+    <div>
+        <form method="post">
+            <div class="row">
+                <div class="col-md-3 col-lg-3">
+                    @Html.TextBoxFor(model => model.ShippingInfo.FirstName, new { @placeholder = "First Name", @class = "form-control" })
+                </div>
+                <div class="col-md-3 col-lg-3">
 
-    //Shipping Info
-    string sFirstName = (string)Session["sFirstName"];
-    string sLastName = (string)Session["sLastName"];
-    string sStreetAddress = (string)Session["sStreetAddress"];
-    string sZip = (string)Session["sZip"];
-    string sCity = (string)Session["sCity"];
-    string sState = (string)Session["sState"];
+                    @Html.TextBoxFor(model => model.ShippingInfo.LastName, new { @placeholder = "Last Name", @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    @Html.TextBoxFor(model => model.ShippingInfo.StreetAddr, new { @placeholder = "Street Address", @class = "form-control" })<br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.ShippingInfo.City, new { @placeholder = "City", @class = "form-control" })
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.ShippingInfo.State, new { @placeholder = "State", @class = "form-control" })
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.ShippingInfo.ZipCode, new { @placeholder = "Zip Code", @class = "form-control" })
+                </div>
+            </div>
 
-    //Billing Info
-    string bFirstName = (string)Session["bFirstName"];
-    string bLastName = (string)Session["bLastName"];
-    string bStreetAddress = (string)Session["bStreetAddress"];
-    string bZip = (string)Session["bZip"];
-    string bCity = (string)Session["bCity"];
-    string bState = (string)Session["bState"];
+            <p>Is your Shipping Information the Same as Billing Information? @Html.CheckBox("isInfoSame", "yes") </p>
+            <input type="submit" />
+        </form>
+    </div>
+    <p> checkBoxValue = @Request["isInfoSame"]</p>
+
+    <br />
+    <h2>Billing Information</h2>
+    <div class="row">
+        <div class="col-md-3 col-lg-3">
+            @Html.TextBoxFor(model => model.PaymentInfo.FirstName, new { @placeholder = "First Name", @class = "form-control" })
+        </div>
+        <div class="col-md-3 col-lg-3">
+            @Html.TextBoxFor(model => model.PaymentInfo.LastName, new { @placeholder = "Last Name", @class = "form-control" })<br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-6">
+            @Html.TextBoxFor(model => model.PaymentInfo.StreetAddr, new { @placeholder = "Street Address", @class = "form-control" })<br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-lg-2">
+            @Html.TextBoxFor(model => model.PaymentInfo.City, new { @placeholder = "City", @class = "form-control" })
+        </div>
+        <div class="col-md-2 col-lg-2">
+            @Html.TextBoxFor(model => model.PaymentInfo.State, new { @placeholder = "State", @class = "form-control" })
+        </div>
+        <div class="col-md-2 col-lg-2">
+            @Html.TextBoxFor(model => model.PaymentInfo.ZipCode, new { @placeholder = "Zip Code", @class = "form-control" })
+        </div>
+    </div>
 
 
-    //Credit Card Info
-    string ccNumber = (string)Session["ccNumber"];
-    string expDateMonth = (string)Session["expDateMonth"];
-    string expDateYear = (string)Session["expDateYear"];
-    string email = (string)Session["email"];
-    //bool isInfoSame = (bool)Session["isInfoSame"];
 
 
-}
+    <h3>Expiration Date</h3>
+    <div class="row">
+        <div class="col-md-6 col-lg-6">
+            @Html.TextBoxFor(model => model.PaymentInfo.CcNumber, new { @placeholder = "Credit Card Number", @class = "form-control" })<br />
+        </div>
+    </div>
 
-<form method="post">
-    @Html.TextBox("sFirstName", "First Name")  @Html.TextBox("sLastName", "Last Name")<br /><br />
-    @Html.TextBox("sStreetAddress", "Street Address")<br /><br />
-    @Html.TextBox("sZip", "Zip Code")<br /><br />
-    @Html.TextBox("sCity", "City")<br /><br />
-    @Html.TextBox("sState", "State")<br /><br />
-    <p>Is your Shipping Information the Same as Billing Information? @Html.CheckBox("isInfoSame", "yes") </p>
-    <input type="submit" />
-</form>
-
-<p> checkBoxValue = @Request["isInfoSame"]</p>
-
-
-<br />
-<h2>Billing Information</h2>
-
-@Html.TextBox("bFirstName", "First Name")  @Html.TextBox("bLastName", "Last Name")<br /><br />
-@Html.TextBox("bStreetAddress", "Street Address")<br /><br />
-@Html.TextBox("bZip", "Zip Code")<br /><br />
-@Html.TextBox("bCity", "City")<br /><br />
-@Html.TextBox("bState", "State")<br /><br />
-
-@Html.TextBox("ccNumber", "CC#")<br /><br />
-<h3>Expiration Date</h3>
-@Html.TextBox("expMonth", "MM")/@Html.TextBox("expYear", "YY")<br /><br />
-@Html.TextBox("email", "Email")
-
+    <div class="row">
+        <div class="col-md-3 col-lg-3">
+            @Html.TextBoxFor(model => model.PaymentInfo.ExpDateMonth, new { @placeholder = "MM", @class = "form-control" })
+        </div>
+        <div class="col-md-3 col-lg-3">
+            @Html.TextBoxFor(model => model.PaymentInfo.ExpDateYear, new { @placeholder = "YY", @class = "form-control" })
+        </div>
+    </div>
+    
+</div>
+<!--//Html.TextBoxFor(model => model) HOW IS THE EMAIL ADDRESS GOING TO BE DONE!-->
