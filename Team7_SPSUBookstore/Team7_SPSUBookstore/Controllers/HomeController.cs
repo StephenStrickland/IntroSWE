@@ -20,6 +20,7 @@ namespace Team7_SPSUBookstore.Controllers
            ViewData["profs"] = GetProfessorsForDropDown();
            ViewData["section"] = GetSectionsForDropDown();
            ViewData["course"] = GetCoursesForDropDown();
+           ViewBag.isHome = true;
             return View();
         }
 
