@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    var shoppingCartBooks = ViewData["ShoppingCart"] as List<Entities.ShoppingCartBook>;
 }
 
 
@@ -13,7 +14,7 @@
 
 
 
-@if (Model != null)
+@if (shoppingCartBooks != null)
 {
     <table class="table">
         <tr>
@@ -30,22 +31,22 @@
 
     </table>
 
-    foreach (var item in Model)
+    foreach (var book in shoppingCartBooks)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ISBN)
+                @Html.DisplayFor(modelItem => book.ISBN)
             </td>
         </tr>
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ISBN) + " by " + @Html.DisplayFor(modelItem => item.ISBN)
+                @Html.DisplayFor(modelItem => book.ISBN) + " by " + @Html.DisplayFor(modelItem => book.ISBN)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TypeInCart)
+                @Html.DisplayFor(modelItem => book.TypeInCart)
             </td>
             <td>
-                @Html.ActionLink("Remove from cart", "Remove from cart", new { /* id=item.PrimaryKey */ }) |
+                <a href="#" class="RemoveBook" data-id="@book.ISBN">Remove from cart</a>
             </td>
         </tr>
     }

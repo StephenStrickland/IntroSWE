@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,11 @@ namespace Team7_SPSUBookstore.Controllers
         // GET: /ShoppingCart/
         public ActionResult Index()
         {
+            var model = new List<ShoppingCartBook>();
+            model = (List<ShoppingCartBook>)Session["ShoppingCart"];
+
+            ViewData["ShoppingCartBook"] = model;
+
             return View();
         }
 
@@ -93,6 +99,34 @@ namespace Team7_SPSUBookstore.Controllers
                 return View();
             }
         }
+        
+        public ActionResult Checkout()
+        {
+            return RedirectToAction("Index", "Order");
+            //return View("Order/BillingAndPaymentInfo.cshtml");
+        }
 
+
+        public ActionResult RemoveFromCart(int id)
+        {
+            var model = new List<ShoppingCartBook>();
+            model = (List<ShoppingCartBook>)Session["ShoppingCart"];
+            model.RemoveAt(id);
+            Session.Add("ShoppingCart", model);
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult AddToCart(int id)
+        {
+            var model = (List<ShoppingCartBook>)Session["ShoppingCart"];
+
+            return RedirectToAction("PreCart", "ShoppingCart");
+        }
+
+        public ActionResult PreCart()
+        {
+            return View("PreCart");
+        }
     }
 }

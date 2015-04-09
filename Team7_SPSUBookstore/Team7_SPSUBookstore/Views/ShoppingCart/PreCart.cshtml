@@ -55,11 +55,13 @@
                             <table border="1">
                                 <tr>
                                     <td>
-                                        <button type="button">Edit Cart</button>
+                                        <button type="button" onclick="location.href='@Url.Action("Index", "ShoppingCart")'">Edit Cart</button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><button type="button">Continue to checkout</button></td>
+                                    <td>
+                                        <button type="submit" onclick="location.href='@Url.Action("BillingAndPaymentInfo", "Order")'">Continue to checkout</button>
+                                    </td>
                                 </tr>
                             </table>
                         </td>
