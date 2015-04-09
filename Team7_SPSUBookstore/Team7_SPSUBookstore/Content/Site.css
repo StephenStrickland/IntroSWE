@@ -44,3 +44,8 @@ input[type="checkbox"].input-validation-error {
 padding-top:200px;
 padding-bottom:200px;
 }
+
+div.navbar-collapse.collapse ul.nav.navbar-nav li button.btn.btn-default.collapsed {
+    margin-top: 12px;
+
+}
