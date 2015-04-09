@@ -35,6 +35,13 @@ namespace Team7_SPSUBookstore.Controllers
 
         }
 
+        public void SetSearchCriteria()
+        {
+            ViewData["profs"] = GetProfessorsForDropDown();
+            ViewData["section"] = GetSectionsForDropDown();
+            ViewData["course"] = GetCoursesForDropDown();
+        }
+
 
 
 

@@ -17,9 +17,7 @@ namespace Team7_SPSUBookstore.Controllers
             ViewBag.hey = ";aoisnfoasnflksnlksnlsknf";
            var j = new List<SelectListItem>();
            j.Add(new SelectListItem() { Text="asfd", Value="asf"});
-           ViewData["profs"] = GetProfessorsForDropDown();
-           ViewData["section"] = GetSectionsForDropDown();
-           ViewData["course"] = GetCoursesForDropDown();
+           SetSearchCriteria();
            ViewBag.isHome = true;
             return View();
         }
