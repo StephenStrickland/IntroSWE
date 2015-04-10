@@ -19,6 +19,7 @@ namespace Entities
         public string StreetAddr { get; set; }
 
         [Required(ErrorMessage = "Zip Code is required")]
+        [StringLength(5, MinimumLength = 5, ErrorMessage = "A Zip Code is 5 digits long")]
         public string ZipCode { get; set; }
 
         [Required(ErrorMessage = "City  is required")]

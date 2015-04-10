@@ -75,7 +75,6 @@ namespace Team7_SPSUBookstore.Controllers
                 return View();
             }
         }
-
         //
         // GET: /Order/Delete/5
         public ActionResult Delete(int id)

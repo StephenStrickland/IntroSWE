@@ -17,22 +17,19 @@ namespace Entities
         //+ validateCCV(): bool
 
         [Required(ErrorMessage = "Credit Card Number is required")]
-        [MinLength(16,ErrorMessage = "Credit Card Number must be 16 digits long")]
-        [MaxLength(16, ErrorMessage = "Credit Card Number must be 16 digits long")]
+        [StringLength(16, MinimumLength = 16, ErrorMessage = "The Credit Card Number must be 16 digits long")]
         public string CcNumber { get; set; }
 
         [Required(ErrorMessage = "Month expiration date is required")]
-        [MinLength(2, ErrorMessage = "Month expiration date must be 2 digits long")]
-        [MaxLength(2, ErrorMessage = "Month expiration date must be 2 digits long")]
+        [StringLength(2, MinimumLength = 2, ErrorMessage = "The Month is in form MM")]
         public int ExpDateMonth { get; set; }
 
         [Required(ErrorMessage = "Year expiration date is required")]
-        [MinLength(2, ErrorMessage = "Year expiration date must be 2 digits long")]
-        [MaxLength(2, ErrorMessage = "Year expiration date must be 2 digits long")]
+        [StringLength(2, MinimumLength = 2, ErrorMessage = "The Year is in form YY")]
         public int ExpDateYear { get; set; }
+
         [Required(ErrorMessage = "Security Code is required")]
-        [MinLength(2, ErrorMessage = "Year expiration date must be 3 digits long")]
-        [MaxLength(2, ErrorMessage = "Year expiration date must be 3 digits long")]
+        [StringLength(3, MinimumLength = 3, ErrorMessage = "The Security Code is 3 digits long")]
 
         public int CCV { get; set; }
 
