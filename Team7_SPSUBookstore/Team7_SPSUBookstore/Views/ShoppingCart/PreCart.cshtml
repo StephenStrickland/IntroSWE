@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "PreCart";
+    var shoppingCartBooks = (List<Entities.ShoppingCartBook>)ViewData["ShoppingCartBooks"];
 }
 
 <h2>Thank you for your purchase!</h2>
@@ -10,12 +11,14 @@
             <td>
                 <table border="1">
                     <tr>
-                        <td></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => shoppingCartBooks[shoppingCartBooks.Count - 1].ISBN) .jpg
+                        </td>
                         <td>
                             <table border="1">
                                 <tr>
                                     <td>
-                                        "big long book title of books"
+                                        @Html.DisplayFor(modelItem => shoppingCartBooks[shoppingCartBooks.Count - 1].ISBN)
                                     </td>
                                 </tr>
                                 <tr>
@@ -25,12 +28,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        "price"
+                                        @Html.DisplayFor(modelItem => shoppingCartBooks[shoppingCartBooks.Count - 1].Price)
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        "quantity added""
+                                        @Html.DisplayFor(modelItem => shoppingCartBooks[shoppingCartBooks.Count - 1].QuantityInCart)
                                     </td>
                                 </tr>
                             </table>
@@ -42,12 +45,12 @@
                 <table border="1">
                     <tr align="center">
                         <td>
-                            "subtotal: xx.xx"
+                            subtotal: $@ViewBag.CartSubtotal
                         </td>
                     </tr>
-                    <tr>
+                    <tr align="center">
                         <td>
-                            "xx items in cart"
+                            @ViewBag.ItemsInCart items in cart
                         </td>
                     </tr>
                     <tr>
@@ -57,10 +60,8 @@
                                     <td>
                                         <button type="button" onclick="location.href='@Url.Action("Index", "ShoppingCart")'">Edit Cart</button>
                                     </td>
-                                </tr>
-                                <tr>
                                     <td>
-                                        <button type="submit" onclick="location.href='@Url.Action("BillingAndPaymentInfo", "Order")'">Continue to checkout</button>
+                                        <button type="submit" onclick="location.href='@Url.Action("BillingAndPaymentInfo", "Order")'">To checkout</button>
                                     </td>
                                 </tr>
                             </table>

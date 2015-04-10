@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
-    var shoppingCartBooks = ViewData["ShoppingCart"] as List<Entities.ShoppingCartBook>;
+    var shoppingCartBooks = (List<Entities.ShoppingCartBook>)ViewData["ShoppingCartBooks"];
 }
 
 
@@ -33,22 +33,33 @@
 
     foreach (var book in shoppingCartBooks)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => book.ISBN)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => book.ISBN) + " by " + @Html.DisplayFor(modelItem => book.ISBN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => book.TypeInCart)
-            </td>
-            <td>
-                <a href="#" class="RemoveBook" data-id="@book.ISBN">Remove from cart</a>
-            </td>
-        </tr>
+        <table>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => book.ISBN) .jpg
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td align="center">
+                                @Html.DisplayFor(modelItem => book.Price) by author
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                @Html.DisplayFor(modelItem => book.TypeInCart)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                @Html.ActionLink("Remove from cart", "RemoveFromCart", new {id = shoppingCartBooks.IndexOf(book)})
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br/>
     }
 }
 else

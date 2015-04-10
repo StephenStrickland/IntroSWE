@@ -14,9 +14,32 @@ namespace Team7_SPSUBookstore.Controllers
         public ActionResult Index()
         {
             var model = new List<ShoppingCartBook>();
-            model = (List<ShoppingCartBook>)Session["ShoppingCart"];
 
-            ViewData["ShoppingCartBook"] = model;
+            if (Session["ShoppingCart"] != null)
+                model = (List<ShoppingCartBook>)Session["ShoppingCart"];
+            else
+            {
+                ShoppingCartBook a = new ShoppingCartBook();
+                a.ISBN = "33333";
+                a.QuantityInCart = 5;
+                a.Price = (decimal)55.55;
+                a.TypeInCart = (StockType.New);
+
+                ShoppingCartBook b = new ShoppingCartBook();
+                b.ISBN = "44444";
+                b.QuantityInCart = 7;
+                b.Price = (decimal)33.33;
+                b.TypeInCart = (StockType.Used);
+
+                model.Add(a);
+                model.Add(b);
+            }
+
+            ViewData["ShoppingCartBooks"] = model;
+
+            Session["ShoppingCart"] = model;
+
+            //CalculateSubtotal();
 
             return View();
         }
@@ -109,23 +132,86 @@ namespace Team7_SPSUBookstore.Controllers
 
         public ActionResult RemoveFromCart(int id)
         {
-            var model = new List<ShoppingCartBook>();
-            model = (List<ShoppingCartBook>)Session["ShoppingCart"];
-            model.RemoveAt(id);
-            Session.Add("ShoppingCart", model);
+            var cartBooks = new List<ShoppingCartBook>();
+            cartBooks = (List<ShoppingCartBook>)Session["ShoppingCart"];
+            cartBooks.RemoveAt(id);
+            Session.Add("ShoppingCart", cartBooks);
+
+            cartBooks = null;
 
             return RedirectToAction("Index");
         }
 
         public ActionResult AddToCart(int id)
         {
-            var model = (List<ShoppingCartBook>)Session["ShoppingCart"];
+            var cartBooks = new List<ShoppingCartBook>();
+
+            if (Session["ShoppingCart"] != null)
+            {
+                cartBooks = (List<ShoppingCartBook>)Session["ShoppingCart"];
+            }
+
+            //cartBooks.Add(id);
+            //from book page add item here
+
+            Session["ShoppingCart"] = cartBooks;
+
+            cartBooks = null;
 
             return RedirectToAction("PreCart", "ShoppingCart");
         }
 
+        [HttpPost]
+        public ViewResult CalculateSubtotal()
+        {
+            decimal CartSubtotal = 0.00M;
+
+            var cartBooks = new List<ShoppingCartBook>();
+
+            if (Session["ShoppingCart"] != null)
+            {
+                cartBooks = (List<ShoppingCartBook>)Session["ShoppingCart"];
+
+                foreach (ShoppingCartBook book in cartBooks)
+                {
+                    CartSubtotal += book.Price;
+                }
+            }
+
+            ViewData.Add("CartSubtotal", CartSubtotal);
+
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult ItemsInCart()
+        {
+            var cartBooks = new List<ShoppingCartBook>();
+
+            if (Session["ShoppingCart"] != null)
+            {
+                cartBooks = (List<ShoppingCartBook>)Session["ShoppingCart"];
+            }
+
+            ViewData.Add("ItemsInCart", cartBooks.Count);
+
+            return View();
+        }
+
         public ActionResult PreCart()
         {
+            CalculateSubtotal();
+            ItemsInCart();
+
+            var model = new List<ShoppingCartBook>();
+
+            if (Session["ShoppingCart"] != null)
+                model = (List<ShoppingCartBook>)Session["ShoppingCart"];
+
+            ViewData["ShoppingCartBooks"] = model;
+
+            Session["ShoppingCart"] = model;
+
             return View("PreCart");
         }
     }
