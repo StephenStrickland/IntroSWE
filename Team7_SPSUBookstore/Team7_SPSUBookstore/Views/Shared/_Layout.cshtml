@@ -1,13 +1,5 @@
 ﻿@using System
-@model Entities.SearchCriteria
-@{
-    IList<SelectListItem> section = (List<SelectListItem>)ViewData["sections"];
-    IList<SelectListItem> semester = (List<SelectListItem>)ViewData["semester"];
-    IList<SelectListItem> course = (List<SelectListItem>)ViewData["course"];
-    IList<SelectListItem> profs = new List<SelectListItem>();
-    profs = (List<SelectListItem>)ViewData["profs"];
 
-}
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +25,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (ViewBag.searchBarWanted != null && ViewBag.searchBarWanted == true)
+                    { 
                     <li>
                         <div class="col-md-12 col-lg-12">
                             <form class="navbar-form">
@@ -55,7 +49,7 @@
                     <li>
                         <a href="#" role="button" data-toggle="collapse" data-target="#navSearch">Advanced</a>
 
-                    </li>
+                    </li>}
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                 </ul>
@@ -73,7 +67,7 @@
                     @* <div class="control-group">*@
                     <p>Course Criteria</p>
 
-                    <div class="form-group">
+                    @*<div class="form-group">
                         @Html.LabelFor(model => model.CRN)
 
                         @Html.TextBoxFor(model => model.CRN, null, new { @class = "form-control", @placeholder = "Enter CRN" })
@@ -91,7 +85,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Section)
                         @Html.DropDownList("Section", section, "Please select one", new { @class = "form-control" })
-                    </div>
+                    </div>*@
                 </div>
 
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-md-offset-1">
@@ -122,8 +116,34 @@
         </footer>
     </div>
 
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script class="source" type="text/javascript">
+
+        //$(document).ready(  function () {
+        //    $.ajax({
+        //        type: 'GET',
+        //        url: '/Book/GetClasses',
+        //        success: function (data) { alert(data) },
+        //        error: function () {alert("failure") }
+
+
+
+        //    });
+        //});
+
+
+       
+
+
+
+     
+
+        
+
+
+    </script>
 </body>
 </html>

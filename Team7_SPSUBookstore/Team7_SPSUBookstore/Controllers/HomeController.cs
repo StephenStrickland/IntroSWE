@@ -18,7 +18,7 @@ namespace Team7_SPSUBookstore.Controllers
            var j = new List<SelectListItem>();
            j.Add(new SelectListItem() { Text="asfd", Value="asf"});
            SetSearchCriteria();
-           ViewBag.isHome = true;
+           ViewBag.searchBarWanted = false;
             return View();
         }
 
