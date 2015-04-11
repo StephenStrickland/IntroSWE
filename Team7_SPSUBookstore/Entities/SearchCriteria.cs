@@ -15,7 +15,8 @@ namespace Entities
         public string Professor { get; set; }
         public string Course { get; set; }
         public bool isRequired { get; set; }
-        public string Edition { get; set; }
+        public bool isAdvanced { get; set; }
+        //public string Edition { get; set; }
         //public decimal Price { get; set; }
     }
 }

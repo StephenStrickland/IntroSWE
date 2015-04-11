@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,39 +17,59 @@ namespace Team7_SPSUBookstore.Controllers
            // ViewBag.Title = criteria;
            // return View();
         //}
-        public ActionResult Index(string query, int sortOrder)
+        public ActionResult Index(string query)//, int sortOrder)
         {
-            var bookList = from b in DbManager.Books
-                           select b;
-            if (!String.IsNullOrEmpty(query))
+            query.ToLower();
+            String[] criteria = query.Split(' ');
+            List<String> criteriaList = new List<String>(criteria);
+            criteriaList.Remove("the");
+            criteriaList.Remove("of");
+            criteriaList.Remove("a");
+            List<BookDatabaseItem> bookList = DbManager.Books.ToList();
+            List<String> searchResultsISBNList = new List<String>();
+            
+
+            foreach(var c in criteriaList)
             {
-                bookList = bookList.Where(b => b.Title.Contains(query));
-                bookList = bookList.Where(b => b.Author.Contains(query));
-                bookList = bookList.Where(b => b.ISBN.Contains(query));
+                if (c.Any(char.IsDigit) && c.Length == 13)
+                {
+                    var firstHalf = c.Substring(0, 3);
+                    var secondHalf = c.Substring(3);
+                     
+                    searchResultsISBNList.AddRange(bookList.Where(x => x.ISBN.ToLower().Contains( firstHalf + "-" + secondHalf )).Select(x => x.ISBN).ToList());
+                } 
+                
+                searchResultsISBNList.AddRange(bookList.Where(x => x.Title.ToLower().Contains(c)).Select(x => x.ISBN).ToList());
+                searchResultsISBNList.AddRange(bookList.Where(x => x.Author.ToLower().Contains(c)).Select(x => x.ISBN).ToList());
+                searchResultsISBNList.AddRange(bookList.Where(x => x.ISBN.ToLower().Contains(c)).Select(x => x.ISBN).ToList()); 
             }
-            switch (sortOrder)
-            {
-                case 1:
-                    bookList = bookList.OrderByDescending(b => b.Author);
-                    break;
-                case 2:
-                    bookList = bookList.OrderBy(b => b.Author);
-                    break;
-                //case 3:
-                //    bookList = bookList.OrderByDescending(b => b.Price);
-                //    break;
-                //case 4:
-                //    bookList = bookList.OrderBy(b => b.Price);
-                //    break;
-                case 3:
-                    bookList = bookList.OrderByDescending(b => b.Title);
-                    break;
-                default:
-                    bookList = bookList.OrderBy(b => b.Title);
-                    break;
-            }
+            searchResultsISBNList= searchResultsISBNList.Distinct().ToList();
+
+            Console.Write("aefaefawfe");
+            //switch (sortOrder)
+            //{
+            //    case 1:
+            //        bookList = bookList.OrderByDescending(b => b.Author);
+            //        break;
+            //    case 2:
+            //        bookList = bookList.OrderBy(b => b.Author);
+            //        break;
+            //    //case 3:
+            //    //    bookList = bookList.OrderByDescending(b => b.Price);
+            //    //    break;
+            //    //case 4:
+            //    //    bookList = bookList.OrderBy(b => b.Price);
+            //    //    break;
+            //    case 3:
+            //        bookList = bookList.OrderByDescending(b => b.Title);
+            //        break;
+            //    default:
+            //        bookList = bookList.OrderBy(b => b.Title);
+            //        break;
+            //}
             return View(bookList.ToList());
         }
+     
 
         [HttpGet]
         public ActionResult Index()
