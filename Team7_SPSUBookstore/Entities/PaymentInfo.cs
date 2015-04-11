@@ -21,16 +21,15 @@ namespace Entities
         public string CcNumber { get; set; }
 
         [Required(ErrorMessage = "Month expiration date is required")]
-        [StringLength(2, MinimumLength = 2, ErrorMessage = "The Month is in form MM")]
+        [Range(2,2)]
         public int ExpDateMonth { get; set; }
 
         [Required(ErrorMessage = "Year expiration date is required")]
-        [StringLength(2, MinimumLength = 2, ErrorMessage = "The Year is in form YY")]
+        [Range(2,2)]
         public int ExpDateYear { get; set; }
-
+        
         [Required(ErrorMessage = "Security Code is required")]
-        [StringLength(3, MinimumLength = 3, ErrorMessage = "The Security Code is 3 digits long")]
-
+        [Range(2,2)]
         public int CCV { get; set; }
 
         public bool ValidateCcNUmber()

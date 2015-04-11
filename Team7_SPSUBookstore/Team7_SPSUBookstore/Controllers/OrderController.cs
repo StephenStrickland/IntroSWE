@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Team7_SPSUBookstore.Controllers
 {
-    public class OrderController : Controller
+    public class OrderController : BaseController
     {
         //
         // GET: /Order/
@@ -26,21 +26,26 @@ namespace Team7_SPSUBookstore.Controllers
             }
             return View();
         }
-
         [HttpPost]
-        public ActionResult Confirm()
+        public ActionResult BillingAndPaymentInfo(Order order)
         {
             if (ModelState.IsValid)
             {
+                Order o = (Order)Session["Order"];
+                o.PaymentInfo = order.PaymentInfo;
+                o.ShippingInfo = order.ShippingInfo;
+                Session["Order"] = o;
+                SetSearchCriteria();
                 return RedirectToAction("Confirmation");
             }
-            return RedirectToAction("BillingAndPaymentInfo");
+
+            return View();
         }
+
 
         public ActionResult Confirmation()
         {
-
-            return View();
+            return View((Order)Session["Order"]);
         }
 
 

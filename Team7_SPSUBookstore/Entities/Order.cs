@@ -21,10 +21,27 @@ namespace Entities
             PaymentInfo = payment;
         }
 
+        public Order()
+        {
+            
+        }
+
         public IList<ShoppingCartBook> BooksInCart { get; set; }
         public ShippingInfo ShippingInfo { get; set; }
         public PaymentInfo PaymentInfo { get; set; }
-        public decimal SubTotalCost { get { return BooksInCart.Select(x => x.QuantityInCart * x.Price).Sum(); } }
+
+        public decimal SubTotalCost
+        {
+            get
+            {
+                if (BooksInCart != null)
+                {
+                    return BooksInCart.Select(x => x.QuantityInCart*x.Price).Sum();
+                }
+                return 0;
+            }
+        }
+
         public decimal Tax { get { return (SubTotalCost * (decimal)(.07)); } }//7%
         public decimal TotalCost { get { return Tax + SubTotalCost; } }
 
