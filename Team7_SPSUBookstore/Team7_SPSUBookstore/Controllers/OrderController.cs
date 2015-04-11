@@ -18,88 +18,30 @@ namespace Team7_SPSUBookstore.Controllers
 
         public ActionResult BillingAndPaymentInfo()
         {
+            if (Session["Order"] == null)
+            {
+                var cart = (List<ShoppingCartBook>)Session["ShoppingCart"];
+                var order = new Order(cart);
+                Session["Order"] = order;
+            }
             return View();
         }
 
-        //
-        // GET: /Order/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
-        // GET: /Order/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Order/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Confirm()
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("Confirmation");
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("BillingAndPaymentInfo");
         }
 
-        //
-        // GET: /Order/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Confirmation()
         {
+
             return View();
         }
-
-        //
-        // POST: /Order/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        //
-        // GET: /Order/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Order/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-
 
 
         public string GenerateReceipt()
@@ -114,16 +56,6 @@ Payment Method:
 
 Shipping Info:
 {4}
-
-
-
-
-
-
-
-
-
-
 
 ";
 

@@ -1,7 +1,125 @@
-﻿
+﻿@model Entities.Order
 @{
-    ViewBag.Title = "Confirmation";
+    ViewBag.Title = "Enter Billing and Payment Info";
 }
+<style>
+    .field-validation-error {
+        color: red;
+        font-weight: bold;
+    }
 
-<h2>Confirmation</h2>
+    .input-validation-error {
+        background: pink;
+        border: 1px solid red;
+    }
+</style>
+<div class="container">
+    <h2>Shipping Information</h2>
 
+    <div>
+
+
+        @using (Html.BeginForm("Confirm", "Order"))
+        {
+            @Html.ValidationSummary(true)
+            <div class="row">
+                <div class="col-md-3 col-lg-3">
+                    @Html.DisplayFor(model => model.ShippingInfo.FirstName, new {@class = "form-control", @readonly = "readonly"})
+                    @Html.ValidationMessageFor(model => model.ShippingInfo.FirstName)
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    @Html.TextBoxFor(model => model.ShippingInfo.LastName, new { @placeholder = "Last Name", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.ShippingInfo.LastName)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    @Html.TextBoxFor(model => model.ShippingInfo.StreetAddr, new { @placeholder = "Street Address", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ShippingInfo.StreetAddr)<br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.ShippingInfo.City, new { @placeholder = "City", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ShippingInfo.City)
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.ShippingInfo.State, new { @placeholder = "State", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ShippingInfo.State)
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.ShippingInfo.ZipCode, new { @placeholder = "Zip Code", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ShippingInfo.ZipCode)
+                </div>
+            </div>
+            <br />
+            <h2>Billing Information</h2>
+            <div class="row">
+                <div class="col-md-3 col-lg-3">
+                    @Html.TextBoxFor(model => model.PaymentInfo.FirstName, new { @placeholder = "First Name", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.FirstName)
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    @Html.TextBoxFor(model => model.PaymentInfo.LastName, new { @placeholder = "Last Name", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.LastName)<br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    @Html.TextBoxFor(model => model.PaymentInfo.StreetAddr, new { @placeholder = "Street Address", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.StreetAddr)<br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.PaymentInfo.City, new { @placeholder = "City", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.City)
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.PaymentInfo.State, new { @placeholder = "State", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.State)
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.PaymentInfo.ZipCode, new { @placeholder = "Zip Code", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.ZipCode)
+                </div>
+            </div>
+
+
+
+
+            <h3>Expiration Date</h3>
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    @Html.TextBoxFor(model => model.PaymentInfo.CcNumber, new { @placeholder = "Credit Card Number", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.CcNumber)<br />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-lg-3">
+                    @Html.TextBoxFor(model => model.PaymentInfo.ExpDateMonth, new { @placeholder = "MM", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.ExpDateMonth)
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    @Html.TextBoxFor(model => model.PaymentInfo.ExpDateYear, new { @placeholder = "YY", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.ExpDateYear)
+                </div>
+            </div>
+            <input type="submit" />
+        }
+
+
+        <p>Is your Shipping Information the Same as Billing Information? @Html.CheckBox("isInfoSame", "yes") </p>
+
+
+    </div>
+
+
+</div>
+<!--//Html.TextBoxFor(model => model) HOW IS THE EMAIL ADDRESS GOING TO BE DONE!-->
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

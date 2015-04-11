@@ -1,6 +1,6 @@
 ﻿@model Entities.Order
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Enter Billing and Payment Info";
 }
 <style>
     .field-validation-error {
@@ -19,7 +19,7 @@
     <div>
 
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Confirm", "Order"))
         {
             @Html.ValidationSummary(true)
             <div class="row">
@@ -53,8 +53,6 @@
                     @Html.ValidationMessageFor(model => model.ShippingInfo.ZipCode)
                 </div>
             </div>
-            <p> checkBoxValue = @Request["isInfoSame"]</p>
-
             <br />
             <h2>Billing Information</h2>
             <div class="row">

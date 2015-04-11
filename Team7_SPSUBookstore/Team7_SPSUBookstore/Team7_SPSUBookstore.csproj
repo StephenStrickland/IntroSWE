@@ -299,8 +299,8 @@
     <Content Include="Views\ShoppingCart\PreCart.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Order\Receipt.cshtml" />
-    <Content Include="Views\Order\Confirmation.cshtml" />
     <Content Include="Views\Order\BillingAndPaymentInfo.cshtml" />
+    <None Include="Views\Order\Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
