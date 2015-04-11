@@ -106,7 +106,6 @@ namespace Team7_SPSUBookstore.Controllers
         [HttpGet]
         public JsonResult GetClasses()
         {
-
             var classes = DbManager.Books.Select(x => new SPSU_Class() { Prof = x.Professor, Course = x.Course, Section = x.Section, Semester = x.Semester}).ToList();
             return Json(classes, JsonRequestBehavior.AllowGet);
 

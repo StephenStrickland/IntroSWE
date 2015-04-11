@@ -6,9 +6,60 @@ var sc = "#sectslct";
 var sem = "#semstrslct";
 var currentSelection = null;
 
-$(document).ready(function () {getClasses(); setSelects(); });
+$(document).ready(function () {
+    getClasses();
+    
+    //setSelections("Prof", p, classes);
+    //setSelections("Course", c, classes);
+    //setSelections("Semester", sem, classes);
+    //setSelections("Section", sc, classes);
+});
 
-$("#courseslct").change(function () { console.log("value changed for select"); setSelects(); });
+$(c).change(function () {
+
+    var elem = document.getElementById("courseslct");
+    var val = elem.options[elem.selectedIndex].value;
+    var ls = getObjects(classes, "Course", val);
+    populatOptions(ls);
+
+
+    console.log("value changed for select");
+});
+
+$(p).change(function () {
+
+    var elem = document.getElementById("profslct");
+    var val = elem.options[elem.selectedIndex].value;
+    var ls = getObjects(classes, "Prof", val);
+    populatOptions(ls);
+
+
+    console.log("value changed for select");
+});
+
+$(sc).change(function () {
+
+    var elem = document.getElementById("sectslct");
+    var val = elem.options[elem.selectedIndex].value;
+    var ls = getObjects(classes, "Section", val);
+    populatOptions(ls);
+
+
+    console.log("value changed for select");
+});
+
+
+
+$(sem).change(function () {
+    var elem = document.getElementById("semstrslct");
+    var val = elem.options[elem.selectedIndex].value;
+    var ls = getObjects(classes, "Semester", val);
+    populatOptions(ls);
+   // console.log("value changed for select"); setSelects();
+});
+
+
+//$("#courseslct").change(function () { console.log("value changed for select"); setSelects(); });
 
 function getClasses() {
 
@@ -25,12 +76,24 @@ function getClasses() {
             alert('Bid Update Failure. Please Refresh the Page.');
         }
     });
+
+    
    
    // console.log(JSON.stringify(l));
    // return l;
 };
 
-function handleData(data) { classes = data; }
+function handleData(data) {
+    classes = data;
+    populatOptions(classes);
+}
+
+function populatOptions(list) {
+    setSelections("Course", c, filterByCourse( list).sort(sortCourse));
+    setSelections("Prof", p, filterByProf( list).sort(sortProf));
+    setSelections("Semester", sem, filterBySemester(list).sort(sortSem));
+    setSelections("Section", sc, filterBySection(list).sort(sortSection));
+}
 
 function clearSelects() {
     //getOptions(p, getProfArr(classes));
@@ -40,69 +103,15 @@ function clearSelects() {
     unHideSelect(p);
     unHideSelect(sc);
     unHideSelect(c);
+    unHideSelect(sem);
+
+   // var ssdf = jQuery.inArray("BATES", classes);
 
 
 
 }
 
 
-function setSelects() {
-
-    //var classes = getClasses();
-    if (classes == null) getClasses();
-    //ids
-   
-    console.log("setting vars");
-    var courseSlct = document.getElementById("courseslct");
-    var profSlct = document.getElementById("profslct");
-    var sectSlct = document.getElementById("sectslct");
-    var semstrtSlct = document.getElementById("semstrslct");
-    var semstrVal = semstrtSlct.options[semstrtSlct.selectedIndex].value;
-    var profVal = profSlct.options[profSlct.selectedIndex].value;
-    var CrseVal = courseSlct.options[courseSlct.selectedIndex].value;
-    var SectVal = sectSlct.options[sectSlct.selectedIndex].value;
-    var isCourse = CrseVal != "";
-    var isProf = profVal != "";
-    var isSection = SectVal != "";
-   //setSelections("Prof", )
-
-
-    if (isCourse && !isProf && !isSection) {
-        var vals = getObjects(classes, "Course", CrseVal);
-        setSelections("Prof", p, vals );
-        setSelections("Section", sc, vals);
-        //console.log("in case 1");
-        //var classList = getObjects(classes, "Course", CrseVal);
-        //getOptions(p, getProfArr(classList));
-        //getOptions(s, getSectArr(classList));
-
-    }
-
-    else if (!isCourse && isProf && !isSection) {
-
-    }
-
-    else if (!isCourse && !isProf && isSection) {
-
-    }
-
-    else if (isCourse && isProf && !isSection) {
-
-    }
-
-    else if (isCourse && !isProf && isSection) {
-
-    }
-    else if (isCourse && isProf && isSection) {
-
-    }
-    else if (!isCourse && isProf && isSection) {
-
-    }
-
-
-
-};
 
 function unHideSelect(elem)
 {
@@ -146,22 +155,63 @@ function setSelections(type, elemName, values) {
 
 
 
-function getOptions(element, keys)
-{
-    console.log("clearing element");
-    $(element).empty();
-    console.log("element cleared");
-    var string = "";
-    console.log("appending options");
-    $(element).append("<option value='" + "'>Please select one</option>");
-    for (i = 0; i < keys.length; i++)
-    {
-        $(element).append("<option value='" + keys[i] +"'>" + keys[i] + "</option>");
-    }
-   
-    
 
+
+function filterBySemester(arr) {
+    var f = []
+    return arr.filter(function (n) {
+        return f.indexOf(n.Semester) == -1 && f.push(n.Semester)
+    })
 }
+function filterByCourse(arr) {
+    var f = []
+    return arr.filter(function (n) {
+        return f.indexOf(n.Course) == -1 && f.push(n.Course)
+    })
+}
+function filterByProf(arr) {
+    var f = []
+    return arr.filter(function (n) {
+        return f.indexOf(n.Prof) == -1 && f.push(n.Prof)
+    })
+}
+function filterBySection(arr) {
+    var f = []
+    return arr.filter(function (n) {
+        return f.indexOf(n.Section) == -1 && f.push(n.Section)
+    })
+}
+
+function sortSection(a, b) {
+    if (a.Section > b.Section) return 1;
+    if (a.Section < b.Section) return -1;
+    return 0;
+}
+
+function sortProf(a, b) {
+    if (a.Prof > b.Prof) return 1;
+    if (a.Prof < b.Prof) return -1;
+    return 0;
+}
+
+
+
+function sortSem(a, b) {
+    if (a.Semester > b.Semester) return 1;
+    if (a.Semester < b.Semester) return -1;
+    return 0;
+}
+
+
+
+function sortCourse(a, b) {
+    if (a.Course > b.Course) return 1;
+    if (a.Course < b.Course) return -1;
+    return 0;
+}
+
+
+
 
 function getProfArr(obj) {
     var l = [];
@@ -210,6 +260,81 @@ function getObjects(obj, key, val) {
 
 
 
+//function setSelects() {
+
+//    //var classes = getClasses();
+//    if (classes == null) getClasses();
+//    //ids
+
+//    console.log("setting vars");
+//    var courseSlct = document.getElementById("courseslct");
+//    var profSlct = document.getElementById("profslct");
+//    var sectSlct = document.getElementById("sectslct");
+//    var semstrtSlct = document.getElementById("semstrslct");
+//    var semstrVal = semstrtSlct.options[semstrtSlct.selectedIndex].value;
+//    var profVal = profSlct.options[profSlct.selectedIndex].value;
+//    var CrseVal = courseSlct.options[courseSlct.selectedIndex].value;
+//    var SectVal = sectSlct.options[sectSlct.selectedIndex].value;
+//    var isCourse = CrseVal != "";
+//    var isProf = profVal != "";
+//    var isSection = SectVal != "";
+//   //setSelections("Prof", )
+
+
+//    if (isCourse && !isProf && !isSection) {
+//        var vals = getObjects(classes, "Course", CrseVal);
+//        setSelections("Prof", p, vals );
+//        setSelections("Section", sc, vals);
+//        //console.log("in case 1");
+//        //var classList = getObjects(classes, "Course", CrseVal);
+//        //getOptions(p, getProfArr(classList));
+//        //getOptions(s, getSectArr(classList));
+
+//    }
+
+//    else if (!isCourse && isProf && !isSection) {
+
+//    }
+
+//    else if (!isCourse && !isProf && isSection) {
+
+//    }
+
+//    else if (isCourse && isProf && !isSection) {
+
+//    }
+
+//    else if (isCourse && !isProf && isSection) {
+
+//    }
+//    else if (isCourse && isProf && isSection) {
+
+//    }
+//    else if (!isCourse && isProf && isSection) {
+
+//    }
+
+
+
+//};
+
+
+//function getOptions(element, keys)
+//{
+//    console.log("clearing element");
+//    $(element).empty();
+//    console.log("element cleared");
+//    var string = "";
+//    console.log("appending options");
+//    $(element).append("<option value='" + "'>Please select one</option>");
+//    for (i = 0; i < keys.length; i++)
+//    {
+//        $(element).append("<option value='" + keys[i] +"'>" + keys[i] + "</option>");
+//    }
+
+
+
+//}
 
 
 
