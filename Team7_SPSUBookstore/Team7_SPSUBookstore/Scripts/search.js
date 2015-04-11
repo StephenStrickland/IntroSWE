@@ -19,7 +19,8 @@ $(c).change(function () {
 
     var elem = document.getElementById("courseslct");
     var val = elem.options[elem.selectedIndex].value;
-    var ls = getObjects(classes, "Course", val);
+    var ls = getObjects(currentSelection, "Course", val);
+    currentSelection = ls;
     populatOptions(ls);
 
 
@@ -30,7 +31,9 @@ $(p).change(function () {
 
     var elem = document.getElementById("profslct");
     var val = elem.options[elem.selectedIndex].value;
-    var ls = getObjects(classes, "Prof", val);
+    var ls = getObjects(currentSelection, "Prof", val);
+    currentSelection = ls;
+
     populatOptions(ls);
 
 
@@ -41,7 +44,9 @@ $(sc).change(function () {
 
     var elem = document.getElementById("sectslct");
     var val = elem.options[elem.selectedIndex].value;
-    var ls = getObjects(classes, "Section", val);
+    var ls = getObjects(currentSelection, "Section", val);
+    currentSelection = ls;
+
     populatOptions(ls);
 
 
@@ -53,7 +58,9 @@ $(sc).change(function () {
 $(sem).change(function () {
     var elem = document.getElementById("semstrslct");
     var val = elem.options[elem.selectedIndex].value;
-    var ls = getObjects(classes, "Semester", val);
+    var ls = getObjects(currentSelection, "Semester", val);
+    currentSelection = ls;
+
     populatOptions(ls);
    // console.log("value changed for select"); setSelects();
 });
@@ -85,6 +92,7 @@ function getClasses() {
 
 function handleData(data) {
     classes = data;
+    currentSelection = data;
     populatOptions(classes);
 }
 
@@ -99,7 +107,7 @@ function clearSelects() {
     //getOptions(p, getProfArr(classes));
     //getOptions(s, getSectArr(classes));
     //getOptions(c, getCrseArr(classes));
-
+    currentSelection = classes;
     unHideSelect(p);
     unHideSelect(sc);
     unHideSelect(c);
