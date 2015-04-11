@@ -1,14 +1,131 @@
 ﻿@model Entities.BookDatabaseItem
 
 @{
+    var imgPath = "/Resources/bk_imgs/" + Model.ISBN + ".jpg";
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
 <div>
-    <h4>BookDatabaseItem</h4>
-	<hr />
+    <h4>Book Details</h4>
+    <hr />
+
+    <div class="row">
+
+        <div class="col-md-4 col-lg-4">
+            <img src="@imgPath" alt="image" class="img-responsive media-left" />
+        </div>
+
+
+        <div class="col-md-4 col-lg-4">
+            <div class="row">
+                <h3>@Model.Title</h3>
+                <p>By @Model.Author</p>
+                <p>@Model.ISBN</p>
+            </div>
+
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Book Description</div>
+                    <div class="panel-body">
+                        @Model.Description
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        
+
+        <div class="col-md-4 col-lg-4">
+
+
+
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="" id="input" value="" checked="">
+                                        Rent
+                                    </label>
+                                </div>
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <button type="button" class="btn btn-warning">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="" id="input" value="">
+                                        Buy Used
+                                    </label>
+                                </div>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                quantity <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>1</li>
+                                <li>2</li>
+                            </ul>
+                            <button type="button" class="btn btn-warning">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="" id="input" value="">
+                                        Buy New
+                                    </label>
+                                </div>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="input" class="col-sm-2 control-label">:</label>
+                                <div class="col-sm-10">
+                                    <select name="" id="input" class="form-control">
+                                        <option value="">-- Select One --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-warning">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ISBN)
@@ -61,7 +178,7 @@
         <dt>
             @Html.DisplayNameFor(model => model.Semester)
         </dt>
-
+        s
         <dd>
             @Html.DisplayFor(model => model.Semester)
         </dd>

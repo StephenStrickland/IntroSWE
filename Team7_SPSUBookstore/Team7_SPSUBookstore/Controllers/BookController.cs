@@ -10,9 +10,9 @@ namespace Team7_SPSUBookstore.Controllers
     {
         //
         // GET: /Book/
-        public ActionResult Index()
+        public ActionResult Index( string id)
         {
-            return View();
+            return View(DbManager.Books.Where(x => x.ISBN == id).FirstOrDefault());
         }
 
         //
