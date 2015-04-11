@@ -23,6 +23,8 @@ namespace Team7_SPSUBookstore.Controllers
             if (!String.IsNullOrEmpty(query))
             {
                 bookList = bookList.Where(b => b.Title.Contains(query));
+                bookList = bookList.Where(b => b.Author.Contains(query));
+                bookList = bookList.Where(b => b.ISBN.Contains(query));
             }
             switch (sortOrder)
             {
@@ -38,7 +40,7 @@ namespace Team7_SPSUBookstore.Controllers
                 //case 4:
                 //    bookList = bookList.OrderBy(b => b.Price);
                 //    break;
-                case 5:
+                case 3:
                     bookList = bookList.OrderByDescending(b => b.Title);
                     break;
                 default:
@@ -55,11 +57,46 @@ namespace Team7_SPSUBookstore.Controllers
             return View();
         }
 
-        //
-        // GET: /Search/Details/5
-        public ActionResult Details(int id)
+        [HttpPost]
+        public ActionResult AdvSearch(String query, String crn, String course, String semester, String professor, String edition, int section)
         {
-            return View();
+            var bookList = from b in DbManager.Books
+                           select b;
+            String ssection = Convert.ToString(section);
+
+            if (!String.IsNullOrEmpty(query))
+            {
+                bookList = bookList.Where(b => b.Title.Contains(query));
+                bookList = bookList.Where(b => b.Author.Contains(query));
+                bookList = bookList.Where(b => b.ISBN.Contains(query));
+            }
+            if (!String.IsNullOrEmpty(crn))
+            {
+                bookList = bookList.Where(b => b.CRN.Contains(crn));
+            }
+            if (!String.IsNullOrEmpty(course))
+            {
+                bookList = bookList.Where(b => b.Course == course);
+            }
+            if (!String.IsNullOrEmpty(edition))
+            {
+                bookList = bookList.Where(b => b.Edition.Contains(edition));
+            }
+            if (!String.IsNullOrEmpty(semester))
+            {
+                bookList = bookList.Where(b => b.Semester == semester);
+            }
+            if (!String.IsNullOrEmpty(professor))
+            {
+                bookList = bookList.Where(b => b.Professor == professor);
+            }
+            if (!String.IsNullOrEmpty(ssection))
+            {
+                bookList = bookList.Where(b => b.Section == int.Parse(ssection));
+            }
+
+            
+            return View(bookList.ToList());
         }
 
         //
@@ -101,30 +138,6 @@ namespace Team7_SPSUBookstore.Controllers
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Search/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Search/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
             }
