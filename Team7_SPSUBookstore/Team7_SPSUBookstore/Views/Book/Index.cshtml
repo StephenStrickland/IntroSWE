@@ -12,12 +12,36 @@
 
     <div class="row">
 
-        <div class="col-md-4 col-lg-4">
-            <img src="@imgPath" alt="image" class="img-responsive media-left" />
+        @*<div class="col-md-8 col-lg-8">
+            
+
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img src="@imgPath" alt="image" class=" media-object" />
+                    </a>
+                </div>
+                <div class="media-body media-middle">
+                    <h4 class="media-heading">@Model.Title</h4>*@
+                    @*<h3>@Model.Title</h3>*@
+                    @*<p>By @Model.Author</p>
+                    <p>@Model.ISBN</p>
+                </div>
+            </div>
+
+
+        </div>*@
+
+
+
+
+        <div class="col-md- col-lg-4">
+            <img src="@imgPath" alt="image" class="img-responsive" />
         </div>
 
 
-        <div class="col-md-4 col-lg-4">
+
+        <div class="col-md-5 col-lg-5">
             <div class="row">
                 <h3>@Model.Title</h3>
                 <p>By @Model.Author</p>
@@ -26,7 +50,7 @@
 
             <div class="row">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Book Description</div>
+                    <div class="panel-heading">Description</div>
                     <div class="panel-body">
                         @Model.Description
                     </div>
@@ -37,7 +61,7 @@
 
         
 
-        <div class="col-md-4 col-lg-4">
+        <div class="col-md-3 col-lg-3">
 
 
 

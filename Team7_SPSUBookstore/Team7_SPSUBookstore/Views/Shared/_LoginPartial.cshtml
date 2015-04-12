@@ -1,4 +1,10 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Entities;
+@{
+    var cart = (List<ShoppingCartBook>)Session["ShoppingCart"] ?? new List<ShoppingCartBook>();
+    int count = cart.Count;
+}
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -17,7 +23,7 @@ else
 {
     <ul class="nav navbar-nav navbar-right">
         @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
-        <li> <a href="@Url.Action("Index", "ShoppingCart")"><span class="fa fa-shopping-cart fa-lg"></span></a></li>
+        <li> <a href="@Url.Action("Index", "ShoppingCart")"><span class="fa fa-shopping-cart fa-lg"></span>  <span class="badge label-success">@if(count != 0){ @count}</span></a></li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

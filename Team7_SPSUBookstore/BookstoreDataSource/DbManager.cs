@@ -71,6 +71,7 @@ namespace BookstoreDataSource
                       }).ToList();
                 
                 excelReader.Close();
+                stream.Close();
             }
 
         }

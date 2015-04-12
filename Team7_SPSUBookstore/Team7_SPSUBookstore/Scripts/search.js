@@ -80,7 +80,7 @@ function getClasses() {
             handleData(data);
         },
         error: function (e) {
-            alert('Bid Update Failure. Please Refresh the Page.');
+            alert('failure to get classes');
         }
     });
 
