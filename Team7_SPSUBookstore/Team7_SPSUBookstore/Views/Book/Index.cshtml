@@ -6,8 +6,8 @@
 
     var rent = Model.Stock.Where(x => x.Type == Entities.StockType.Rental);
     //var rent = Model.Stock.Where(x => x.Type == Entities.StockType.Rental);
-    
-    
+
+
 }
 
 
@@ -38,110 +38,126 @@
             </div>
         </div>
 
-       
+
         <div class="col-md-3 col-lg-3">
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-@foreach (var stock in Model.Stock)
-{
-    if (stock.Price != 0)
-    {
 
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" data-target="#@stock.Type" aria-expanded="true" aria-controls="@stock.Type">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="Stock" id="input" value="@stock.Type">
-                                @stock.Type.ToString() - $@stock.Price.ToString()
-                            </label>
+                @using (Html.BeginForm("Add", "ShoppingCart", FormMethod.Post))
+                {
+
+                    <input class="hidden" name="isbn" value="@Model.ISBN" />
+
+                    foreach (var stock in Model.Stock)
+                    {
+                        if (stock.Price != 0)
+                        {
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" data-target="#@stock.Type" aria-expanded="true" aria-controls="@stock.Type">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="stockType" id="input" value="@stock.Type">
+                                                    @stock.Type.ToString() - $@stock.Price.ToString()
+                                                </label>
+                                            </div>
+
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="@stock.Type" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+
+                                        <div class="form-group">
+
+                                            <input class="form-control" type="number" id="qtyInput" name="qty" value="1" min="1" />
+                                        </div>
+
+                                        <button type="submit" class="btn btn-warning"><span class="fa fa-plus-circle"></span>  Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+
+
+
+
+                @*<div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="" id="input" value="" checked="">
+                                            Rent
+                                        </label>
+                                    </div>
+
+                                </a>
+                            </h4>
                         </div>
-
-                    </a>
-                </h4>
-            </div>
-            <div id="@stock.Type" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                    <button type="button" class="btn btn-warning"><span class="fa fa-plus-circle"></span>  Add to Cart</button>
-                </div>
-            </div>
-        </div>
-    }
-}
-
-@*<div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingOne">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="" id="input" value="" checked="">
-                            Rent
-                        </label>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <button type="button" class="btn btn-warning">Add to Cart</button>
+                            </div>
+                        </div>
                     </div>
-
-                </a>
-            </h4>
-        </div>
-        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-            <div class="panel-body">
-                <button type="button" class="btn btn-warning">Add to Cart</button>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingTwo">
-            <h4 class="panel-title">
-                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="" id="input" value="">
-                            Buy Used
-                        </label>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="" id="input" value="">
+                                            Buy Used
+                                        </label>
+                                    </div>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                    quantity <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>1</li>
+                                    <li>2</li>
+                                </ul>
+                                <button type="button" class="btn btn-warning">Add to Cart</button>
+                            </div>
+                        </div>
                     </div>
-                </a>
-            </h4>
-        </div>
-        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-            <div class="panel-body">
-                <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                    quantity <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li>1</li>
-                    <li>2</li>
-                </ul>
-                <button type="button" class="btn btn-warning">Add to Cart</button>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingThree">
-            <h4 class="panel-title">
-                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="" id="input" value="">
-                            Buy New
-                        </label>
-                    </div>
-                </a>
-            </h4>
-        </div>
-        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-            <div class="panel-body">
-                <div class="form-group">
-                    <label for="input" class="col-sm-2 control-label">:</label>
-                    <div class="col-sm-10">
-                        <select name="" id="input" class="form-control">
-                            <option value="">-- Select One --</option>
-                        </select>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-warning">Add to Cart</button>
-            </div>
-        </div>
-    </div>*@
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="" id="input" value="">
+                                            Buy New
+                                        </label>
+                                    </div>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="input" class="col-sm-2 control-label">:</label>
+                                    <div class="col-sm-10">
+                                        <select name="" id="input" class="form-control">
+                                            <option value="">-- Select One --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-warning">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>*@
             </div>
 
         </div>
@@ -154,89 +170,89 @@
 
 
     @*<dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ISBN)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ISBN)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ISBN)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Author)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Author)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Edition)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Edition)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Edition)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Edition)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Course)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Course)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Course)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Course)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Section)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Section)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Section)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Section)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Semester)
-        </dt>
-        s
-        <dd>
-            @Html.DisplayFor(model => model.Semester)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Semester)
+            </dt>
+            s
+            <dd>
+                @Html.DisplayFor(model => model.Semester)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Professor)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Professor)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Professor)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Professor)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CRN)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.CRN)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CRN)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CRN)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.isRequired)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.isRequired)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.isRequired)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.isRequired)
+            </dd>
 
-    </dl>*@
+        </dl>*@
 </div>
 @*<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
