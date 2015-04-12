@@ -10,88 +10,11 @@ namespace Team7_SPSUBookstore.Controllers
     {
         //
         // GET: /Book/
+        [Route("Book/{id}")]
         public ActionResult Index( string id)
         {
-            return View(DbManager.Books.Where(x => x.ISBN == id).FirstOrDefault());
-        }
-
-        //
-        // GET: /Book/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
-        // GET: /Book/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Book/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Book/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Book/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Book/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Book/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                var book = DbManager.Books.Where(x => x.ISBN == id).FirstOrDefault();
+            return View(book);
         }
 
         public class SPSU_Class
@@ -102,11 +25,13 @@ namespace Team7_SPSUBookstore.Controllers
             public virtual string Semester { get; set; }
 
         }
+
         [AllowAnonymous]
         [HttpGet]
+        [Route("Book/GetClasses")]
         public JsonResult GetClasses()
         {
-            var classes = DbManager.Books.Select(x => new SPSU_Class() { Prof = x.Professor, Course = x.Course, Section = x.Section, Semester = x.Semester}).ToList();
+            var classes = DbManager.Books.Select(x => new SPSU_Class() { Prof = x.Professor, Course = x.Course, Section = x.Section, Semester = x.Semester }).ToList();
             return Json(classes, JsonRequestBehavior.AllowGet);
 
         }
