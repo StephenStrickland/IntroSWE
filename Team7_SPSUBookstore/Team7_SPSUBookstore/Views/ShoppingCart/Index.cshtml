@@ -6,67 +6,80 @@
 }
 
 
-<h2>Shopping Cart</h2>
 
 <p>
-    @Html.ActionLink("Create New", "PreCart")
+    @Html.ActionLink("TO Precart TEST", "PreCart")
 </p>
 
 
 
-@if (shoppingCartBooks != null)
+@if (shoppingCartBooks.Any())
 {
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ISBN)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantityInCart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-        </tr>
 
-    </table>
+    <h2>Shopping Cart</h2>
+
+    <div class="row vertical-divider">
+        <div class="col-lg-6 col-md-6">
+
+        </div>
+        <div class="col-lg-2 col-md-2" align="center">
+            Price
+        </div>
+        <div class="col-lg-2 col-md-2" align="center">
+            @Html.DisplayNameFor(model => model.QuantityInCart)
+        </div>
+    </div>
 
     foreach (var book in shoppingCartBooks)
     {
-        <table>
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => book.ISBN) .jpg
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <td align="center">
-                                @Html.DisplayFor(modelItem => book.Price) by author
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center">
-                                @Html.DisplayFor(modelItem => book.TypeInCart)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center">
-                                @Html.ActionLink("Remove from cart", "RemoveFromCart", new {id = shoppingCartBooks.IndexOf(book)})
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-        <br/>
+        var bookDetails = ViewBag.BookDetails;
+        //{ Html.RenderAction("BookDetails", new { isbn = book.ISBN }); }
+
+        <hr />
+        <div class="row">
+
+            <div class="col-lg-2 col-md-2">
+                @Html.DisplayFor(modelItem => book.ISBN) .jpg
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <table>
+                    <tr>
+                        <td align="left">
+                            @{ Html.RenderAction("GetTitle", new { isbn = book.ISBN }); }  by @{ Html.RenderAction("GetAuthor", new { isbn = book.ISBN }); } 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            Format: @Html.DisplayFor(modelItem => book.TypeInCart)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            @Html.ActionLink("Remove from cart", "RemoveFromCart", new { id = shoppingCartBooks.IndexOf(book) })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-2 col-md-2" align="center">
+                $@Html.DisplayFor(modelItem => book.Price) each
+            </div>
+            <div class="col-lg-2 col-md-2" align="center">
+                @Html.DisplayFor(model => book.QuantityInCart)
+            </div>
+
+        </div>
+        <br />
     }
 }
 else
 {
-    <h4>
-        Your cart is empty!
-    </h4>
+    <center>
+        <h2>
+            Your cart is empty!
+        </h2>
+        <br />
+        <h4>@Html.ActionLink("Click here to continue shopping!", "Index", "Home")</h4>
+    </center>
 }
 
 

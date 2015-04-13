@@ -3,7 +3,12 @@
     var shoppingCartBooks = (List<Entities.ShoppingCartBook>)ViewData["ShoppingCartBooks"];
 }
 
-<h2>Thank you for your purchase!</h2>
+@if (!shoppingCartBooks.Any())
+{
+    Response.Redirect("~/");
+}
+
+<h2>@Html.DisplayFor(modelItem => shoppingCartBooks.Last().QuantityInCart) items have been added to your cart!</h2>
 
 <center>
     <table class="table" border="1">
@@ -18,22 +23,22 @@
                             <table border="1">
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => shoppingCartBooks[shoppingCartBooks.Count - 1].ISBN)
+                                        @{ Html.RenderAction("GetTitle", new { isbn = shoppingCartBooks[shoppingCartBooks.Count - 1].ISBN }); } 
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        "author"
+                                        by @{ Html.RenderAction("GetAuthor", new { isbn = shoppingCartBooks[shoppingCartBooks.Count - 1].ISBN }); } 
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => shoppingCartBooks[shoppingCartBooks.Count - 1].Price)
+                                        $@Html.DisplayFor(modelItem => shoppingCartBooks[shoppingCartBooks.Count - 1].Price) each
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => shoppingCartBooks[shoppingCartBooks.Count - 1].QuantityInCart)
+                                        Quantity added: @Html.DisplayFor(modelItem => shoppingCartBooks[shoppingCartBooks.Count - 1].QuantityInCart)
                                     </td>
                                 </tr>
                             </table>
