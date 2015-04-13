@@ -79,41 +79,60 @@ namespace Team7_SPSUBookstore.Controllers
         }
 
         [HttpPost]
-        public ActionResult AdvSearch(String query, String crn, String course, String semester, String professor, String edition, int section)
+        public ActionResult AdvSearch(String query, SearchCriteria ADVcriteria)
         {
-            var bookList = from b in DbManager.Books
-                           select b;
-            String ssection = Convert.ToString(section);
+            bool advanced = ADVcriteria.isAdvanced;
+            query.ToLower();
+            String[] criteria = query.Split(' ');
+            List<String> criteriaList = new List<String>(criteria);
+            criteriaList.Remove("the");
+            criteriaList.Remove("of");
+            criteriaList.Remove("a");
+            List<BookDatabaseItem> bookList = DbManager.Books.ToList();
+            List<String> searchResultsISBNList = new List<String>();
+            
+            if (advanced == true)
+            {
+                foreach (var c in criteriaList)
+                {
+                    if (c.Any(char.IsDigit) && c.Length == 13)
+                    {
+                        var firstHalf = c.Substring(0, 3);
+                        var secondHalf = c.Substring(3);
 
-            if (!String.IsNullOrEmpty(query))
-            {
-                bookList = bookList.Where(b => b.Title.Contains(query));
-                bookList = bookList.Where(b => b.Author.Contains(query));
-                bookList = bookList.Where(b => b.ISBN.Contains(query));
-            }
-            if (!String.IsNullOrEmpty(crn))
-            {
-                bookList = bookList.Where(b => b.CRN.Contains(crn));
-            }
-            if (!String.IsNullOrEmpty(course))
-            {
-                bookList = bookList.Where(b => b.Course == course);
-            }
-            if (!String.IsNullOrEmpty(edition))
-            {
-                bookList = bookList.Where(b => b.Edition.Contains(edition));
-            }
-            if (!String.IsNullOrEmpty(semester))
-            {
-                bookList = bookList.Where(b => b.Semester == semester);
-            }
-            if (!String.IsNullOrEmpty(professor))
-            {
-                bookList = bookList.Where(b => b.Professor == professor);
-            }
-            if (!String.IsNullOrEmpty(ssection))
-            {
-                bookList = bookList.Where(b => b.Section == int.Parse(ssection));
+                        searchResultsISBNList.AddRange(bookList.Where(x => x.ISBN.ToLower().Contains(firstHalf + "-" + secondHalf)).Select(x => x.ISBN).ToList());
+                    }
+                    if (ADVcriteria.Course != null)
+                    {
+                        searchResultsISBNList.AddRange(bookList.Where(x => x.Course.ToLower().Contains(ADVcriteria.Course)).Select(x => x.ISBN).ToList());
+                    }
+                    if (ADVcriteria.Section != 0)
+                    {
+                        searchResultsISBNList.AddRange(bookList.Where(x => x.Section.Equals(ADVcriteria.Section)).Select(x => x.ISBN).ToList());
+                    }
+                    if (ADVcriteria.Professor != null)
+                    {
+                        searchResultsISBNList.AddRange(bookList.Where(x => x.Professor.ToLower().Contains(ADVcriteria.Professor)).Select(x => x.ISBN).ToList());
+
+                    }
+                    if (ADVcriteria.Semester != null)
+                    {
+                        searchResultsISBNList.AddRange(bookList.Where(x => x.Semester.ToLower().Contains(ADVcriteria.Semester)).Select(x => x.ISBN).ToList());
+
+                    }
+                    if (ADVcriteria.Course != null)
+                    {
+                        searchResultsISBNList.AddRange(bookList.Where(x => x.Course.ToLower().Contains(ADVcriteria.Course)).Select(x => x.ISBN).ToList());
+
+                    }
+                    if (ADVcriteria.CRN != 0)
+                    {
+                        searchResultsISBNList.AddRange(bookList.Where(x => x.CRN.Equals(ADVcriteria.CRN)).Select(x => x.ISBN).ToList());
+
+                    }
+                }
+                searchResultsISBNList = searchResultsISBNList.Distinct().ToList();
+
             }
 
             
