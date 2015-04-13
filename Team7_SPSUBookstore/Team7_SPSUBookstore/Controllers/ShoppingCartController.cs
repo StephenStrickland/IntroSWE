@@ -77,7 +77,8 @@ namespace Team7_SPSUBookstore.Controllers
             {
                 cartBooks = (List<ShoppingCartBook>)Session["ShoppingCart"];
             }
-
+            bookToAdd.Price = DbManager.Books.Where(x => x.ISBN == bookToAdd.ISBN).FirstOrDefault()
+                .Stock.Where(x => x.Type == stockType).Select(x => x.Price).FirstOrDefault();
             cartBooks.Add(bookToAdd);
 
             Session["ShoppingCart"] = cartBooks;
