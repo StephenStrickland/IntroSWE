@@ -8,35 +8,42 @@
 
 <div>
     <h4>Order</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.SubTotalCost)
-        </dt>
+    <div class="row">@Html.LabelFor(model => model.ShippingInfo.FirstName) @Html.DisplayFor(model => model.ShippingInfo.FirstName)</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.SubTotalCost)
-        </dd>
+    @Html.LabelFor(model => model.ShippingInfo.LastName)
+    @Html.DisplayFor(model => model.ShippingInfo.LastName)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Tax)
-        </dt>
+    @Html.LabelFor(model => model.ShippingInfo.StreetAddr)
+    @Html.DisplayFor(model => model.ShippingInfo.StreetAddr)
 
-        <dd>
-            @Html.DisplayFor(model => model.Tax)
-        </dd>
+    @Html.LabelFor(model => model.ShippingInfo.City)
+    @Html.DisplayFor(model => model.ShippingInfo.City)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalCost)
-        </dt>
+    @Html.LabelFor(model => model.ShippingInfo.State)
+    @Html.DisplayFor(model => model.ShippingInfo.State)
 
-        <dd>
-            @Html.DisplayFor(model => model.TotalCost)
-        </dd>
+    @Html.LabelFor(model => model.ShippingInfo.ZipCode)
+    @Html.DisplayFor(model => model.ShippingInfo.ZipCode)
 
-    </dl>
+
+
+    @Html.LabelFor(model => model.PaymentInfo.FirstName)
+    @Html.DisplayFor(model => model.PaymentInfo.FirstName)
+
+    @Html.LabelFor(model => model.PaymentInfo.LastName)
+    @Html.DisplayFor(model => model.PaymentInfo.LastName)
+
+    @Html.LabelFor(model => model.PaymentInfo.StreetAddr)
+    @Html.DisplayFor(model => model.PaymentInfo.StreetAddr)
+
+    @Html.LabelFor(model => model.PaymentInfo.City)
+    @Html.DisplayFor(model => model.PaymentInfo.City)
+
+    @Html.LabelFor(model => model.PaymentInfo.State)
+    @Html.DisplayFor(model => model.PaymentInfo.State)
+
+    @Html.LabelFor(model => model.PaymentInfo.ZipCode)
+    @Html.DisplayFor(model => model.PaymentInfo.ZipCode)
+
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

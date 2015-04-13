@@ -48,6 +48,11 @@ namespace Team7_SPSUBookstore.Controllers
             return View((Order)Session["Order"]);
         }
 
+        [HttpPost]
+        public ActionResult Receipt()
+        {
+            return View((Order) Session["Order"]);
+        }
 
         public string GenerateReceipt()
         {
