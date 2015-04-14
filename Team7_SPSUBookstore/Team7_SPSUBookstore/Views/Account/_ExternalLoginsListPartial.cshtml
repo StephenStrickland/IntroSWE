@@ -1,8 +1,59 @@
 ﻿@using Microsoft.Owin.Security
+@*@model Team7_SPSUBookstore.Models.LoginViewModel*@
 
-<h4>Use another service to log in.</h4>
+<h4>Not a User? Use our Guest Login</h4>
 <hr />
-@{
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+    @*<h4>Continue as Guest   </h4>*@
+    @*<hr />*@
+   
+    <div class="form-group">
+                    <label for="UserName" class="col-md-2 control-label">Email</label>
+                    <div class="col-md-8">
+                        <input type="email" value="" name="Email" id="UserName" data-val-required="The email field is required." data-val="true" class="form-control">
+                        <span data-valmsg-replace="true" data-valmsg-for="Email" class="field-validation-valid"></span>
+                    </div>
+                </div>
+    
+    
+    @*<div class="form-group">
+                    <label for="Password" class="col-md-4 control-label">Password</label>
+                    <div class="col-md-8">
+                        <input type="password" name="Password" id="Password" data-val-required="The Password field is required." data-val="true" class="form-control">
+                        <span data-valmsg-replace="true" data-valmsg-for="Password" class="field-validation-valid"></span>
+                    </div>
+                </div>*@
+    
+    @*<div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div class="checkbox">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+            </div>
+        </div>
+    </div>*@
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Continue as Guest" class="btn btn-default" />
+        </div>
+    </div>
+    @*<p>
+        @Html.ActionLink("Register", "Register") if you don't have a local account.
+    </p>*@
+}
+
+
+@*@{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
     if (loginProviders.Count() == 0)
     {
@@ -28,4 +79,4 @@
             </div>
         }
     }
-}
+}*@
