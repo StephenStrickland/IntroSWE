@@ -21,7 +21,7 @@ namespace Entities
         public string CcNumber { get; set; }
 
         [Required(ErrorMessage = "Month expiration date is required")]
-        [RegularExpression(@"[0-9][0-9]", ErrorMessage = "Month is in form MM")]
+        [RegularExpression(@"^(0?[1-9]|1[012])$", ErrorMessage = "Month is in form MM")]
         public int ExpDateMonth { get; set; }
 
         [Required(ErrorMessage = "Year expiration date is required")]

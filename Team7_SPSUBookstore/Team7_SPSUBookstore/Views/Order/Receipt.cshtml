@@ -8,42 +8,58 @@
 
 <div>
     <h4>Order</h4>
-    <div class="row">@Html.LabelFor(model => model.ShippingInfo.FirstName) @Html.DisplayFor(model => model.ShippingInfo.FirstName)</div>
+    <div class="row">
+        <b>Shipping Info:</b>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3 col-lg-3">First Name:  @Html.DisplayFor(model => model.ShippingInfo.FirstName)</div>
+        <div class="col-md-3 col-lg-3">Last Name: @Html.DisplayFor(model => model.ShippingInfo.LastName)</div>
+    </div>
 
-    @Html.LabelFor(model => model.ShippingInfo.LastName)
-    @Html.DisplayFor(model => model.ShippingInfo.LastName)
+    <div class="row">
+        <div class="col-md-6 col-lg-6">Street Address @Html.DisplayFor(model => model.ShippingInfo.StreetAddr)</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-lg-2"> @Html.DisplayFor(model => model.ShippingInfo.City)</div>
+        <div class="col-md-2 col-lg-2"> @Html.DisplayFor(model => model.ShippingInfo.State)</div>
+        <div class="col-md-2 col-lg-2"> @Html.DisplayFor(model => model.ShippingInfo.ZipCode)</div>
+    </div>
 
-    @Html.LabelFor(model => model.ShippingInfo.StreetAddr)
-    @Html.DisplayFor(model => model.ShippingInfo.StreetAddr)
-
-    @Html.LabelFor(model => model.ShippingInfo.City)
-    @Html.DisplayFor(model => model.ShippingInfo.City)
-
-    @Html.LabelFor(model => model.ShippingInfo.State)
-    @Html.DisplayFor(model => model.ShippingInfo.State)
-
-    @Html.LabelFor(model => model.ShippingInfo.ZipCode)
-    @Html.DisplayFor(model => model.ShippingInfo.ZipCode)
+    <br />
+    <div class="row"><b>Payment Info</b>/></div>
+    <div class="row">@Html.LabelFor(model => model.PaymentInfo.FirstName) @Html.DisplayFor(model => model.PaymentInfo.FirstName)</div>
+    <div class="row">@Html.LabelFor(model => model.PaymentInfo.LastName) @Html.DisplayFor(model => model.PaymentInfo.LastName)</div>
+    <div class="row">@Html.LabelFor(model => model.PaymentInfo.StreetAddr) @Html.DisplayFor(model => model.PaymentInfo.StreetAddr)</div>
+    <div class="row">@Html.LabelFor(model => model.PaymentInfo.City) @Html.DisplayFor(model => model.PaymentInfo.City)</div>
+    <div class="row">@Html.LabelFor(model => model.PaymentInfo.State) @Html.DisplayFor(model => model.PaymentInfo.State)</div>
+    <div class="row" @Html.LabelFor(model => model.PaymentInfo.ZipCode) @Html.DisplayFor(model => model.PaymentInfo.ZipCode)></div>
 
 
 
-    @Html.LabelFor(model => model.PaymentInfo.FirstName)
-    @Html.DisplayFor(model => model.PaymentInfo.FirstName)
 
-    @Html.LabelFor(model => model.PaymentInfo.LastName)
-    @Html.DisplayFor(model => model.PaymentInfo.LastName)
 
-    @Html.LabelFor(model => model.PaymentInfo.StreetAddr)
-    @Html.DisplayFor(model => model.PaymentInfo.StreetAddr)
 
-    @Html.LabelFor(model => model.PaymentInfo.City)
-    @Html.DisplayFor(model => model.PaymentInfo.City)
 
-    @Html.LabelFor(model => model.PaymentInfo.State)
-    @Html.DisplayFor(model => model.PaymentInfo.State)
 
-    @Html.LabelFor(model => model.PaymentInfo.ZipCode)
-    @Html.DisplayFor(model => model.PaymentInfo.ZipCode)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </div>
