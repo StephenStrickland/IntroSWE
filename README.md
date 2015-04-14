@@ -7,12 +7,14 @@ This is the repository for group 7 in Intro to Software Engineering @ SPSU taugh
 - [x] Revised intro page layout diagram
 - [ ] Revised search diagram (sorting and code)
 - [x] Reciept page; (model after print recipt from amazon?)
+- [ ] Revise all diagrams before presentation
+- [ ] Discuss/decide on initial page changes
 
 ## Views
 - [x] Book
 - [ ] Search Results
 - [x] Order
-- [ ] Shopping cart and Pre-cart
+- [x] Shopping cart and Pre-cart
 - [ ] Advanced search
 
 ## Data models
@@ -22,7 +24,7 @@ This is the repository for group 7 in Intro to Software Engineering @ SPSU taugh
 ## Controllers
 - [x] Home
 - [ ] Search
-- [ ] Shopping cart
+- [x] Shopping cart
 - [x] Order
 - [x] Book
 - [ ] User session
