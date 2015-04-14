@@ -6,12 +6,12 @@ This is the repository for group 7 in Intro to Software Engineering @ SPSU taugh
 ## Design adjustments
 - [x] Revised intro page layout diagram
 - [ ] Revised search diagram (sorting and code)
-- [ ] Reciept page; (model after print recipt from amazon?)
+- [x] Reciept page; (model after print recipt from amazon?)
 
 ## Views
-- [ ] Book
-- [ ] Search
-- [ ] Order
+- [x] Book
+- [ ] Search Results
+- [x] Order
 - [ ] Shopping cart and Pre-cart
 - [ ] Advanced search
 
@@ -23,13 +23,13 @@ This is the repository for group 7 in Intro to Software Engineering @ SPSU taugh
 - [x] Home
 - [ ] Search
 - [ ] Shopping cart
-- [ ] Order
-- [ ] Book
+- [x] Order
+- [x] Book
 - [ ] User session
 
 ## Search and sort
-- [ ] Search via basic
-- [ ] Search via advanced
+- [x] Search via basic
+- [x] Search via advanced
 - [ ] Sort results
 
 ## Resources

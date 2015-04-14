@@ -20,101 +20,101 @@
 
 
         @Html.ValidationSummary(true)
-        <div class="row">
-            <div class="col-md-3 col-lg-3">
-                @Html.TextBoxFor(model => model.ShippingInfo.FirstName, new { @class = "form-control",@placeholder = "First Name", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.ShippingInfo.FirstName)
+        @using (Html.BeginForm("Receipt", "Order"))
+        {
+            <div class="row">
+                <div class="col-md-3 col-lg-3">
+                    @Html.TextBoxFor(model => model.ShippingInfo.FirstName, new { @class = "form-control", @placeholder = "First Name", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.ShippingInfo.FirstName)
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    @Html.TextBoxFor(model => model.ShippingInfo.LastName, new { @placeholder = "Last Name", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.ShippingInfo.LastName)
+                </div>
             </div>
-            <div class="col-md-3 col-lg-3">
-                @Html.TextBoxFor(model => model.ShippingInfo.LastName, new { @placeholder = "Last Name", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.ShippingInfo.LastName)
+            <br />
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    @Html.TextBoxFor(model => model.ShippingInfo.StreetAddr, new { @placeholder = "Street Address", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.ShippingInfo.StreetAddr)<br />
+                </div>
             </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-md-6 col-lg-6">
-                @Html.TextBoxFor(model => model.ShippingInfo.StreetAddr, new { @placeholder = "Street Address", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.ShippingInfo.StreetAddr)<br />
+            <div class="row">
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.ShippingInfo.City, new { @placeholder = "City", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.ShippingInfo.City)
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.ShippingInfo.State, new { @placeholder = "State", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.ShippingInfo.State)
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.ShippingInfo.ZipCode, new { @placeholder = "Zip Code", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.ShippingInfo.ZipCode)
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2 col-lg-2">
-                @Html.TextBoxFor(model => model.ShippingInfo.City, new { @placeholder = "City", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.ShippingInfo.City)
+            <br />
+            <h2>Billing Information</h2>
+            <div class="row">
+                <div class="col-md-3 col-lg-3">
+                    @Html.TextBoxFor(model => model.PaymentInfo.FirstName, new { @class = "form-control", @placeholder = "First Name", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.FirstName)
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    @Html.TextBoxFor(model => model.PaymentInfo.LastName, new { @placeholder = "Last Name", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.LastName)<br />
+                </div>
             </div>
-            <div class="col-md-2 col-lg-2">
-                @Html.TextBoxFor(model => model.ShippingInfo.State, new { @placeholder = "State", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.ShippingInfo.State)
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    @Html.TextBoxFor(model => model.PaymentInfo.StreetAddr, new { @placeholder = "Street Address", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.StreetAddr)<br />
+                </div>
             </div>
-            <div class="col-md-2 col-lg-2">
-                @Html.TextBoxFor(model => model.ShippingInfo.ZipCode, new { @placeholder = "Zip Code", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.ShippingInfo.ZipCode)
+            <div class="row">
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.PaymentInfo.City, new { @placeholder = "City", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.City)
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.PaymentInfo.State, new { @placeholder = "State", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.State)
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    @Html.TextBoxFor(model => model.PaymentInfo.ZipCode, new { @placeholder = "Zip Code", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.ZipCode)
+                </div>
             </div>
-        </div>
-        <br />
-        <h2>Billing Information</h2>
-        <div class="row">
-            <div class="col-md-3 col-lg-3">
-                @Html.TextBoxFor(model => model.PaymentInfo.FirstName, new { @class = "form-control",@placeholder = "First Name", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.PaymentInfo.FirstName)
-            </div>
-            <div class="col-md-3 col-lg-3">
-                @Html.TextBoxFor(model => model.PaymentInfo.LastName, new { @placeholder = "Last Name", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.PaymentInfo.LastName)<br />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-lg-6">
-                @Html.TextBoxFor(model => model.PaymentInfo.StreetAddr, new { @placeholder = "Street Address", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.PaymentInfo.StreetAddr)<br />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2 col-lg-2">
-                @Html.TextBoxFor(model => model.PaymentInfo.City, new { @placeholder = "City", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.PaymentInfo.City)
-            </div>
-            <div class="col-md-2 col-lg-2">
-                @Html.TextBoxFor(model => model.PaymentInfo.State, new { @placeholder = "State", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.PaymentInfo.State)
-            </div>
-            <div class="col-md-2 col-lg-2">
-                @Html.TextBoxFor(model => model.PaymentInfo.ZipCode, new { @placeholder = "Zip Code", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.PaymentInfo.ZipCode)
-            </div>
-        </div>
 
 
 
 
-        <h3>Expiration Date</h3>
-        <div class="row">
-            <div class="col-md-6 col-lg-6">
-                @Html.TextBoxFor(model => model.PaymentInfo.CcNumber, new { @placeholder = "Credit Card Number", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.PaymentInfo.CcNumber)<br />
+            <h3>Expiration Date</h3>
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    @Html.TextBoxFor(model => model.PaymentInfo.CcNumber, new { @placeholder = "Credit Card Number", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.CcNumber)<br />
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-3 col-lg-3">
-                @Html.TextBoxFor(model => model.PaymentInfo.ExpDateMonth, new { @placeholder = "MM", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.PaymentInfo.ExpDateMonth)
+            <div class="row">
+                <div class="col-md-3 col-lg-3">
+                    @Html.TextBoxFor(model => model.PaymentInfo.ExpDateMonth, new { @placeholder = "MM", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.ExpDateMonth)
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    @Html.TextBoxFor(model => model.PaymentInfo.ExpDateYear, new { @placeholder = "YY", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PaymentInfo.ExpDateYear)
+                </div>
             </div>
-            <div class="col-md-3 col-lg-3">
-                @Html.TextBoxFor(model => model.PaymentInfo.ExpDateYear, new { @placeholder = "YY", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.PaymentInfo.ExpDateYear)
-            </div>
-        </div>
-        
-        <h3>Is this informaton Correct?</h3>
-        <a class="btn btn-default" href="/Order/BillingAndPaymentInfo">No</a>
-
+            <h3>Is this informaton Correct?</h3>
+            <button type="submit" class="btn btn-default">Yes</button>    <a class="btn btn-default" href="/Order/BillingAndPaymentInfo">No</a>
+        }
 
     </div>
 
 
 </div>
-<!--//Html.TextBoxFor(model => model) HOW IS THE EMAIL ADDRESS GOING TO BE DONE!-->
 @section Scripts
 {
     @Scripts.Render("~/bundles/jqueryval")

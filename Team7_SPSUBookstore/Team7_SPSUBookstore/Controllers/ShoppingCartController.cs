@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Team7_SPSUBookstore.Controllers
 {
-    public class ShoppingCartController : Controller
+    public class ShoppingCartController : BaseController
     {
         //
         // GET: /ShoppingCart/
@@ -20,13 +20,13 @@ namespace Team7_SPSUBookstore.Controllers
             else
             {
                 ShoppingCartBook a = new ShoppingCartBook();
-                a.ISBN = "33333";
+                a.ISBN = "978-0073376356";
                 a.QuantityInCart = 5;
                 a.Price = (decimal)55.55;
                 a.TypeInCart = (StockType.New);
 
                 ShoppingCartBook b = new ShoppingCartBook();
-                b.ISBN = "44444";
+                b.ISBN = "978-0132662253";
                 b.QuantityInCart = 7;
                 b.Price = (decimal)33.33;
                 b.TypeInCart = (StockType.Used);
@@ -39,90 +39,12 @@ namespace Team7_SPSUBookstore.Controllers
 
             Session["ShoppingCart"] = model;
 
-            //CalculateSubtotal();
+            CalculateSubtotal();
 
             return View();
         }
 
-        //
-        // GET: /ShoppingCart/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        //
-        // GET: /ShoppingCart/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /ShoppingCart/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /ShoppingCart/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /ShoppingCart/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /ShoppingCart/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /ShoppingCart/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        
         public ActionResult Checkout()
         {
             return RedirectToAction("Index", "Order");
@@ -142,20 +64,32 @@ namespace Team7_SPSUBookstore.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult AddToCart(int id)
+        public ActionResult AddToCart(string isbn, StockType stockType, int qty)
         {
             var cartBooks = new List<ShoppingCartBook>();
-
+            var bookToAdd = new ShoppingCartBook();
             if (Session["ShoppingCart"] != null)
-            {
                 cartBooks = (List<ShoppingCartBook>)Session["ShoppingCart"];
+
+            int index = cartBooks.FindIndex(item => item.ISBN == isbn);
+            if (index >= 0)
+                cartBooks[index].QuantityInCart += qty;
+            else
+            {
+                bookToAdd.ISBN = isbn;
+                bookToAdd.TypeInCart = stockType;
+                bookToAdd.QuantityInCart = qty;
+
+                bookToAdd.Price = DbManager.Books.Where(x => x.ISBN == bookToAdd.ISBN).FirstOrDefault()
+                    .Stock.Where(x => x.Type == stockType).Select(x => x.Price).FirstOrDefault();
+                cartBooks.Add(bookToAdd);
             }
 
-            //cartBooks.Add(id);
-            //from book page add item here
+            
 
             Session["ShoppingCart"] = cartBooks;
 
+            bookToAdd = null;
             cartBooks = null;
 
             return RedirectToAction("PreCart", "ShoppingCart");
@@ -174,11 +108,12 @@ namespace Team7_SPSUBookstore.Controllers
 
                 foreach (ShoppingCartBook book in cartBooks)
                 {
-                    CartSubtotal += book.Price;
+                    CartSubtotal += book.Price * book.QuantityInCart;
                 }
             }
 
-            ViewData.Add("CartSubtotal", CartSubtotal);
+            ViewBag.CartSubtotal = CartSubtotal;
+            //ViewData.Add("CartSubtotal", CartSubtotal);
 
             return View();
         }
@@ -193,7 +128,14 @@ namespace Team7_SPSUBookstore.Controllers
                 cartBooks = (List<ShoppingCartBook>)Session["ShoppingCart"];
             }
 
-            ViewData.Add("ItemsInCart", cartBooks.Count);
+            var count = 0;
+
+            foreach(ShoppingCartBook b in cartBooks)
+            {
+                count += b.QuantityInCart;
+            }
+
+            ViewData.Add("ItemsInCart", count);
 
             return View();
         }
@@ -213,6 +155,37 @@ namespace Team7_SPSUBookstore.Controllers
             Session["ShoppingCart"] = model;
 
             return View("PreCart");
+        }
+
+        [HttpPost]
+        public ActionResult PreCartInvalid()
+        {
+            return View("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult BookDetails(string isbn)
+        {
+            var bookDetails = DbManager.Books.Where(x => x.ISBN == isbn).First();
+
+            ViewData.Add("BookDetails", "author");
+
+            return View();
+        }
+
+        public String GetAuthor (string isbn)
+        {
+            return DbManager.Books.Where(x => x.ISBN == isbn).First().Author;
+        }
+
+        public String GetTitle(string isbn)
+        {
+            return DbManager.Books.Where(x => x.ISBN == isbn).First().Title;
+        }
+
+        public String GetImage(string isbn)
+        {
+            return DbManager.Books.Where(x => x.ISBN == isbn).First().ISBN;
         }
     }
 }

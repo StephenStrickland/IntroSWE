@@ -2,7 +2,15 @@
 @using Entities;
 @{
     var cart = (List<ShoppingCartBook>)Session["ShoppingCart"] ?? new List<ShoppingCartBook>();
+<<<<<<< HEAD
     int count = ( cart != null ? cart.Select(x => x.QuantityInCart).Sum() : 0);
+=======
+    int count = 0;
+    foreach (var b in cart)
+    {
+        count += b.QuantityInCart;
+    }
+>>>>>>> origin/master
 }
 
 @if (Request.IsAuthenticated)
