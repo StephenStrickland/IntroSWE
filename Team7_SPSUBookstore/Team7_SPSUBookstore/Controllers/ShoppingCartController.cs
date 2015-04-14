@@ -39,7 +39,7 @@ namespace Team7_SPSUBookstore.Controllers
 
             Session["ShoppingCart"] = model;
 
-            //CalculateSubtotal();
+            CalculateSubtotal();
 
             return View();
         }
@@ -66,20 +66,26 @@ namespace Team7_SPSUBookstore.Controllers
 
         public ActionResult AddToCart(string isbn, StockType stockType, int qty)
         {
-            var bookToAdd = new ShoppingCartBook();
-            bookToAdd.ISBN = isbn;
-            bookToAdd.TypeInCart = stockType;
-            bookToAdd.QuantityInCart = qty;
-
             var cartBooks = new List<ShoppingCartBook>();
-
+            var bookToAdd = new ShoppingCartBook();
             if (Session["ShoppingCart"] != null)
-            {
                 cartBooks = (List<ShoppingCartBook>)Session["ShoppingCart"];
+
+            int index = cartBooks.FindIndex(item => item.ISBN == isbn);
+            if (index >= 0)
+                cartBooks[index].QuantityInCart += qty;
+            else
+            {
+                bookToAdd.ISBN = isbn;
+                bookToAdd.TypeInCart = stockType;
+                bookToAdd.QuantityInCart = qty;
+
+                bookToAdd.Price = DbManager.Books.Where(x => x.ISBN == bookToAdd.ISBN).FirstOrDefault()
+                    .Stock.Where(x => x.Type == stockType).Select(x => x.Price).FirstOrDefault();
+                cartBooks.Add(bookToAdd);
             }
-            bookToAdd.Price = DbManager.Books.Where(x => x.ISBN == bookToAdd.ISBN).FirstOrDefault()
-                .Stock.Where(x => x.Type == stockType).Select(x => x.Price).FirstOrDefault();
-            cartBooks.Add(bookToAdd);
+
+            
 
             Session["ShoppingCart"] = cartBooks;
 
@@ -106,7 +112,8 @@ namespace Team7_SPSUBookstore.Controllers
                 }
             }
 
-            ViewData.Add("CartSubtotal", CartSubtotal);
+            ViewBag.CartSubtotal = CartSubtotal;
+            //ViewData.Add("CartSubtotal", CartSubtotal);
 
             return View();
         }
