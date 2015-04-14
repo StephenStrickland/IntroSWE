@@ -14,8 +14,8 @@
     <div class="span9" style="float: none; margin-left: auto; margin-right: auto">
         <div class="row" align="center">
 
-            <div class="col-lg-5 col-md-5 table-bordered">
-                <br />
+            <div class="col-lg-6 col-md-6 col-md-offset-1">
+                <hr />
                 <div class="row">
                     <div class="col-lg-3 col-md-3">
                         @{var imgPath = "/Resources/bk_imgs/" + shoppingCartBooks.Last().ISBN + ".jpg";
@@ -24,23 +24,26 @@
                             <img src="@imgPath" />
                         </a>
                     </div>
-                    <div class="col-lg-7 col-md-7" align="left">
+                    <div class="col-lg-8 col-md-8" align="left">
                         <div class="row" border="1">
-                            @{ Html.RenderAction("GetTitle", new { isbn = shoppingCartBooks[shoppingCartBooks.Count - 1].ISBN }); }
+                            <a href="@Url.Action("Index", "Book", new { id = shoppingCartBooks.Last().ISBN }, null)">
+                                @{ Html.RenderAction("GetTitle", new { isbn = shoppingCartBooks.Last().ISBN }); }
+                            </a>
                         </div>
                         <div class="row">
-                            by @{ Html.RenderAction("GetAuthor", new { isbn = shoppingCartBooks[shoppingCartBooks.Count - 1].ISBN }); }
+                            by @{ Html.RenderAction("GetAuthor", new { isbn = shoppingCartBooks.Last().ISBN }); }
                         </div>
                         <div class="row">
                             $@Html.DisplayFor(modelItem => shoppingCartBooks[shoppingCartBooks.Count - 1].Price) each
                         </div>
                         <div class="row">
-                            Quantity added: @Html.DisplayFor(modelItem => shoppingCartBooks[shoppingCartBooks.Count - 1].QuantityInCart)
+                            Quantity added: @Html.DisplayFor(modelItem => shoppingCartBooks.Last().QuantityInCart)
                         </div>
                     </div>
                 </div>
+                <hr />
             </div>
-            <div class="col-lg-3 col-md-3 table-bordered" align="center">
+            <div class="col-lg-3 col-md-3 table-bordered col-md-offset-1" align="center">
                 <br />
                 <div class="row">
                     Order Subtotal: $@ViewBag.CartSubtotal

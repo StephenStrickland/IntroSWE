@@ -2,7 +2,11 @@
 @using Entities;
 @{
     var cart = (List<ShoppingCartBook>)Session["ShoppingCart"] ?? new List<ShoppingCartBook>();
-    int count = cart.Count;
+    int count = 0;
+    foreach (var b in cart)
+    {
+        count += b.QuantityInCart;
+    }
 }
 
 @if (Request.IsAuthenticated)

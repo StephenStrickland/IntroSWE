@@ -52,7 +52,9 @@
                         <table>
                             <tr>
                                 <td align="left">
-                                    @{ Html.RenderAction("GetTitle", new { isbn = book.ISBN }); }  by @{ Html.RenderAction("GetAuthor", new { isbn = book.ISBN }); } 
+                                    <a href="@Url.Action("Index", "Book", new { id = book.ISBN }, null)">
+                                        @{ Html.RenderAction("GetTitle", new { isbn = book.ISBN }); } </a> by @{ Html.RenderAction("GetAuthor", new { isbn = book.ISBN }); }
+                                        
                                 </td>
                             </tr>
                             <tr>
