@@ -107,20 +107,20 @@ function checkDirty() {
         var profVal = elem.options[elem.selectedIndex].value;
         elem = document.getElementById("courseslct");
         var courseVal = elem.options[elem.selectedIndex].value;
-        elem = document.getElementById("courseslct");
-        var courseVal = elem.options[elem.selectedIndex].value;
+        //elem = document.getElementById("courseslct");
+        //var courseVal = elem.options[elem.selectedIndex].value;
         elem = document.getElementById("crn");
-        var crnVal = elem.options[elem.selectedIndex].value;
+        var crnVal = elem.value;
         elem = document.getElementById("isRequired");
-        var requiredVal = elem.options[elem.selectedIndex].value;
+        var requiredVal = elem.value;
 
         if (semVal == "" && sectVal == "" && profVal == "" && courseVal == "" && crnVal == "" && requiredVal == false) {
             elem = document.getElementById("isAdvanced");
-            elem.val = true;
+            elem.val = false;
         }
         else {
             elem = document.getElementById("isAdvanced");
-            elem.val = true;
+            elem.value = true;
         }
     }
 

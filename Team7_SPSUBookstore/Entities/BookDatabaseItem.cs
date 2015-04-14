@@ -54,5 +54,5 @@ namespace Entities
         public decimal Price { get; set; }
     }
 
-    public enum StockType { Rental, New, Used, E_Book }
+    public enum StockType { Rental, New, Used, eBook }
 }

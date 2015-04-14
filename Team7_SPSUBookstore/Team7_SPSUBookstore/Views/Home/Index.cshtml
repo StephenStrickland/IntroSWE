@@ -1,17 +1,17 @@
 ﻿@*@model Entities.SearchCriteria
 
-@{
-    //ViewBag.Title = "BOOKSTORE";
-    IList<SelectListItem> section = (List<SelectListItem>)ViewData["sections"];
-    IList<SelectListItem> semester = (List<SelectListItem>)ViewData["semester"];
-    IList<SelectListItem> course = (List<SelectListItem>)ViewData["course"];
-    IList<SelectListItem> profs = new List<SelectListItem>();
-        profs =(List<SelectListItem>)ViewData["profs"];
-    
-    
-    
-    
-}*@
+    @{
+        //ViewBag.Title = "BOOKSTORE";
+        IList<SelectListItem> section = (List<SelectListItem>)ViewData["sections"];
+        IList<SelectListItem> semester = (List<SelectListItem>)ViewData["semester"];
+        IList<SelectListItem> course = (List<SelectListItem>)ViewData["course"];
+        IList<SelectListItem> profs = new List<SelectListItem>();
+            profs =(List<SelectListItem>)ViewData["profs"];
+
+
+
+
+    }*@
 
 
 
@@ -24,27 +24,27 @@
         <div class="col-md-8 col-lg-8 col-md-offset-2">
             @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @role = "form" }))
             {
-                <input name="isAdvanced" id="isAdvanced" value="false" type="hidden"/>
-                
-     
+               <input name="isAdvanced" id="isAdvanced" value="false" type="hidden"/>
+
+
 
                 @*<div class="form-group">
-                    <label class="control-label" for="exampleInputEmail">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail" placeholder="Enter email">
+                        <label class="control-label" for="exampleInputEmail">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail" placeholder="Enter email">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Remember me
+                        </label>
+                    </div>*@
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="BasicSearch" value="" placeholder="Enter Title, Author, ISBN" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Search</button>
+                        </span>
+                    </div>
                 </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Remember me
-                    </label>
-                </div>*@
-    <div class="form-group">
-        <div class="input-group">
-            <input type="text" class="form-control" name="BasicSearch" value="" placeholder="Enter Title, Author, ISBN" />
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="submit">Search</button>
-            </span>
-        </div>
-    </div>
                 <div class="panel-group" id="collapse">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -59,113 +59,66 @@
 
 
                                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                                    @* <div class="control-group">*@
+                                    
                                     <p>Course Criteria</p>
 
 
 
                                     <div class="form-group">
                                         <label for="Semester">Semester</label>
-                                        <select name="Semester" id="semstrslct" class="form-control">
-                                        </select>
+                                        <select name="Semester" id="semstrslct" class="form-control"></select>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="Course">Course</label>
-                                        <select name="Course" id="courseslct" class="form-control">
-                                        </select>
+                                        <select name="Course" id="courseslct" class="form-control"></select>
                                     </div>
 
 
                                     <div class="form-group">
                                         <label for="Professor">Professor</label>
-                                        <select name="Professor" id="profslct" class="form-control">
-                                        </select>
+                                        <select name="Professor" id="profslct" class="form-control"></select>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="Section">Section</label>
-                                        <select name="Section" id="sectslct" class="form-control">
-                                        </select>
+                                        <select name="Section" id="sectslct" class="form-control"></select>
                                     </div>
 
-                                    @*<div class="form-group">
-                                        @Html.LabelFor(model => model.CRN)
+                                   
+                                    <button onclick="clearSelects()" type="button" class="btn btn-success"><span class="fa fa-remove"></span>Clear Selection</button>
 
-                                        @Html.TextBoxFor(model => model.CRN, null, new { @class = "form-control", @placeholder="Enter CRN"})
-
-                                    </div>
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Semester)
-                                        @Html.DropDownList("Semester", course, "Please select one", new { @class = "form-control", id = "semstrslct" })
-                                    </div>
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Course)
-                                        @Html.DropDownList("Course", course, "Please select one", new { @class = "form-control", id = "courseslct" })
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Professor)
-                                        @Html.DropDownList("Professor", profs, "Please select one", new { @class = "form-control", id = "profslct" })
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Section)
-                                        @Html.DropDownList("Section", section, "Please select one", new { @class = "form-control", id="sectslct" })
-                                    </div>*@
-                                   <button onclick="clearSelects()" type="button" class="btn btn-success"><span class="fa fa-remove"></span>Clear Selection</button>
-
-                                    @*<div class="form-group">
-                                        @Html.LabelFor(model => model.Section)
-                                        @Html.TextBoxFor(model => model.Section, null, new { @class = "form-control", @placeholder = "Enter Section" })
-                                    </div>*@
-
-                                    @*<div class="form-group">
-                                        <label class="control-label" for="exampleInputEmail">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail" placeholder="Enter email">
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Semester)
-                                        @Html.TextBoxFor(model => model.Semester, null, new { @class = "form-control", @placeholder = "Enter Semester" })
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox"> Is Book Required For Class?
-                                            </label>
-                                        </div>
-                                    </div>*@
-                                    @*</div>*@
+                                    
                                 </div>
 
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-md-offset-1">
 
                                     <div class="form-group">
-                                        <label class="control-label" for="exampleInputEmail">CRN</label>
+                                        <label class="control-label" for="CRN">CRN</label>
                                         <input type="email" class="form-control" id="crn" name="CRN" placeholder="Enter CRN">
                                     </div>
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" id ="isRequired "name="required"> Show Only Required Books?
+                                                <input type="checkbox" id="isRequired " name="required"> Show Only Required Books?
                                             </label>
                                         </div>
                                     </div>
 
-                                    </div>
+                                </div>
                             </div>
                         </div>
-                        </div>
                     </div>
+                </div>
 
 
             }
 
 
 
-                </div>
-            </div>
         </div>
+    </div>
+</div>
 
 
 

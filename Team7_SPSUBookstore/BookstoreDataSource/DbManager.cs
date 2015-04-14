@@ -8,19 +8,27 @@ using Entities;
 using System.Reflection;
 using Excel;
 using System.Data;
+using Microsoft.Office.Interop.Excel;
 
 namespace BookstoreDataSource
 {
     public class DbManager
     {
-        public DbManager(string userUrl, string bookUrl)
+        public DbManager(string uUrl, string bUrl)
         {
             Users = new List<User>();
             Books = new List<BookDatabaseItem>();
-            ReadFiles(userUrl, bookUrl);
+            userUrl = userUrl;
+            bookUrl = bookUrl;
+            ReadFiles(uUrl, bUrl);
         }
         public IList<User> Users { get; set; }
         public IList<BookDatabaseItem> Books {get; set;}
+        private static Workbook MyBook = null;
+        private static Application MyApp = null;
+        private static Worksheet MySheet = null;
+        private string userUrl { get; set; }
+        private string bookUrl { get; set; }
 
         public void ReadFiles(string userUrl, string bookUrl)
         {
@@ -75,14 +83,29 @@ namespace BookstoreDataSource
             }
 
         }
+
         public List<BookStock> ConvertToStock(int qtyNew, int qtyUsed, int qtyRental, int qtyEBook, decimal pNew, decimal pUsed, decimal pRental, decimal pEbook)
         {
             List<BookStock> stock = new List<BookStock>();
             stock.Add(new BookStock() { Price = pNew, Quantity = qtyNew, Type = StockType.New});
             stock.Add(new BookStock() { Price = pUsed, Quantity = qtyUsed, Type = StockType.Used });
             stock.Add(new BookStock() { Price = pRental, Quantity = qtyRental, Type = StockType.Rental });
-            stock.Add(new BookStock() { Price = pEbook, Quantity = qtyEBook, Type = StockType.E_Book });
+            stock.Add(new BookStock() { Price = pEbook, Quantity = qtyEBook, Type = StockType.eBook });
             return stock;
         }
+
+        public bool UpdateStock(string isbn, int quantityToRemove)
+        {
+            MyApp = new Application();
+            MyApp.Visible = false;
+            MyBook = MyApp.Workbooks.Open(bookUrl);
+            MySheet = (Worksheet)MyBook.Sheets[1]; // Explicit cast is not required here
+            var lastRow = MySheet.Cells.SpecialCells(XlCellType.xlCellTypeLastCell).Row; 
+            return true;
+        }
+
+
+
+
     }
 }
