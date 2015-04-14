@@ -24,6 +24,9 @@
         <div class="col-md-8 col-lg-8 col-md-offset-2">
             @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @role = "form" }))
             {
+                <input name="isAdvanced" id="isAdvanced" value="false" type="hidden"/>
+                
+     
 
                 @*<div class="form-group">
                     <label class="control-label" for="exampleInputEmail">Email address</label>
@@ -139,12 +142,12 @@
 
                                     <div class="form-group">
                                         <label class="control-label" for="exampleInputEmail">CRN</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail" name="CRN" placeholder="Enter CRN">
+                                        <input type="email" class="form-control" id="crn" name="CRN" placeholder="Enter CRN">
                                     </div>
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox"> Show Only Required Books?
+                                                <input type="checkbox" id ="isRequired "name="required"> Show Only Required Books?
                                             </label>
                                         </div>
                                     </div>

@@ -5,77 +5,16 @@ var p = "#profslct";
 var sc = "#sectslct";
 var sem = "#semstrslct";
 var currentSelection = null;
+var populated = false;
 
-$(document).ready(function () {
-    getClasses();
-    
-    //setSelections("Prof", p, classes);
-    //setSelections("Course", c, classes);
-    //setSelections("Semester", sem, classes);
-    //setSelections("Section", sc, classes);
-});
-
-$(c).change(function () {
-
-    var elem = document.getElementById("courseslct");
-    var val = elem.options[elem.selectedIndex].value;
-    var ls = getObjects(currentSelection, "Course", val);
-    currentSelection = ls;
-    populatOptions(ls);
-
-
-    console.log("value changed for select");
-});
-
-$(p).change(function () {
-
-    var elem = document.getElementById("profslct");
-    var val = elem.options[elem.selectedIndex].value;
-    var ls = getObjects(currentSelection, "Prof", val);
-    currentSelection = ls;
-
-    populatOptions(ls);
-
-
-    console.log("value changed for select");
-});
-
-$(sc).change(function () {
-
-    var elem = document.getElementById("sectslct");
-    var val = elem.options[elem.selectedIndex].value;
-    var ls = getObjects(currentSelection, "Section", val);
-    currentSelection = ls;
-
-    populatOptions(ls);
-
-
-    console.log("value changed for select");
-});
-
-
-
-$(sem).change(function () {
-    var elem = document.getElementById("semstrslct");
-    var val = elem.options[elem.selectedIndex].value;
-    var ls = getObjects(currentSelection, "Semester", val);
-    currentSelection = ls;
-
-    populatOptions(ls);
-   // console.log("value changed for select"); setSelects();
-});
-
-
-//$("#courseslct").change(function () { console.log("value changed for select"); setSelects(); });
 
 function getClasses() {
 
-    var l = null;
     $.ajax({
         url: "/Book/GetClasses",
         type: "GET",
         dataType: "json",
-        
+
         success: function (data) {
             handleData(data);
         },
@@ -84,21 +23,22 @@ function getClasses() {
         }
     });
 
-    
-   
-   // console.log(JSON.stringify(l));
-   // return l;
+
+
+    // console.log(JSON.stringify(l));
+    // return l;
 };
 
 function handleData(data) {
     classes = data;
     currentSelection = data;
     populatOptions(classes);
+    populated = true;
 }
 
 function populatOptions(list) {
-    setSelections("Course", c, filterByCourse( list).sort(sortCourse));
-    setSelections("Prof", p, filterByProf( list).sort(sortProf));
+    setSelections("Course", c, filterByCourse(list).sort(sortCourse));
+    setSelections("Prof", p, filterByProf(list).sort(sortProf));
     setSelections("Semester", sem, filterBySemester(list).sort(sortSem));
     setSelections("Section", sc, filterBySection(list).sort(sortSection));
 }
@@ -113,7 +53,7 @@ function clearSelects() {
     unHideSelect(c);
     unHideSelect(sem);
 
-   // var ssdf = jQuery.inArray("BATES", classes);
+
 
 
 
@@ -121,9 +61,8 @@ function clearSelects() {
 
 
 
-function unHideSelect(elem)
-{
-    $(elem + " option").filter(function (val) { return true }).show(0);
+function unHideSelect(elem) {
+    $(elem + " option").filter(function (val) { return true; }).show(0);
     $(elem)[0].selectedIndex = 0;
 
 }
@@ -138,10 +77,10 @@ function setSelections(type, elemName, values) {
         }
     }
     else {
-        var g = getObjects(values, type, "BATES").length > 0
-        $(elemName + " option").filter(function () { return getObjects(values, type, this.value).length == 0 }).hide(0);
-        $(elemName + " option").filter(function () { return getObjects(values, type, this.value).length > 0 }).show(0);
-       // $(elemName + " option").each(function () { alert(this.value)});
+        //var g = getObjects(values, type, "BATES").length > 0
+        $(elemName + " option").filter(function () { return getObjects(values, type, this.value).length == 0; }).hide(0);
+        $(elemName + " option").filter(function () { return getObjects(values, type, this.value).length > 0; }).show(0);
+        // $(elemName + " option").each(function () { alert(this.value)});
         //var n = null;
         //$(elemName).children("option").each(function () {
         //    var l = $.grep(values, function (val) { return (val[type] == this.value || val[type] == ""); })
@@ -156,8 +95,34 @@ function setSelections(type, elemName, values) {
         //});
 
     }
+}
 
+function checkDirty() {
+    if (populated) {
+        var elem = document.getElementById("semstrslct");
+        var semVal = elem.options[elem.selectedIndex].value;
+        elem = document.getElementById("sectslct");
+        var sectVal = elem.options[elem.selectedIndex].value;
+        elem = document.getElementById("profslct");
+        var profVal = elem.options[elem.selectedIndex].value;
+        elem = document.getElementById("courseslct");
+        var courseVal = elem.options[elem.selectedIndex].value;
+        elem = document.getElementById("courseslct");
+        var courseVal = elem.options[elem.selectedIndex].value;
+        elem = document.getElementById("crn");
+        var crnVal = elem.options[elem.selectedIndex].value;
+        elem = document.getElementById("isRequired");
+        var requiredVal = elem.options[elem.selectedIndex].value;
 
+        if (semVal == "" && sectVal == "" && profVal == "" && courseVal == "" && crnVal == "" && requiredVal == false) {
+            elem = document.getElementById("isAdvanced");
+            elem.val = true;
+        }
+        else {
+            elem = document.getElementById("isAdvanced");
+            elem.val = true;
+        }
+    }
 
 }
 
@@ -168,25 +133,25 @@ function setSelections(type, elemName, values) {
 function filterBySemester(arr) {
     var f = []
     return arr.filter(function (n) {
-        return f.indexOf(n.Semester) == -1 && f.push(n.Semester)
+        return f.indexOf(n.Semester) == -1 && f.push(n.Semester);
     })
 }
 function filterByCourse(arr) {
     var f = []
     return arr.filter(function (n) {
-        return f.indexOf(n.Course) == -1 && f.push(n.Course)
+        return f.indexOf(n.Course) == -1 && f.push(n.Course);
     })
 }
 function filterByProf(arr) {
     var f = []
     return arr.filter(function (n) {
-        return f.indexOf(n.Prof) == -1 && f.push(n.Prof)
+        return f.indexOf(n.Prof) == -1 && f.push(n.Prof);
     })
 }
 function filterBySection(arr) {
     var f = []
     return arr.filter(function (n) {
-        return f.indexOf(n.Section) == -1 && f.push(n.Section)
+        return f.indexOf(n.Section) == -1 && f.push(n.Section);
     })
 }
 
@@ -227,7 +192,7 @@ function getProfArr(obj) {
         var s = obj[i].Prof;
         l.push(s);
     }
-    
+
     return l
 }
 
@@ -247,7 +212,7 @@ function getSectArr(obj) {
         l.push(s);
     }
     return l
-}
+}   
 
 
 function getObjects(obj, key, val) {
@@ -256,3 +221,73 @@ function getObjects(obj, key, val) {
     return arr;
 }
 
+
+
+
+
+window.onload = function () {
+    getClasses();
+
+    //setSelections("Prof", p, classes);
+    //setSelections("Course", c, classes);
+    //setSelections("Semester", sem, classes);
+    //setSelections("Section", sc, classes);
+}
+
+$(c).change(function () {
+
+    var elem = document.getElementById("courseslct");
+    var val = elem.options[elem.selectedIndex].value;
+    var ls = getObjects(currentSelection, "Course", val);
+    currentSelection = ls;
+    populatOptions(ls);
+    checkDirty();
+
+
+    console.log("value changed for select");
+});
+
+$(p).change(function () {
+
+    var elem = document.getElementById("profslct");
+    var val = elem.options[elem.selectedIndex].value;
+    var ls = getObjects(currentSelection, "Prof", val);
+    currentSelection = ls;
+
+    populatOptions(ls);
+    checkDirty();
+
+
+    console.log("value changed for select");
+});
+
+$(sc).change(function () {
+
+    var elem = document.getElementById("sectslct");
+    var val = elem.options[elem.selectedIndex].value;
+    var ls = getObjects(currentSelection, "Section", val);
+    currentSelection = ls;
+
+    populatOptions(ls);
+    checkDirty();
+
+
+    console.log("value changed for select");
+});
+
+
+
+$(sem).change(function () {
+    var elem = document.getElementById("semstrslct");
+    var val = elem.options[elem.selectedIndex].value;
+    var ls = getObjects(currentSelection, "Semester", val);
+    currentSelection = ls;
+
+    populatOptions(ls);
+    checkDirty();
+    // console.log("value changed for select"); setSelects();
+});
+
+$("#crn").change(function () { if (populated) { checkDirty(); } });
+
+$("#isRequired").change(function () { if (populated) { checkDirty(); } });

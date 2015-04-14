@@ -53,9 +53,9 @@
                         {
 
                             <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingOne">
+                                <div class="panel-heading" role="tab" id="heading_@stock.Type.ToString()">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" data-target="#@stock.Type" aria-expanded="true" aria-controls="@stock.Type">
+                                        <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse_@stock.Type" aria-expanded="false" aria-controls="collapse_@stock.Type">
                                             <div class="radio">
                                                 <label>
                                                     <input type="radio" name="stockType" id="input" value="@stock.Type">
@@ -66,7 +66,7 @@
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="@stock.Type" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                <div id="collapse_@stock.Type" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@stock.Type.ToString()">
                                     <div class="panel-body">
 
                                         <div class="form-group">
@@ -81,6 +81,8 @@
                         }
                     }
                 }
+
+
 
 
 
@@ -159,6 +161,82 @@
                         </div>
                     </div>*@
             </div>
+
+            @*<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="" id="input" value="" checked="">
+                                        Rent
+                                    </label>
+                                </div>
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <button type="button" class="btn btn-warning">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="" id="input" value="">
+                                        Buy Used
+                                    </label>
+                                </div>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                quantity <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>1</li>
+                                <li>2</li>
+                            </ul>
+                            <button type="button" class="btn btn-warning">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="" id="input" value="">
+                                        Buy New
+                                    </label>
+                                </div>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="input" class="col-sm-2 control-label">:</label>
+                                <div class="col-sm-10">
+                                    <select name="" id="input" class="form-control">
+                                        <option value="">-- Select One --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-warning">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
 
         </div>
 
