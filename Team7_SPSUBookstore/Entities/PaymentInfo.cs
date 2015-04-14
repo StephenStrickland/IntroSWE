@@ -32,6 +32,14 @@ namespace Entities
         [RegularExpression(@"777", ErrorMessage = "Invalid Security Code")]
         public int CCV { get; set; }
 
+        public string CCnumberStub
+        {
+            get
+            {
+                return CcNumber.ToString().Substring(12);
+            }
+        }
+
         public bool ValidateCcNUmber()
         {
             return true;
