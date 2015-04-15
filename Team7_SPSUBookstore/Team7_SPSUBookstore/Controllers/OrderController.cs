@@ -37,7 +37,6 @@ namespace Team7_SPSUBookstore.Controllers
                 o.PaymentInfo = order.PaymentInfo;
                 o.ShippingInfo = order.ShippingInfo;
                 Session["Order"] = o;
-                SetSearchCriteria();
                 return RedirectToAction("Confirmation");
             }
 
