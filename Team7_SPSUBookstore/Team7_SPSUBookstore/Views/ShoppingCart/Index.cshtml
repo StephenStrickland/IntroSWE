@@ -25,7 +25,7 @@
                 <div class="col-lg-6 col-md-6">
 
                 </div>
-                <div class="col-lg-2 col-md-2" align="center">
+                <div class="col-lg-2 col-md-2 col-lg-offset-1" align="center">
                     Price
                 </div>
                 <div class="col-lg-2 col-md-2" align="center">
@@ -48,7 +48,7 @@
                             <img src="@imgPath" />
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-lg-5 col-md-5">
                         <table>
                             <tr>
                                 <td align="left">
@@ -64,12 +64,13 @@
                             </tr>
                             <tr>
                                 <td align="left">
+                                    <br />
                                     @Html.ActionLink("Remove from cart", "RemoveFromCart", new { id = shoppingCartBooks.IndexOf(book) })
                                 </td>
                             </tr>
                         </table>
                     </div>
-                    <div class="col-lg-2 col-md-2" align="center">
+                    <div class="col-lg-2 col-md-2 col-lg-offset-0" align="center">
                         $@Html.DisplayFor(modelItem => book.Price) each
                     </div>
                     <div class="col-lg-2 col-md-2" align="center">

@@ -66,15 +66,22 @@ namespace Team7_SPSUBookstore.Controllers
 
         public ActionResult AddToCart(string isbn, StockType stockType, int qty)
         {
+            bool isAlreadyInCart = false;
             var cartBooks = new List<ShoppingCartBook>();
             var bookToAdd = new ShoppingCartBook();
             if (Session["ShoppingCart"] != null)
                 cartBooks = (List<ShoppingCartBook>)Session["ShoppingCart"];
 
-            int index = cartBooks.FindIndex(item => item.ISBN == isbn);
-            if (index >= 0)
-                cartBooks[index].QuantityInCart += qty;
-            else
+            int i = cartBooks.FindIndex(item => item.ISBN == isbn);
+            if (i >= 0)
+                foreach (var b in cartBooks)
+                    if (b.ISBN.Equals(isbn) && b.TypeInCart.Equals(stockType))
+                    {
+                        isAlreadyInCart = !isAlreadyInCart;
+                        i = cartBooks.IndexOf(b);
+                    }
+
+            if (!isAlreadyInCart)
             {
                 bookToAdd.ISBN = isbn;
                 bookToAdd.TypeInCart = stockType;
@@ -84,8 +91,12 @@ namespace Team7_SPSUBookstore.Controllers
                     .Stock.Where(x => x.Type == stockType).Select(x => x.Price).FirstOrDefault();
                 cartBooks.Add(bookToAdd);
             }
-
-            
+            else
+            {
+                cartBooks[i].QuantityInCart += qty;
+                cartBooks.Add(cartBooks[i]);
+                cartBooks.RemoveAt(i);
+            }
 
             Session["ShoppingCart"] = cartBooks;
 

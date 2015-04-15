@@ -246,6 +246,9 @@
     <Content Include="Resources\bk_imgs\978-1605769745.jpg" />
     <Content Include="Resources\bk_imgs\978-1607974147.jpg" />
     <Content Include="Resources\bk_imgs\978-9544007737.jpg" />
+    <Content Include="Resources\cell_big.jpg" />
+    <Content Include="Resources\dot_multi_color.jpg" />
+    <Content Include="Resources\small_cell.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
