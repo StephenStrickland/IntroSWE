@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using System.Text;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,28 +52,23 @@ namespace Team7_SPSUBookstore.Controllers
         [HttpPost]
         public ActionResult Receipt()
         {
-            return View((Order) Session["Order"]);
+            Order o = (Order) Session["Order"];
+            Session["Order"] = null;
+            Session["ShoppingCart"] = null;
+            return View(o);
         }
 
-        public string GenerateReceipt()
+        public string GenerateReceipt(Order o)
         {
-            string receipt =
-                @"Thank you for your purchase of {0} books for a total of {1}.
-
-Customer: {2}
-
-Payment Method:
-{3}
-
-Shipping Info:
-{4}
-
-";
-
-
-
-
-
+            StringBuilder sb = new StringBuilder();
+            sb.Append("-------------------------");
+            sb.Append("Shipping Info");
+            sb.Append("Billing Info"):
+            for(ShoppingCartBook book in o.BooksInCart  )
+            {
+                
+            }
+            string receipt = "";
             return "";
         }
 

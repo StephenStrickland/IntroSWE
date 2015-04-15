@@ -1,10 +1,13 @@
-﻿@model Entities.Order
+﻿@using BookstoreDataSource
+@using Entities
+@model Entities.Order
 
 @{
     ViewBag.Title = "Receipt";
 }
 
-<h2>Receipt</h2>
+<h2 align="center">Receipt</h2>
+
 <div class="row">
     <div class="col-md-4 col-lg-4">
         <h3>Shipping Info</h3>
@@ -28,12 +31,42 @@
     </div>
     <div class="col-md-4 col-lg-4">
         <h3>Cost</h3>
-        Subtotal: @Html.DisplayFor(model => model.SubTotalCost) 
+        Subtotal: $@Html.DisplayFor(model => model.SubTotalCost)
         <br />
-        Tax: @Html.DisplayFor(model => model.Tax) 
-        <br /> 
-        Total Cost: @Html.DisplayFor(model => model.TotalCost)
+        Tax: $@Html.DisplayFor(model => model.Tax)
+        <br />
+        Total Cost: $@Html.DisplayFor(model => model.TotalCost)
     </div>
 </div>
 
+<br />
+<hr />
+<h2 align="center">Products</h2>
 
+@foreach (var book in Model.BooksInCart)
+{
+    DbManager test = new DbManager("Resources/users.txt", "Resources/books.xlsx");
+    string title = test.Books.ToList().Where(x => x.ISBN.Equals(book.ISBN)).First().Title;
+    string link = "www.spsubookstore.com/ebook/download/" + @book.ISBN + ".pdf";
+    string image = "/Resources/bk_imgs/" + book.ISBN + ".jpg";
+
+    <div class="row">
+        <div class="col-md-2 col-lg-2">
+            <a class="thumbnail"><img src="@image" /></a>
+        </div>
+        <div class="col-md-10 col-lg-10">
+            Title: @title <br />
+            ISBN: @book.ISBN  <br />
+            Type: @book.TypeInCart <br />
+            @if (book.TypeInCart == StockType.eBook)
+            {
+                @:Download link: <a href=@link>@link</a> <br />
+            }
+            Quantity: @book.QuantityInCart<br />
+            Price: $@book.Price <br />
+        </div>
+    </div>
+    <br />
+    <br />
+    <hr />
+}
