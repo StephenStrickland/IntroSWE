@@ -55,7 +55,7 @@
                     if (stock.Quantity != 0 && stock.Type != Entities.StockType.eBook)
                     {
                         <div class="row">
-                      @stock.Quantity.ToString() @stock.Type.ToString() @@ $@stock.Price.ToString()
+                      @stock.Quantity.ToString()    @stock.Type.ToString()      @@  $@stock.Price.ToString()
                         </div>
                     }
                     else if(stock.Quantity != 0)
