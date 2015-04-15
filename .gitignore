@@ -198,3 +198,6 @@ FakesAssemblies/
 *.opt
 
 *.xml
+
+# Receipts 
+*.txt

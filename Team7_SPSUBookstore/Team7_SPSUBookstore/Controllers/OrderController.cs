@@ -62,7 +62,11 @@ namespace Team7_SPSUBookstore.Controllers
             foreach (ShoppingCartBook book in o.BooksInCart)
             {
                 string title = DbManager.Books.ToList().Where(x => x.ISBN.Equals(book.ISBN)).First().Title;
-                dict.Add(book.ISBN, title);
+                if (!dict.ContainsKey(book.ISBN))
+                {
+                    dict.Add(book.ISBN, title);
+                }
+
             }
             ViewBag.titles = dict;
             return View(o);
@@ -101,6 +105,12 @@ namespace Team7_SPSUBookstore.Controllers
                 }
                 sb.AppendLine();
             }
+
+            sb.AppendLine("-------------------------");
+            sb.AppendLine("SubTotal :" + o.SubTotalCost);
+            sb.AppendLine("Tax: " + o.Tax);
+            sb.AppendLine("Total: " + o.TotalCost);
+
             long milliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             DateTime date = DateTime.Now;
             String root = AppDomain.CurrentDomain.BaseDirectory;
