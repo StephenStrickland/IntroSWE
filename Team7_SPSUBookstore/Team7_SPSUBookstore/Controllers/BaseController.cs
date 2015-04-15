@@ -1,4 +1,5 @@
 ﻿using BookstoreDataSource;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,15 @@ namespace Team7_SPSUBookstore.Controllers
         //
         // GET: /Base/
 
+        public BaseController()
+	{
+            DbManager = new DbManager("Resources/users.txt", "Resources/books.xlsx");
+       
+	}
 
-        public DbManager DbManager = new DbManager("Resources/users.txt", "Resources/books.xlsx");
+        public DbManager DbManager;
+
+
 
 
         public List<SelectListItem> GetProfessorsForDropDown()

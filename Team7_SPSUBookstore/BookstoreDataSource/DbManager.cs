@@ -18,14 +18,14 @@ namespace BookstoreDataSource
         {
             Users = new List<User>();
             Books = new List<BookDatabaseItem>();
-            userUrl = userUrl;
-            bookUrl = bookUrl;
+            userUrl = uUrl;
+            bookUrl = bUrl;
             ReadFiles(uUrl, bUrl);
         }
         public IList<User> Users { get; set; }
         public IList<BookDatabaseItem> Books {get; set;}
-        private static Workbook MyBook = null;
-        private static Application MyApp = null;
+        private static Workbook excelBook = null;
+        private static Application excelApp = null;
         private static Worksheet MySheet = null;
         private string userUrl { get; set; }
         private string bookUrl { get; set; }
@@ -94,14 +94,58 @@ namespace BookstoreDataSource
             return stock;
         }
 
-        public bool UpdateStock(string isbn, int quantityToRemove)
+        public bool UpdateStock(string isbn, int quantityToRemove, StockType type)
         {
-            MyApp = new Application();
-            MyApp.Visible = false;
-            MyBook = MyApp.Workbooks.Open(bookUrl);
-            MySheet = (Worksheet)MyBook.Sheets[1]; // Explicit cast is not required here
-            var lastRow = MySheet.Cells.SpecialCells(XlCellType.xlCellTypeLastCell).Row; 
+            String root = AppDomain.CurrentDomain.BaseDirectory;
+            excelApp = new Application();
+            excelApp.Visible = false;
+            excelBook = excelApp.Workbooks.Open(root + bookUrl);
+            MySheet = (Worksheet)excelBook.Sheets[1]; // Explicit cast is not required here
+           // var lastRow = MySheet.Cells.SpecialCells(XlCellType.xlCellTypeLastCell).Row;
+            Range isbnCol = MySheet.get_Range("A2", "A2");
+            var bookRow = isbnCol.EntireRow.Find(isbn,
+                            Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlPart,
+                            XlSearchOrder.xlByColumns, XlSearchDirection.xlNext,
+                            true, Missing.Value, Missing.Value);
+            int col = bookRow.Row;
+            int oldQty = 0;
+
+            switch (type)
+            {
+                case StockType.Rental:
+                    oldQty = Convert.ToInt32(MySheet.Cells[col, 12].Value);
+                    MySheet.Cells[col, 12].Value = calcNewQuantity(oldQty, quantityToRemove);
+                    break;
+                case StockType.New:
+                    oldQty = Convert.ToInt32(MySheet.Cells[col, 10].Value);
+                    MySheet.Cells[col, 10].Value = calcNewQuantity(oldQty, quantityToRemove);
+                    break;
+                case StockType.Used:
+                    oldQty = Convert.ToInt32(MySheet.Cells[col, 11].Value);
+                    MySheet.Cells[col, 11].Value = calcNewQuantity(oldQty, quantityToRemove);
+                    break;
+                case StockType.eBook:
+                     oldQty = Convert.ToInt32(MySheet.Cells[col, 13].Value);
+                    MySheet.Cells[col, 13].Value = calcNewQuantity(oldQty, quantityToRemove);
+                    break;
+                default:
+                    break;
+            }
+
+            excelBook.Save();
+            excelBook.Close();
+            excelApp.Quit();
+
+
+
             return true;
+        }
+
+        public int calcNewQuantity(int origQty, int newQty)
+        {
+            int newVal = origQty - newQty;
+            return (newVal >= 0? newVal: 0);
+
         }
 
 
