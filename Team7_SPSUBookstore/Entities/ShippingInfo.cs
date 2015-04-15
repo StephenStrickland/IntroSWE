@@ -27,13 +27,5 @@ namespace Entities
 
         [Required(ErrorMessage = "State is required")]
         public string State { get; set; }
-
-        public string ToString()
-        {
-            string address =
-@"{0}
-{1}, {2} {3}";
-            return String.Format(address, StreetAddr, City, State, ZipCode);
-        }
     }
 }
