@@ -87,23 +87,23 @@ namespace Team7_SPSUBookstore.Controllers
                    tempBookList.AddRange( bookList.Where(x => x.Title.ToLower().Contains(c)).ToList());
  
                    tempBookList.AddRange( bookList.Where(x => x.Author.ToLower().Contains(c)).ToList());
-              
 
-        
             }
             tempBookList = tempBookList.Distinct().ToList();
             if (tempBookList.Count > 0)
                 bookList = tempBookList;
             if (bookList.Count == 1 || tempBookList.Count ==1)
             {
+                bookList = Sort(bookList, 0);
                 RedirectToAction("Index", "Book", bookList.FirstOrDefault().ISBN);
             }
             if (!tempBookList.Any())
             {
+                tempBookList = Sort(tempBookList, 0);
                 return View(tempBookList);
             }
             SearchTerms(AdvCriteria.BasicSearch);
-
+            bookList = Sort(bookList, 0);
             return View(bookList.ToList());
         }
      
@@ -178,8 +178,33 @@ namespace Team7_SPSUBookstore.Controllers
             
             return View(bookList.ToList());
         }
-
-
+        public List<BookDatabaseItem> Sort(List<BookDatabaseItem> searchResults, int sortType)
+        {
+       
+                switch (sortType)
+                {
+                    case 1:
+                        searchResults = searchResults.OrderByDescending(b => b.Author).ToList();
+                        break;
+                    case 2:
+                        searchResults = searchResults.OrderBy(b => b.Author).ToList();
+                        break;
+                    //case 3:
+                    //    booklist = booklist.orderbydescending(b => b.price);
+                    //    break;
+                    //case 4:
+                    //    booklist = booklist.orderby(b => b.price);
+                    //    break;
+                    case 3:
+                        searchResults = searchResults.OrderByDescending(b => b.Title).ToList();
+                        break;
+                    default:
+                        searchResults = searchResults.OrderBy(b => b.Title).ToList();
+                        break;
+            }
+                return searchResults;
+        }
+    
         public ActionResult SearchTerms(String criteria)
         {
             ViewBag.SearchTerms = criteria;
