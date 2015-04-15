@@ -36,11 +36,12 @@
                     {
                         <li>
                             <div class="col-md-12 col-lg-12">
-                                <form class="navbar-form">
+                                <form class="navbar-form" onsubmit="postSearch(); return false;">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input class="form-control" type="text">
-                                            <span class="input-group-btn"><button class="btn btn-default" type="submit">Search</button></span>
+                                            @*<input class="form-control" type="text">*@
+                                            <input type="text" class="form-control" id="BasicSearch" name="BasicSearch" value="" placeholder="Enter Title, Author, ISBN" />
+                                            <span class="input-group-btn"><button class="btn btn-default" >Search</button></span>
                                         </div>
                                     </div>
                                 </form>
@@ -70,7 +71,7 @@
         {
             <div class="row">
                 <div class="collapse col-md-6 col-md-offset-3" id="navSearch">
-                    @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @role = "form" }))
+                    @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @role = "form", id="searchForm" }))
                     {
                         <input name="isAdvanced" id="isAdvanced" value="false" type="hidden" />
                         <div class="row">
@@ -127,10 +128,7 @@
                         </div>
                         <hr />
 
-
                     }
-
-
 
                 </div>
             </div>

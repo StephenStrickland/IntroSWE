@@ -23,11 +23,45 @@ function getClasses() {
         }
     });
 
-
-
     // console.log(JSON.stringify(l));
     // return l;
 };
+
+
+
+function postSearch() {
+    var data = $("#searchForm").serializeArray();
+    var searchTxt = document.getElementById("BasicSearch").value;
+    data.push({ name: "BasicSearch", value: searchTxt });
+
+
+    //$.post("/Search", data);
+
+    $.ajax({
+        url: "/Search",
+        type: "post",
+        data: data,
+       
+
+        success: function (data) {
+            document.body.innerHTML = data;
+            history.pushState(null, null, "/Search");
+            getClasses();
+
+           // document.location.href = "/Search";
+           // handleData(data);
+        },
+        error: function (e) {
+            alert('failure to get classes');
+        }
+    });
+    
+
+
+
+};
+
+
 
 function handleData(data) {
     classes = data;
