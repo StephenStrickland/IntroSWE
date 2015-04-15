@@ -85,42 +85,25 @@ namespace Team7_SPSUBookstore.Controllers
             {
 
                    tempBookList.AddRange( bookList.Where(x => x.Title.ToLower().Contains(c)).ToList());
-                
-             
+ 
                    tempBookList.AddRange( bookList.Where(x => x.Author.ToLower().Contains(c)).ToList());
               
 
         
             }
+            tempBookList = tempBookList.Distinct().ToList();
             if (tempBookList.Count > 0)
                 bookList = tempBookList;
-            if (bookList.Count == 1)
+            if (bookList.Count == 1 || tempBookList.Count ==1)
             {
                 RedirectToAction("Index", "Book", bookList.FirstOrDefault().ISBN);
             }
+            if (!tempBookList.Any())
+            {
+                return View(tempBookList);
+            }
+            SearchTerms(AdvCriteria.BasicSearch);
 
-            Console.Write("aefaefawfe");
-            //switch (sortOrder)
-            //{
-            //    case 1:
-            //        bookList = bookList.OrderByDescending(b => b.Author);
-            //        break;
-            //    case 2:
-            //        bookList = bookList.OrderBy(b => b.Author);
-            //        break;
-            //    //case 3:
-            //    //    bookList = bookList.OrderByDescending(b => b.Price);
-            //    //    break;
-            //    //case 4:
-            //    //    bookList = bookList.OrderBy(b => b.Price);
-            //    //    break;
-            //    case 3:
-            //        bookList = bookList.OrderByDescending(b => b.Title);
-            //        break;
-            //    default:
-            //        bookList = bookList.OrderBy(b => b.Title);
-            //        break;
-            //}
             return View(bookList.ToList());
         }
      
@@ -197,27 +180,10 @@ namespace Team7_SPSUBookstore.Controllers
         }
 
 
-
-        //public ActionResult ToBookPage()
-        //{
-
-        //}
-
-        //
-        // POST: /Search/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult SearchTerms(String criteria)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            ViewBag.SearchTerms = criteria;
+            return View();
         }
     }
 }
