@@ -17,6 +17,7 @@ namespace Entities
         //+ validateCCV(): bool
 
         [Required(ErrorMessage = "Credit Card Number is required")]
+        [RegularExpression(@"\d{16}", ErrorMessage = "The Credit Card Number must be 16 digits long")]
         [StringLength(16, MinimumLength = 16, ErrorMessage = "The Credit Card Number must be 16 digits long")]
         public string CcNumber { get; set; }
 
@@ -25,9 +26,9 @@ namespace Entities
         public int ExpDateMonth { get; set; }
 
         [Required(ErrorMessage = "Year expiration date is required")]
-        [RegularExpression(@"[0-9][0-9]", ErrorMessage = "Year is in form YY")]
+        [RegularExpression(@"^([1-9]\d|\d{3,})$", ErrorMessage = "Year is in form YY")]
         public int ExpDateYear { get; set; }
-        
+
         [Required(ErrorMessage = "Security Code is required")]
         [RegularExpression(@"777", ErrorMessage = "Invalid Security Code")]
         public int CCV { get; set; }
@@ -40,20 +41,7 @@ namespace Entities
             }
         }
 
-        public bool ValidateCcNUmber()
-        {
-            return true;
-        }
 
-        public bool ValidateExpDate()
-        {
-            return true;
-        }
-
-        public bool ValidateCCV()
-        {
-            return true;
-        }
 
     }
 }

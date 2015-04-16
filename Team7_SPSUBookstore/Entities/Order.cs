@@ -23,7 +23,7 @@ namespace Entities
 
         public Order()
         {
-            
+
         }
 
         public IList<ShoppingCartBook> BooksInCart { get; set; }
@@ -36,7 +36,7 @@ namespace Entities
             {
                 if (BooksInCart != null)
                 {
-                    return BooksInCart.Select(x => x.QuantityInCart*x.Price).Sum();
+                    return BooksInCart.Select(x => x.QuantityInCart * x.Price).Sum();
                 }
                 return 0;
             }
@@ -44,10 +44,5 @@ namespace Entities
 
         public decimal Tax { get { return (SubTotalCost * (decimal)(.07)); } }//7%
         public decimal TotalCost { get { return Tax + SubTotalCost; } }
-
-        public bool ValidatePaymentInfo()
-        {
-            return (PaymentInfo.ValidateExpDate() && PaymentInfo.ValidateCCV() && PaymentInfo.ValidateCcNUmber());
-        }
     }
 }
