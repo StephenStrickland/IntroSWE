@@ -28,11 +28,11 @@ namespace Team7_SPSUBookstore.Controllers
             Session["attempts"] = attempts;
             User user = DbManager.Users.Where(x => x.Email == username).FirstOrDefault();
             bool validLogin = (user != null && user.Password.ToLower() == password.ToLower());
-            if (attempts >= 5 && validLogin)
+            if (attempts >= 5 && !validLogin)
             {
 
 
-                DateTime jailDateTime = DateTime.Now.AddMinutes(10);
+                DateTime jailDateTime = DateTime.Now.AddMinutes(5);
 
                 if (Session["jailtime"] != null)
                     jailDateTime = (DateTime)Session["jailtime"];
