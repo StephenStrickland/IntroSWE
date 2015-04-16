@@ -69,6 +69,7 @@ namespace Team7_SPSUBookstore.Controllers
             bool isAlreadyInCart = false;
             var cartBooks = new List<ShoppingCartBook>();
             var bookToAdd = new ShoppingCartBook();
+
             if (Session["ShoppingCart"] != null)
                 cartBooks = (List<ShoppingCartBook>)Session["ShoppingCart"];
 

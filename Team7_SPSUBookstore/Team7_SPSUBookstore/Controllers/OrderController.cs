@@ -91,6 +91,8 @@ namespace Team7_SPSUBookstore.Controllers
             sb.AppendLine("-------------------------");
             foreach (ShoppingCartBook book in o.BooksInCart)
             {
+
+                DbManager.UpdateStock(book.ISBN, book.QuantityInCart, book.TypeInCart);
                 string title = DbManager.Books.ToList().Where(x => x.ISBN.Equals(book.ISBN)).First().Title;
                 string link = "www.spsubookstore.com/ebook/download/" + book.ISBN + ".pdf";
                 sb.AppendLine("Title: " + title);

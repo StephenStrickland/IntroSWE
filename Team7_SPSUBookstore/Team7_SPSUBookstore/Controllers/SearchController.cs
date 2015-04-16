@@ -21,7 +21,7 @@ namespace Team7_SPSUBookstore.Controllers
         //}
         public ActionResult Index(SearchCriteria AdvCriteria, int sort = 0)//, int sortOrder)
         {
-            bool advanced = AdvCriteria.isAdvanced;
+            bool advanced = true;
             if (AdvCriteria.BasicSearch.IsNullOrWhiteSpace())
                 AdvCriteria.BasicSearch = "";
             AdvCriteria.BasicSearch = AdvCriteria.BasicSearch.ToLower();
@@ -55,12 +55,12 @@ namespace Team7_SPSUBookstore.Controllers
                     if (!String.IsNullOrEmpty(AdvCriteria.Semester))
                     {
 
-                       bookList = bookList.Where(x => x.Semester.ToLower().Contains(AdvCriteria.Semester)).ToList();
+                       bookList = bookList.Where(x => x.Semester.Equals(AdvCriteria.Semester)).ToList();
                         
                     }
                     if (!String.IsNullOrEmpty(AdvCriteria.Course))
                     {
-                        bookList = bookList.Where(x => x.Course.ToLower().Contains(AdvCriteria.Course)).ToList();
+                        bookList = bookList.Where(x => x.Course.Equals(AdvCriteria.Course)).ToList();
                     }
                     if (AdvCriteria.Section != 0)
                     {
@@ -68,13 +68,13 @@ namespace Team7_SPSUBookstore.Controllers
                     }
                     if (!String.IsNullOrEmpty(AdvCriteria.Professor))
                     {
-                        bookList = bookList.Where(x => x.Professor.ToLower().Contains(AdvCriteria.Professor)).ToList();
+                        bookList = bookList.Where(x => x.Professor.Equals(AdvCriteria.Professor)).ToList();
 
                     }
                    
                     if (AdvCriteria.CRN != 0)
                     {
-                        bookList = bookList.Where(x => x.CRN.Equals(AdvCriteria.CRN)).ToList();
+                        bookList = bookList.Where(x => x.CRN.ToString().Equals(AdvCriteria.CRN)).ToList();
 
                     }
                     if (AdvCriteria.isRequired == true)

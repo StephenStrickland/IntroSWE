@@ -42,45 +42,47 @@
         <div class="col-md-3 col-lg-3">
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-                @using (Html.BeginForm("AddToCart", "ShoppingCart", FormMethod.Post))
-                {
+                
 
-                    <input class="hidden" name="isbn" value="@Model.ISBN" />
+                    
 
-                    foreach (var stock in Model.Stock)
+                    @foreach (var stock in Model.Stock)
                     {
                         if (stock.Quantity != 0)
                         {
+                            using (Html.BeginForm("AddToCart", "ShoppingCart", FormMethod.Post))
+                            {
+                                <input class="hidden" name="isbn" value="@Model.ISBN" />
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="heading_@stock.Type.ToString()">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse_@stock.Type" aria-expanded="false" aria-controls="collapse_@stock.Type">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="stockType" id="input" value="@stock.Type">
+                                                        @stock.Type.ToString() - $@stock.Price.ToString()
+                                                    </label>
+                                                </div>
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="heading_@stock.Type.ToString()">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse_@stock.Type" aria-expanded="false" aria-controls="collapse_@stock.Type">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="stockType" id="input" value="@stock.Type">
-                                                    @stock.Type.ToString() - $@stock.Price.ToString()
-                                                </label>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse_@stock.Type" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@stock.Type.ToString()">
+                                        <div class="panel-body">
+
+                                            <div class="form-group">
+
+                                                <input class="form-control" type="number" id="qtyInput" name="qty"  min="1" max="@stock.Quantity" />
                                             </div>
 
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapse_@stock.Type" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@stock.Type.ToString()">
-                                    <div class="panel-body">
-
-                                        <div class="form-group">
-
-                                            <input class="form-control" type="number" id="qtyInput" name="qty"  min="1" max="@stock.Quantity" />
+                                            <button type="submit" class="btn btn-warning"><span class="fa fa-plus-circle"></span>  Add to Cart</button>
                                         </div>
-
-                                        <button type="submit" class="btn btn-warning"><span class="fa fa-plus-circle"></span>  Add to Cart</button>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
                     }
-                }
+                
 
 
 
