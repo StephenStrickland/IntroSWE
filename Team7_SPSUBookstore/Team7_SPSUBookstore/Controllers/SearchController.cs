@@ -1,9 +1,11 @@
-﻿using Entities;
+﻿using System.Web.Routing;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 
 namespace Team7_SPSUBookstore.Controllers
 {
@@ -17,9 +19,11 @@ namespace Team7_SPSUBookstore.Controllers
            // ViewBag.Title = criteria;
            // return View();
         //}
-        public ActionResult Index(SearchCriteria AdvCriteria)//, int sortOrder)
+        public ActionResult Index(SearchCriteria AdvCriteria, int sort = 0)//, int sortOrder)
         {
             bool advanced = AdvCriteria.isAdvanced;
+            if (AdvCriteria.BasicSearch.IsNullOrWhiteSpace())
+                AdvCriteria.BasicSearch = "";
             AdvCriteria.BasicSearch = AdvCriteria.BasicSearch.ToLower();
             String[] criteria = AdvCriteria.BasicSearch.Split(' ');
             List<String> criteriaList = new List<String>(criteria);
@@ -28,6 +32,7 @@ namespace Team7_SPSUBookstore.Controllers
             criteriaList.Remove("a");
             List<BookDatabaseItem> bookList = DbManager.Books.ToList();
             List<String> searchResultsISBNList = new List<String>();
+            Session.Add("SearchCritera", AdvCriteria.BasicSearch);
            
                 foreach (var c in criteriaList)
                 {
@@ -95,15 +100,18 @@ namespace Team7_SPSUBookstore.Controllers
             if (bookList.Count == 1 || tempBookList.Count ==1)
             {
                 bookList = Sort(bookList, 0);
+                Session.Add("SearchResults", bookList);
                 RedirectToAction("Index", "Book", bookList.FirstOrDefault().ISBN);
             }
             if (!tempBookList.Any())
             {
-                tempBookList = Sort(tempBookList, 0);
+                tempBookList = Sort(tempBookList, sort);
+                Session.Add("SearchResults", tempBookList);
                 return View(tempBookList);
             }
             SearchTerms(AdvCriteria.BasicSearch);
             bookList = Sort(bookList, 0);
+            Session.Add("SearchResults", bookList);
             return View(bookList.ToList());
         }
      
@@ -111,7 +119,7 @@ namespace Team7_SPSUBookstore.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            ViewBag.Title = "nothing here, try searching for something!!!";
+            ViewBag.Title = "No results found for " + Session["SearchCritera"] + "! Pleae try something else.";
             return View();
         }
 
@@ -180,34 +188,42 @@ namespace Team7_SPSUBookstore.Controllers
         }
         public List<BookDatabaseItem> Sort(List<BookDatabaseItem> searchResults, int sortType)
         {
-       
-                switch (sortType)
-                {
-                    case 1:
-                        searchResults = searchResults.OrderByDescending(b => b.Author).ToList();
-                        break;
-                    case 2:
-                        searchResults = searchResults.OrderBy(b => b.Author).ToList();
-                        break;
-                    //case 3:
-                    //    booklist = booklist.orderbydescending(b => b.price);
-                    //    break;
-                    //case 4:
-                    //    booklist = booklist.orderby(b => b.price);
-                    //    break;
-                    case 3:
-                        searchResults = searchResults.OrderByDescending(b => b.Title).ToList();
-                        break;
-                    default:
-                        searchResults = searchResults.OrderBy(b => b.Title).ToList();
-                        break;
+            switch (sortType)
+            {
+                case 1:
+                    searchResults = searchResults.OrderByDescending(b => b.Author).ToList();
+                    break;
+                case 2:
+                    searchResults = searchResults.OrderBy(b => b.Author).ToList();
+                    break;
+                case 3:
+                    searchResults = searchResults.OrderByDescending(b => b.Title).ToList();
+                    break;
+                case 4:
+                    searchResults = searchResults.OrderByDescending(b => b.Stock.First().Price).ToList();
+                    break;
+                case 5:
+                    searchResults = searchResults.OrderBy(b => b.Stock.First().Price).ToList();
+                    break;
+                default:
+                    searchResults = searchResults.OrderBy(b => b.Title).ToList();
+                    break;
             }
-                return searchResults;
+
+            return searchResults;
         }
-    
+
+        [HttpGet]
+        public ActionResult SortResults(int sortType)
+        {
+            var searchCritera = (List<BookDatabaseItem>)Session["SearchResults"];
+            ViewBag.SearchTerms = Session["SearchCritera"];
+            return View("Index", Sort(searchCritera, sortType));
+        }
+
         public ActionResult SearchTerms(String criteria)
         {
-            ViewBag.SearchTerms = criteria;
+            ViewBag.SearchTerms = Session["SearchCritera"];
             return View();
         }
     }

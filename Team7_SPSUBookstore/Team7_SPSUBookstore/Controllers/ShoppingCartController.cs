@@ -141,7 +141,7 @@ namespace Team7_SPSUBookstore.Controllers
 
             var count = 0;
 
-            foreach(ShoppingCartBook b in cartBooks)
+            foreach (ShoppingCartBook b in cartBooks)
             {
                 count += b.QuantityInCart;
             }
@@ -184,7 +184,7 @@ namespace Team7_SPSUBookstore.Controllers
             return View();
         }
 
-        public String GetAuthor (string isbn)
+        public String GetAuthor(string isbn)
         {
             return DbManager.Books.Where(x => x.ISBN == isbn).First().Author;
         }

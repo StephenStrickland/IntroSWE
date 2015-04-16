@@ -17,13 +17,15 @@
         <div class="pull-right">
             <div class="btn-group">
             <a class ="btn dropdown-toggle" aria-expanded="false" data-toggle="dropdown">
-                Sort By: <span class="caret"></span>
+                Sorted By  <span class="caret"></span>
             </a>
                 <ul class="dropdown-menu"> 
-                    <li><a href="/Search/Sort/1">Title A-Z</a></li>
-                    <li><a href="/Search/Sort/2">Title Z-A</a></li>
-                    <li><a href="/Search/Sort/3">Author A-Z</a></li>
-                    <li><a href="/Search/Sort/4">Author Z-A</a></li>
+                    <li><a href="@Url.Action("SortResults", "Search", new { sortType = 0 }, null)">Title A-Z</a></li>
+                    <li><a href="@Url.Action("SortResults", "Search", new { sortType = 3 }, null)">Title Z-A</a></li>
+                    <li><a href="@Url.Action("SortResults", "Search", new { sortType = 2 }, null)">Author A-Z</a></li>
+                    <li><a href="@Url.Action("SortResults", "Search", new { sortType = 1 }, null)">Author Z-A</a></li>
+                    <li><a href="@Url.Action("SortResults", "Search", new { sortType = 4 }, null)">Price (New) High to Low</a></li>
+                    <li><a href="@Url.Action("SortResults", "Search", new { sortType = 5 }, null)">Price (New) Low to High</a></li>
                 </ul>
                 </div>
         </div>
@@ -52,7 +54,13 @@
             <div class=" col-lg-3 col-md-2 col-md-offset-1">
                 @foreach (var stock in item.Stock)
                 {
-                    if (stock.Quantity != 0 && stock.Type != Entities.StockType.eBook)
+                    if (stock.Quantity > 19 && stock.Type != Entities.StockType.eBook)
+                    {
+                        <div class="row">
+                      10+    @stock.Type.ToString()      @@  $@stock.Price.ToString()
+                        </div>
+                    }
+                    else if (stock.Quantity != 0 && stock.Type != Entities.StockType.eBook)
                     {
                         <div class="row">
                       @stock.Quantity.ToString()    @stock.Type.ToString()      @@  $@stock.Price.ToString()

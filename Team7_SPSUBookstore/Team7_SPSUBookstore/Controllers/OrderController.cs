@@ -97,7 +97,7 @@ namespace Team7_SPSUBookstore.Controllers
                 sb.AppendLine("ISBN: " + book.ISBN);
                 sb.AppendLine("Type: " + book.TypeInCart);
                 sb.AppendLine("Quantity: " + book.QuantityInCart);
-                sb.AppendLine("Price: " + book.Price);
+                sb.AppendLine("Price: " + book.Price + " each");
                 if (book.TypeInCart == StockType.eBook)
                 {
                     sb.AppendLine("Download Link: " + link);
