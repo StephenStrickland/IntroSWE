@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Team7_SPSUBookstore.Controllers.BaseController" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAIAAAAAAAAAAAAAgAAAAACAACAAAAAAAA=</HashCode>
+      <FileName>Controllers\BaseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7_SPSUBookstore.Controllers.BookController">
+    <Position X="7" Y="2" Width="2.25" />
+    <NestedTypes>
+      <Class Name="Team7_SPSUBookstore.Controllers.BookController.SPSU_Class" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\BookController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\BookController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7_SPSUBookstore.Controllers.HomeController">
+    <Position X="19.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEACAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7_SPSUBookstore.Controllers.OrderController">
+    <Position X="22.25" Y="2" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAICEAAAAACAA=</HashCode>
+      <FileName>Controllers\OrderController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7_SPSUBookstore.Controllers.SearchController">
+    <Position X="0.5" Y="2" Width="5.5" />
+    <NestedTypes>
+      <Enum Name="Team7_SPSUBookstore.Controllers.SearchController.SortType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\SearchController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QAAAACAAAAAAAAAAAAAQAAAAAAAAAAAAAAEAAAAAAAE=</HashCode>
+      <FileName>Controllers\SearchController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7_SPSUBookstore.Controllers.ShoppingCartController">
+    <Position X="10" Y="2" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAABAGAQAAAgAEwAAAAAAAAAAEAAAEAACA=</HashCode>
+      <FileName>Controllers\ShoppingCartController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7_SPSUBookstore.Controllers.UserSessionController">
+    <Position X="15.25" Y="2" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAQAAAg=</HashCode>
+      <FileName>Controllers\UserSessionController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.BookDatabaseItem">
+    <Position X="10" Y="5.5" Width="3.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Entities.BookStock">
+    <Position X="14.75" Y="5.5" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Entities.Order">
+    <Position X="18.75" Y="5.5" Width="5.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Entities.PaymentInfo">
+    <Position X="7.25" Y="9" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Entities.SearchCriteria">
+    <Position X="12" Y="9.75" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Entities.ShippingInfo">
+    <Position X="7.25" Y="5.5" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Entities.ShoppingCartBook">
+    <Position X="14.75" Y="7.75" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Entities.User">
+    <Position X="18.75" Y="8.5" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Enum Name="Entities.StockType">
+    <Position X="9.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -23,6 +23,7 @@ namespace BookstoreDataSource
             bookUrl = bUrl;
             ReadFiles(uUrl, bUrl);
         }
+
         public IList<User> Users { get; set; }
         public IList<BookDatabaseItem> Books {get; set;}
         private static Workbook excelBook = null;
@@ -31,6 +32,7 @@ namespace BookstoreDataSource
         private string userUrl { get; set; }
         private string bookUrl { get; set; }
 
+        //Reads in user and book files into usable objects.
         public void ReadFiles(string userUrl, string bookUrl)
         {
             String root = AppDomain.CurrentDomain.BaseDirectory;
@@ -51,8 +53,8 @@ namespace BookstoreDataSource
                         Users.Add(new User() { Email = input[0], Password = input[1] });
                     }
                     sr.Close();
-                    // @"Y:\Code\IntroSWE\Team7_SPSUBookstore\users.txt"
                 }
+
                 //generate the Book list
                 if (bookUrl.Contains(".xlsx"))
                 {
@@ -116,7 +118,7 @@ namespace BookstoreDataSource
                 excelApp.Visible = false;
                 excelBook = excelApp.Workbooks.Open(root + bookUrl);
                 MySheet = (Worksheet)excelBook.Sheets[1]; // Explicit cast is not required here
-                 var lastRow = MySheet.Cells.SpecialCells(XlCellType.xlCellTypeLastCell).Row;
+                var lastRow = MySheet.Cells.SpecialCells(XlCellType.xlCellTypeLastCell).Row;
                 Range isbnCol = MySheet.get_Range("A2", "A" + lastRow.ToString());
                 var bookRow = isbnCol.EntireRow.Find(isbn,
                                 Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlPart,
@@ -147,9 +149,6 @@ namespace BookstoreDataSource
                         break;
                 }
 
-                //excelBook.Save();
-                //excelBook.Close();
-                //excelApp.Quit();
                 excelBook.Save();
 
                 excelBook.Close(false);
@@ -163,8 +162,6 @@ namespace BookstoreDataSource
                 excelApp = null;
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
-
-
 
                 return true;
             }
@@ -190,11 +187,6 @@ namespace BookstoreDataSource
         {
             int newVal = origQty - newQty;
             return (newVal >= 0? newVal: 0);
-
         }
-
-
-
-
     }
 }
