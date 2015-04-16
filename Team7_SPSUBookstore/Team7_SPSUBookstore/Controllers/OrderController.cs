@@ -115,8 +115,9 @@ namespace Team7_SPSUBookstore.Controllers
             long milliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             DateTime date = DateTime.Now;
             String root = AppDomain.CurrentDomain.BaseDirectory;
-            String file = root + "/Resources/Receipts/" + date.Month + "-" + date.Day + "-" + milliseconds + "-" + o.ShippingInfo.FirstName + " " + o.ShippingInfo.LastName + ".txt";
-            System.IO.File.WriteAllText(file, sb.ToString());
+            String file = "/Resources/Receipts/" + date.Month + "-" + date.Day + "-" + milliseconds + "-" + o.ShippingInfo.FirstName + "-" + o.ShippingInfo.LastName + ".txt";
+            System.IO.File.WriteAllText(root + file, sb.ToString());
+            ViewBag.rcptLink = file;
         }
 
 
