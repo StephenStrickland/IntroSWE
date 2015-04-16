@@ -33,51 +33,63 @@ namespace BookstoreDataSource
         public void ReadFiles(string userUrl, string bookUrl)
         {
             String root = AppDomain.CurrentDomain.BaseDirectory;
-            
-           
-            //generate users in text file
-            using (StreamReader sr = File.OpenText(root + userUrl))
+            FileStream stream = File.Open(root + bookUrl, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+            try
             {
-                string line = String.Empty;
-                while ((line = sr.ReadLine()) != null)
+
+
+                //generate users in text file
+                using (StreamReader sr = File.OpenText(root + userUrl))
                 {
-                    string[] input = line.Split(new char[] { ' ' }, 2);
-                    Users.Add(new User() { Email = input[0], Password = input[1]});
+                    string line = String.Empty;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string[] input = line.Split(new char[] { ' ' }, 2);
+                        Users.Add(new User() { Email = input[0], Password = input[1] });
+                    }
+                    sr.Close();
+                    // @"Y:\Code\IntroSWE\Team7_SPSUBookstore\users.txt"
                 }
-                sr.Close();
-                // @"Y:\Code\IntroSWE\Team7_SPSUBookstore\users.txt"
+                //generate the Book list
+                if (bookUrl.Contains(".xlsx"))
+                {
+                    stream = File.Open(root + bookUrl, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                    excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                    DataSet result = excelReader.AsDataSet();
+                    excelReader.IsFirstRowAsColumnNames = true;
+
+                    result = excelReader.AsDataSet();
+
+                    result.AcceptChanges();
+
+                    Books = result.Tables[0].AsEnumerable().Select(x =>
+                          new BookDatabaseItem()
+                          {
+                              ISBN = x.Field<string>("ISBN"),
+                              Title = x.Field<string>("title"),
+                              Author = x.Field<string>("author"),
+                              Semester = x.Field<string>("semester"),
+                              Course = x.Field<string>("course"),
+                              Section = Convert.ToInt32(x.Field<double>("section")),
+                              Professor = x.Field<string>("professor"),
+                              CRN = x.Field<double>("CRN").ToString(),
+                              isRequired = (x.Field<string>("use") == "Required"),
+                              Stock = ConvertToStock(Convert.ToInt32(x.Field<object>("quantityNew")), Convert.ToInt32(x.Field<object>("quantityUsed")),
+                                  Convert.ToInt32(x.Field<double>("quantityRental")), Convert.ToInt32(x.Field<double>("quantityEBook")), Convert.ToDecimal(x.Field<double>("priceNew")),
+                                  Convert.ToDecimal(x.Field<double>("priceUsed")), Convert.ToDecimal(x.Field<double>("priceRental")), Convert.ToDecimal(x.Field<double>("priceEBook"))),
+
+                              Description = x.Field<string>("description")
+                          }).ToList();
+
+                    result.Dispose();
+                    excelReader.Close();
+                    stream.Close();
+                }
             }
-            //generate the Book list
-            if(bookUrl.Contains(".xlsx"))
+            catch (Exception e)
             {
-                FileStream stream = File.Open(root + bookUrl, FileMode.Open, FileAccess.Read);
-                IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-                DataSet result = excelReader.AsDataSet();
-                excelReader.IsFirstRowAsColumnNames = true;
-                
-                result = excelReader.AsDataSet();
-
-                result.AcceptChanges();
-               
-                Books = result.Tables[0].AsEnumerable().Select(x =>
-                      new BookDatabaseItem()
-                      {
-                          ISBN = x.Field<string>("ISBN"),
-                          Title = x.Field<string>("title"),
-                          Author = x.Field<string>("author"),
-                          Semester = x.Field<string>("semester"),
-                          Course = x.Field<string>("course"),
-                          Section = Convert.ToInt32( x.Field<double>("section")),
-                          Professor = x.Field<string>("professor"),
-                          CRN = x.Field<double>("CRN").ToString(),
-                          isRequired = (x.Field<string>("use") == "Required"),
-                          Stock = ConvertToStock(Convert.ToInt32(x.Field<object>("quantityNew")), Convert.ToInt32(x.Field<object>("quantityUsed")),
-                              Convert.ToInt32(x.Field<double>("quantityRental")), Convert.ToInt32(x.Field<double>("quantityEBook")), Convert.ToDecimal(x.Field<double>("priceNew")),
-                              Convert.ToDecimal(x.Field<double>("priceUsed")), Convert.ToDecimal(x.Field<double>("priceRental")), Convert.ToDecimal(x.Field<double>("priceEBook"))),
-
-                          Description = x.Field<string>("description")
-                      }).ToList();
-                
                 excelReader.Close();
                 stream.Close();
             }
@@ -98,47 +110,56 @@ namespace BookstoreDataSource
         {
             String root = AppDomain.CurrentDomain.BaseDirectory;
             excelApp = new Application();
-            excelApp.Visible = false;
-            excelBook = excelApp.Workbooks.Open(root + bookUrl);
-            MySheet = (Worksheet)excelBook.Sheets[1]; // Explicit cast is not required here
-           // var lastRow = MySheet.Cells.SpecialCells(XlCellType.xlCellTypeLastCell).Row;
-            Range isbnCol = MySheet.get_Range("A2", "A2");
-            var bookRow = isbnCol.EntireRow.Find(isbn,
-                            Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlPart,
-                            XlSearchOrder.xlByColumns, XlSearchDirection.xlNext,
-                            true, Missing.Value, Missing.Value);
-            int col = bookRow.Row;
-            int oldQty = 0;
-
-            switch (type)
+            try
             {
-                case StockType.Rental:
-                    oldQty = Convert.ToInt32(MySheet.Cells[col, 12].Value);
-                    MySheet.Cells[col, 12].Value = calcNewQuantity(oldQty, quantityToRemove);
-                    break;
-                case StockType.New:
-                    oldQty = Convert.ToInt32(MySheet.Cells[col, 10].Value);
-                    MySheet.Cells[col, 10].Value = calcNewQuantity(oldQty, quantityToRemove);
-                    break;
-                case StockType.Used:
-                    oldQty = Convert.ToInt32(MySheet.Cells[col, 11].Value);
-                    MySheet.Cells[col, 11].Value = calcNewQuantity(oldQty, quantityToRemove);
-                    break;
-                case StockType.eBook:
-                     oldQty = Convert.ToInt32(MySheet.Cells[col, 13].Value);
-                    MySheet.Cells[col, 13].Value = calcNewQuantity(oldQty, quantityToRemove);
-                    break;
-                default:
-                    break;
+                excelApp.Visible = false;
+                excelBook = excelApp.Workbooks.Open(root + bookUrl);
+                MySheet = (Worksheet)excelBook.Sheets[1]; // Explicit cast is not required here
+                // var lastRow = MySheet.Cells.SpecialCells(XlCellType.xlCellTypeLastCell).Row;
+                Range isbnCol = MySheet.get_Range("A2", "A2");
+                var bookRow = isbnCol.EntireRow.Find(isbn,
+                                Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlPart,
+                                XlSearchOrder.xlByColumns, XlSearchDirection.xlNext,
+                                true, Missing.Value, Missing.Value);
+                int col = bookRow.Row;
+                int oldQty = 0;
+
+                switch (type)
+                {
+                    case StockType.Rental:
+                        oldQty = Convert.ToInt32(MySheet.Cells[col, 12].Value);
+                        MySheet.Cells[col, 12].Value = calcNewQuantity(oldQty, quantityToRemove);
+                        break;
+                    case StockType.New:
+                        oldQty = Convert.ToInt32(MySheet.Cells[col, 10].Value);
+                        MySheet.Cells[col, 10].Value = calcNewQuantity(oldQty, quantityToRemove);
+                        break;
+                    case StockType.Used:
+                        oldQty = Convert.ToInt32(MySheet.Cells[col, 11].Value);
+                        MySheet.Cells[col, 11].Value = calcNewQuantity(oldQty, quantityToRemove);
+                        break;
+                    case StockType.eBook:
+                        oldQty = Convert.ToInt32(MySheet.Cells[col, 13].Value);
+                        MySheet.Cells[col, 13].Value = calcNewQuantity(oldQty, quantityToRemove);
+                        break;
+                    default:
+                        break;
+                }
+
+                excelBook.Save();
+                excelBook.Close();
+                excelApp.Quit();
+
+
+
+                return true;
             }
-
-            excelBook.Save();
-            excelBook.Close();
-            excelApp.Quit();
-
-
-
-            return true;
+            catch(Exception e)
+            {
+                excelBook.Close();
+                excelApp.Quit();
+                return false;
+            }
         }
 
         public int calcNewQuantity(int origQty, int newQty)
