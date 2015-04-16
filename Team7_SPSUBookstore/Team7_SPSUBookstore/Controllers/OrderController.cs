@@ -104,6 +104,10 @@ namespace Team7_SPSUBookstore.Controllers
                 {
                     sb.AppendLine("Download Link: " + link);
                 }
+                if (book.TypeInCart == StockType.Rental)
+                {
+                    sb.AppendLine("Your book " + title + " is due back by the end of the semester");
+                }
                 sb.AppendLine();
             }
 

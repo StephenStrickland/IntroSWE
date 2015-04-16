@@ -62,6 +62,10 @@
             {
                 @:Download link: <a href=@link>@link</a> <br />
             }
+            @if (book.TypeInCart == StockType.Rental)
+            {
+                @:Your book is due back by the end of the semester. <br />
+            }
             Quantity: @book.QuantityInCart<br />
             Price: $@book.Price <br />
         </div>
@@ -71,4 +75,4 @@
     <hr />
 }
 
-<a href= @ViewBag.rcptLink>Click here to download receipt</a>
+<a href=@ViewBag.rcptLink>Click here to download receipt</a>
