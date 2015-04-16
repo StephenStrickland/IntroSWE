@@ -17,13 +17,13 @@
         <div class="pull-right">
             <div class="btn-group">
             <a class ="btn dropdown-toggle" aria-expanded="false" data-toggle="dropdown">
-                Sorted By  <span class="caret"></span>
+                Sorted By @ViewBag.SortType <span class="caret"></span>
             </a>
                 <ul class="dropdown-menu"> 
                     <li><a href="@Url.Action("SortResults", "Search", new { sortType = 0 }, null)">Title A-Z</a></li>
-                    <li><a href="@Url.Action("SortResults", "Search", new { sortType = 3 }, null)">Title Z-A</a></li>
+                    <li><a href="@Url.Action("SortResults", "Search", new { sortType = 1 }, null)">Title Z-A</a></li>
                     <li><a href="@Url.Action("SortResults", "Search", new { sortType = 2 }, null)">Author A-Z</a></li>
-                    <li><a href="@Url.Action("SortResults", "Search", new { sortType = 1 }, null)">Author Z-A</a></li>
+                    <li><a href="@Url.Action("SortResults", "Search", new { sortType = 3 }, null)">Author Z-A</a></li>
                     <li><a href="@Url.Action("SortResults", "Search", new { sortType = 4 }, null)">Price (New) High to Low</a></li>
                     <li><a href="@Url.Action("SortResults", "Search", new { sortType = 5 }, null)">Price (New) Low to High</a></li>
                 </ul>

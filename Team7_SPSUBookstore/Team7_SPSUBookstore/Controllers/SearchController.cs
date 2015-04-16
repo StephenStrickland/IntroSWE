@@ -95,6 +95,7 @@ namespace Team7_SPSUBookstore.Controllers
 
             }
             tempBookList = tempBookList.Distinct().ToList();
+            ViewBag.SortType = (SortType) 0;
             if (tempBookList.Count > 0)
                 bookList = tempBookList;
             if (bookList.Count == 1 || tempBookList.Count ==1)
@@ -191,13 +192,13 @@ namespace Team7_SPSUBookstore.Controllers
             switch (sortType)
             {
                 case 1:
-                    searchResults = searchResults.OrderByDescending(b => b.Author).ToList();
+                    searchResults = searchResults.OrderByDescending(b => b.Title).ToList();
                     break;
                 case 2:
                     searchResults = searchResults.OrderBy(b => b.Author).ToList();
                     break;
                 case 3:
-                    searchResults = searchResults.OrderByDescending(b => b.Title).ToList();
+                    searchResults = searchResults.OrderByDescending(b => b.Author).ToList();
                     break;
                 case 4:
                     searchResults = searchResults.OrderByDescending(b => b.Stock.First().Price).ToList();
@@ -218,6 +219,7 @@ namespace Team7_SPSUBookstore.Controllers
         {
             var searchCritera = (List<BookDatabaseItem>)Session["SearchResults"];
             ViewBag.SearchTerms = Session["SearchCritera"];
+            ViewBag.SortType = (SortType) sortType;
             return View("Index", Sort(searchCritera, sortType));
         }
 
@@ -226,5 +228,11 @@ namespace Team7_SPSUBookstore.Controllers
             ViewBag.SearchTerms = Session["SearchCritera"];
             return View();
         }
+
+        public enum SortType
+        {
+            TitleAtoZ, TitleZtoA, AuthorAtoZ, AuthoerZtoA, PriceNewHightoLow, PriceNewLowtoHigh
+        }
+
     }
 }
