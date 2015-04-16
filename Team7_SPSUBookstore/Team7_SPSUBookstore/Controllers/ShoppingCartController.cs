@@ -17,23 +17,6 @@ namespace Team7_SPSUBookstore.Controllers
 
             if (Session["ShoppingCart"] != null)
                 model = (List<ShoppingCartBook>)Session["ShoppingCart"];
-            else
-            {
-                ShoppingCartBook a = new ShoppingCartBook();
-                a.ISBN = "978-0073376356";
-                a.QuantityInCart = 5;
-                a.Price = (decimal)55.55;
-                a.TypeInCart = (StockType.New);
-
-                ShoppingCartBook b = new ShoppingCartBook();
-                b.ISBN = "978-0132662253";
-                b.QuantityInCart = 7;
-                b.Price = (decimal)33.33;
-                b.TypeInCart = (StockType.Used);
-
-                model.Add(a);
-                model.Add(b);
-            }
 
             ViewData["ShoppingCartBooks"] = model;
 
