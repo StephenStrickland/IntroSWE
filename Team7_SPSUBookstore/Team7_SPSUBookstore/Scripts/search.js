@@ -86,6 +86,12 @@ function clearSelects() {
     unHideSelect(sc);
     unHideSelect(c);
     unHideSelect(sem);
+   var elem = document.getElementsByName("required");
+   elem[0].checked = false;
+   elem = document.getElementById("crn");
+   elem.value = "";
+   checkDirty();
+
 
 
 
@@ -145,8 +151,8 @@ function checkDirty() {
         //var courseVal = elem.options[elem.selectedIndex].value;
         elem = document.getElementById("crn");
         var crnVal = elem.value;
-        elem = document.getElementById("isRequired");
-        var requiredVal = elem.value;
+        elem = document.getElementsByName("required");
+        var requiredVal = elem[0].checked;
 
         if (semVal == "" && sectVal == "" && profVal == "" && courseVal == "" && crnVal == "" && requiredVal == false) {
             elem = document.getElementById("isAdvanced");
