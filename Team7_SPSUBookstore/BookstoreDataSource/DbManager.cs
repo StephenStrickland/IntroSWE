@@ -9,6 +9,7 @@ using System.Reflection;
 using Excel;
 using System.Data;
 using Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
 
 namespace BookstoreDataSource
 {
@@ -115,8 +116,8 @@ namespace BookstoreDataSource
                 excelApp.Visible = false;
                 excelBook = excelApp.Workbooks.Open(root + bookUrl);
                 MySheet = (Worksheet)excelBook.Sheets[1]; // Explicit cast is not required here
-                // var lastRow = MySheet.Cells.SpecialCells(XlCellType.xlCellTypeLastCell).Row;
-                Range isbnCol = MySheet.get_Range("A2", "A2");
+                 var lastRow = MySheet.Cells.SpecialCells(XlCellType.xlCellTypeLastCell).Row;
+                Range isbnCol = MySheet.get_Range("A2", "A" + lastRow.ToString());
                 var bookRow = isbnCol.EntireRow.Find(isbn,
                                 Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlPart,
                                 XlSearchOrder.xlByColumns, XlSearchDirection.xlNext,
@@ -146,9 +147,22 @@ namespace BookstoreDataSource
                         break;
                 }
 
+                //excelBook.Save();
+                //excelBook.Close();
+                //excelApp.Quit();
                 excelBook.Save();
-                excelBook.Close();
+
+                excelBook.Close(false);
+                excelApp.DisplayAlerts = true;
                 excelApp.Quit();
+                Marshal.ReleaseComObject(MySheet);
+                Marshal.ReleaseComObject(excelBook);
+                Marshal.ReleaseComObject(excelApp);
+                MySheet = null;
+                excelBook = null;
+                excelApp = null;
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
 
 
 
@@ -156,8 +170,18 @@ namespace BookstoreDataSource
             }
             catch(Exception e)
             {
-                excelBook.Close();
+                excelBook.Close(false);
+                excelApp.DisplayAlerts = true;
                 excelApp.Quit();
+                Marshal.ReleaseComObject(MySheet);
+                Marshal.ReleaseComObject(excelBook);
+                Marshal.ReleaseComObject(excelApp);
+                MySheet = null;
+                excelBook = null;
+                excelApp = null;
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
                 return false;
             }
         }
