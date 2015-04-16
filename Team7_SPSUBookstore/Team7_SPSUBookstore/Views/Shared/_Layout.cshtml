@@ -73,7 +73,7 @@
                 <div class="collapse col-md-6 col-md-offset-3" id="navSearch">
                     @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @role = "form", id="searchForm" }))
                     {
-                        <input name="isAdvanced" id="isAdvanced" value="false" type="hidden" />
+                        @*<input name="isAdvanced" id="isAdvanced" value="false" type="hidden" />*@
                         <div class="row">
                             <div class="row">
                                 <p>Course Criteria</p>

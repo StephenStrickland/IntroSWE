@@ -307,12 +307,13 @@
     <Content Include="Views\Order\Receipt.cshtml" />
     <Content Include="Views\Order\BillingAndPaymentInfo.cshtml" />
     <None Include="Views\Order\Confirmation.cshtml" />
+    <Content Include="Views\UserSession\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\UserSession\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Resources\Receipts\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\UserSession\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

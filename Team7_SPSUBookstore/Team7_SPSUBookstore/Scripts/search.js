@@ -90,7 +90,7 @@ function clearSelects() {
    elem[0].checked = false;
    elem = document.getElementById("crn");
    elem.value = "";
-   checkDirty();
+   //checkDirty();
 
 
 
@@ -137,34 +137,34 @@ function setSelections(type, elemName, values) {
     }
 }
 
-function checkDirty() {
-    if (populated) {
-        var elem = document.getElementById("semstrslct");
-        var semVal = elem.options[elem.selectedIndex].value;
-        elem = document.getElementById("sectslct");
-        var sectVal = elem.options[elem.selectedIndex].value;
-        elem = document.getElementById("profslct");
-        var profVal = elem.options[elem.selectedIndex].value;
-        elem = document.getElementById("courseslct");
-        var courseVal = elem.options[elem.selectedIndex].value;
-        //elem = document.getElementById("courseslct");
-        //var courseVal = elem.options[elem.selectedIndex].value;
-        elem = document.getElementById("crn");
-        var crnVal = elem.value;
-        elem = document.getElementsByName("required");
-        var requiredVal = elem[0].checked;
+//function checkDirty() {
+//    if (populated) {
+//        var elem = document.getElementById("semstrslct");
+//        var semVal = elem.options[elem.selectedIndex].value;
+//        elem = document.getElementById("sectslct");
+//        var sectVal = elem.options[elem.selectedIndex].value;
+//        elem = document.getElementById("profslct");
+//        var profVal = elem.options[elem.selectedIndex].value;
+//        elem = document.getElementById("courseslct");
+//        var courseVal = elem.options[elem.selectedIndex].value;
+//        //elem = document.getElementById("courseslct");
+//        //var courseVal = elem.options[elem.selectedIndex].value;
+//        elem = document.getElementById("crn");
+//        var crnVal = elem.value;
+//        elem = document.getElementsByName("required");
+//        var requiredVal = elem[0].checked;
 
-        if (semVal == "" && sectVal == "" && profVal == "" && courseVal == "" && crnVal == "" && requiredVal == false) {
-            elem = document.getElementById("isAdvanced");
-            elem.val = false;
-        }
-        else {
-            elem = document.getElementById("isAdvanced");
-            elem.value = true;
-        }
-    }
+//        if (semVal == "" && sectVal == "" && profVal == "" && courseVal == "" && crnVal == "" && requiredVal == false) {
+//            elem = document.getElementById("isAdvanced");
+//            elem.val = false;
+//        }
+//        else {
+//            elem = document.getElementById("isAdvanced");
+//            elem.value = true;
+//        }
+//    }
 
-}
+//}
 
 
 
@@ -281,7 +281,7 @@ $(c).change(function () {
     var ls = getObjects(currentSelection, "Course", val);
     currentSelection = ls;
     populatOptions(ls);
-    checkDirty();
+    //checkDirty();
 
 
     console.log("value changed for select");
@@ -295,7 +295,7 @@ $(p).change(function () {
     currentSelection = ls;
 
     populatOptions(ls);
-    checkDirty();
+    //checkDirty();
 
 
     console.log("value changed for select");
@@ -309,7 +309,7 @@ $(sc).change(function () {
     currentSelection = ls;
 
     populatOptions(ls);
-    checkDirty();
+    //checkDirty();
 
 
     console.log("value changed for select");
@@ -324,10 +324,10 @@ $(sem).change(function () {
     currentSelection = ls;
 
     populatOptions(ls);
-    checkDirty();
+    //checkDirty();
     // console.log("value changed for select"); setSelects();
 });
 
-$("#crn").change(function () { if (populated) { checkDirty(); } });
+//$("#crn").change(function () { if (populated) { checkDirty(); } });
 
-$("#isRequired").change(function () { if (populated) { checkDirty(); } });
+//$("#isRequired").change(function () { if (populated) { checkDirty(); } });
