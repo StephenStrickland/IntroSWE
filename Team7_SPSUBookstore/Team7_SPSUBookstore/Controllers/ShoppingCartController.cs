@@ -47,7 +47,7 @@ namespace Team7_SPSUBookstore.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult AddToCart(string isbn, StockType stockType, int qty)
+        public ActionResult AddToCart(string isbn, StockType stockType, int qty, bool fromCart = false)
         {
             bool isAlreadyInCart = false;
             var cartBooks = new List<ShoppingCartBook>();
@@ -75,6 +75,13 @@ namespace Team7_SPSUBookstore.Controllers
                     .Stock.Where(x => x.Type == stockType).Select(x => x.Price).FirstOrDefault();
                 cartBooks.Add(bookToAdd);
             }
+            else if(fromCart)
+            {
+                
+                cartBooks[i].QuantityInCart = qty;
+                cartBooks.Add(cartBooks[i]);
+                cartBooks.RemoveAt(i);
+            }
             else
             {
                 cartBooks[i].QuantityInCart += qty;
@@ -86,7 +93,10 @@ namespace Team7_SPSUBookstore.Controllers
 
             bookToAdd = null;
             cartBooks = null;
-
+            if(fromCart)
+            {
+                return RedirectToAction("Index", "ShoppingCart");
+            }
             return RedirectToAction("PreCart", "ShoppingCart");
         }
 

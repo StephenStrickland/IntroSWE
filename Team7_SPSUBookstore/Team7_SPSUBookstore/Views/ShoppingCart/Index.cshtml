@@ -71,6 +71,28 @@
                     </div>
                     <div class="col-lg-2 col-md-2" align="center">
                         @Html.DisplayFor(model => book.QuantityInCart)
+                        <p>Update Quantity</p>
+
+                        @using (Html.BeginForm("AddToCart", "ShoppingCart", FormMethod.Post))
+                        {
+                            <input class="hidden" name="isbn" value="@book.ISBN" />
+                            <input class="hidden" name="stockType" value="@book.TypeInCart" />
+                            <input class="hidden" name="fromCart" value="true" />
+                            <select class="form-control" id="qty" name="qty" onchange="this.form.submit()">
+                                <option value="@book.QuantityInCart">@book.QuantityInCart</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        }
+
                     </div>
 
                 </div>
