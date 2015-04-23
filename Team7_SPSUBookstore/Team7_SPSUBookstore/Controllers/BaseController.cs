@@ -15,7 +15,7 @@ namespace Team7_SPSUBookstore.Controllers
 
         public BaseController()
 	{
-            DbManager = new DbManager("Resources/users.txt", "Resources/books.xlsx");
+            DbManager = new DbManager("/Resources/users.txt", "/Resources/books.xlsx");
        
 	}
 
