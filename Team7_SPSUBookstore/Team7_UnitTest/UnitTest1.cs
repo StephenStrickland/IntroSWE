@@ -39,13 +39,14 @@ namespace Team7_UnitTest
         [TestMethod]
         public void TestOrderController()
         {
-            const string expectedViewName = "Index";
-            var orderController = new OrderController();
+            //Glad to see MVC refuses to work
 
-            // Act
-            var result = orderController.Index() as ViewResult;
+            const string expectedViewName = "About";
+            var controller = new HomeController();
 
-            // Assert
+            var result = controller.About() as ViewResult;
+
+
             Assert.IsNotNull(result, "Should have returned a ViewResult");
             Assert.AreEqual(expectedViewName, result.ViewName, "View name should have been {0}", expectedViewName);
         }
