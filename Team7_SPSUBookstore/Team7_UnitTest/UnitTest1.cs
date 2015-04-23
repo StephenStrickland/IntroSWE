@@ -182,5 +182,42 @@ namespace Team7_UnitTest
 
             Assert.IsNotNull(controller.Session["Order"]);
         }
+
+        [TestMethod]
+        public void TestShoppingCart_AddToCart_PreCart()
+        {
+            var controller = new ShoppingCartController();
+            var wrapper = new HttpContextWrapper(HttpContext.Current);
+            controller.ControllerContext = new ControllerContext(wrapper, new RouteData(), controller);
+
+            var result = controller.AddToCart("978-1449691998", StockType.New, 5) as ViewResult;
+
+            Assert.IsNotNull(controller.Session["ShoppingCart"]);
+        }
+
+        [TestMethod]
+        public void TestShoppingCart_ItemsInCart()
+        {
+            var controller = new ShoppingCartController();
+            var wrapper = new HttpContextWrapper(HttpContext.Current);
+            controller.ControllerContext = new ControllerContext(wrapper, new RouteData(), controller);
+
+            var result = controller.ItemsInCart() as ViewResult;
+
+            Assert.IsNotNull(result, "should return items in cart");
+        }
+
+        [TestMethod]
+        public void TestShoppingCart_RemoveFromCart()
+        {
+            var controller = new ShoppingCartController();
+            var wrapper = new HttpContextWrapper(HttpContext.Current);
+            controller.ControllerContext = new ControllerContext(wrapper, new RouteData(), controller);
+            controller.AddToCart("978-1449691998", StockType.New, 5);
+            var result = controller.RemoveFromCart(0) as ViewResult;
+            var cart = (List<ShoppingCartBook>) controller.Session["ShoppingCart"];
+
+            Assert.AreEqual(cart.Count, 0);
+        }
     }
 }
