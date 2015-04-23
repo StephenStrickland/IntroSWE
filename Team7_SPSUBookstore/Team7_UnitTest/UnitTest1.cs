@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Web.Mvc;
 using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,5 +36,18 @@ namespace Team7_UnitTest
             Assert.AreEqual(testOrder.TotalCost, (decimal)1.07);
         }
 
+        [TestMethod]
+        public void TestOrderController()
+        {
+            const string expectedViewName = "Index";
+            var orderController = new OrderController();
+
+            // Act
+            var result = orderController.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, "Should have returned a ViewResult");
+            Assert.AreEqual(expectedViewName, result.ViewName, "View name should have been {0}", expectedViewName);
+        }
     }
 }
