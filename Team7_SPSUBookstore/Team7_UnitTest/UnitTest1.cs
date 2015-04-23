@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Web.Mvc;
+using System.Web;
+using System.Web.WebPages;
 using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Team7_SPSUBookstore.Controllers;
@@ -48,7 +50,7 @@ namespace Team7_UnitTest
 
 
             Assert.IsNotNull(result, "Should have returned a ViewResult");
-            Assert.AreEqual(expectedViewName, result.ViewName, "View name should have been {0}", expectedViewName);
+            Assert.AreEqual("", result.ViewName, "View name should have been {0}", expectedViewName);
         }
     }
 }

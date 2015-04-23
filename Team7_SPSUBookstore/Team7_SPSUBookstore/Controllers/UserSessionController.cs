@@ -52,6 +52,7 @@ namespace Team7_SPSUBookstore.Controllers
             }
             else
             {
+                Session["attempts"] = 0;
                 Session["isLoggedIn"] = true;
                 return RedirectToAction("Index", "Home");
             }
