@@ -123,7 +123,7 @@ namespace Team7_UnitTest
 
 
         [TestMethod]
-        public void TestOrder()
+        public void TestOrder_Tax_And_SubTotal()
         {
             List<ShoppingCartBook> bookList = new List<ShoppingCartBook>();
             ShoppingCartBook testBook = new ShoppingCartBook();
@@ -138,11 +138,27 @@ namespace Team7_UnitTest
 
             Assert.AreEqual(testOrder.SubTotalCost, 1);
             Assert.AreEqual(testOrder.Tax, (decimal)0.07);
-            Assert.AreEqual(testOrder.TotalCost, (decimal)1.07);
+        }
+        [TestMethod]
+        public void TestOrder_TotalCost()
+        {
+            List<ShoppingCartBook> bookList = new List<ShoppingCartBook>();
+            ShoppingCartBook testBook = new ShoppingCartBook();
+            testBook.ISBN = "123";
+            testBook.QuantityInCart = 1;
+            testBook.TypeInCart = StockType.New;
+            testBook.Price = 3;
+
+            bookList.Add(testBook);
+            bookList.Add(testBook);
+
+
+            Order testOrder = new Order(bookList);
+            Assert.AreEqual(testOrder.TotalCost, (decimal)6.42);
         }
 
         [TestMethod]
-        public void TestOrderController()
+        public void TestOrderController_AboutPage()
         {
             //Glad to see MVC refuses to work
 
@@ -154,6 +170,17 @@ namespace Team7_UnitTest
 
             Assert.IsNotNull(result, "Should have returned a ViewResult");
             Assert.AreEqual("", result.ViewName, "View name should have been {0}", expectedViewName);
+        }
+
+        [TestMethod]
+        public void TestOrderController_Loading_Order_From_Session()
+        {
+            var controller = new OrderController();
+            var wrapper = new HttpContextWrapper(HttpContext.Current);
+            controller.ControllerContext = new ControllerContext(wrapper, new RouteData(), controller);
+            var result = controller.BillingAndPaymentInfo() as ViewResult;
+
+            Assert.IsNotNull(controller.Session["Order"]);
         }
     }
 }
